@@ -1,0 +1,49 @@
+.button {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0;
+  border: none;
+  color: var(--navbar-text);
+  background-color: transparent;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.button:hover p,
+.button:hover .icon {
+  color: var(--button-hover-bg);
+}
+
+.content {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dropdown-bg);
+  border-radius: 1rem;
+  margin-top: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.item p {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.item {
+  padding: 0.75rem 1.5rem;
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 1rem;
+  min-width: 13rem;
+}
+
+.item:hover {
+  background-color: var(--navbar-bg);
+}
+
+.item:hover p {
+  color: var(--navbar-text);
+}
