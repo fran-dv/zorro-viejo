@@ -4,6 +4,8 @@
   background-color: var(--navbar-bg);
   width: 100%;
   max-height: 75px;
+  position: sticky;
+  top: 0;
 }
 
 .linksContainer {

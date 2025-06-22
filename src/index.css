@@ -34,4 +34,5 @@ p,
 li,
 a {
   font-family: var(--general-font-family);
+  color: var(--text-primary);
 }
