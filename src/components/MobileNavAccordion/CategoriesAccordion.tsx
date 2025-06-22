@@ -7,16 +7,14 @@ import { useCategories } from "@/hooks";
 
 interface Props {
   title: string;
-  onClick: () => void;
 }
 
-export const CategoriesAccordion = ({ title, onClick }: Props) => {
+export const CategoriesAccordion = ({ title }: Props) => {
   const navigate = useNavigate();
   const { data: categories } = useCategories();
 
   const handleClick = (catSlug: string) => {
     navigate(`${Paths.Products}?category=${catSlug}`);
-    onClick();
   };
 
   return (

@@ -15,7 +15,7 @@ export const CategoriesDropdown = () => {
         <DropdownMenu.Trigger asChild>
           <button className={styles.button}>
             <p>BEBIDAS</p>
-            <ChevronDown className={styles.icon} />
+            <ChevronDown className={`${styles.icon} ${styles.chevron}`} />
           </button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content className={styles.content}>

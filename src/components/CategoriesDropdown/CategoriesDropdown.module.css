@@ -15,6 +15,14 @@
   color: var(--button-hover-bg);
 }
 
+.chevron {
+  transition: transform 0.2s ease-in-out;
+}
+
+.button[data-state="open"] .chevron {
+  transform: rotate(180deg);
+}
+
 .content {
   background-color: var(--button-bg);
   color: var(--button-text);

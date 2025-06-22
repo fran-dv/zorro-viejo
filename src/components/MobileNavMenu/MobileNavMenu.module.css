@@ -11,6 +11,10 @@
   animation: overlayShow 150ms ease-in-out;
 }
 
+.overlay[data-state="closed"] {
+  animation: overlayClose 150ms ease-in-out forwards;
+}
+
 .content {
   background-color: var(--surface);
   position: fixed;
@@ -20,6 +24,10 @@
   height: 100dvh;
   padding: 1.5rem;
   animation: slideInOut 150ms ease-in-out forwards;
+}
+
+.content[data-state="closed"] {
+  animation: slideOut 150ms ease-in-out forwards;
 }
 
 .closeButton,
