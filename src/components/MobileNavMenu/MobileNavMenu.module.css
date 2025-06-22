@@ -23,7 +23,7 @@
 }
 
 .closeButton,
-.title h2 {
+.title {
   color: var(--text-primary);
 }
 
@@ -40,7 +40,7 @@
   gap: 0.75rem;
 }
 
-.title h2 {
+.title {
   font-family: var(--title-font);
   font-size: 3rem;
 }

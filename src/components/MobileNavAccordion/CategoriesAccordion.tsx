@@ -3,6 +3,7 @@ import styles from "./CategoriesAccordion.module.css";
 import { useNavigate } from "react-router-dom";
 import { Paths } from "@/routing";
 import { ChevronDown, Martini } from "lucide-react";
+import { useCategories } from "@/hooks";
 
 interface Props {
   title: string;
@@ -11,9 +12,10 @@ interface Props {
 
 export const CategoriesAccordion = ({ title, onClick }: Props) => {
   const navigate = useNavigate();
+  const { data: categories } = useCategories();
 
-  const handleClick = () => {
-    navigate(`${Paths.Products}?category=${title}`);
+  const handleClick = (catSlug: string) => {
+    navigate(`${Paths.Products}?category=${catSlug}`);
     onClick();
   };
 
@@ -24,22 +26,13 @@ export const CategoriesAccordion = ({ title, onClick }: Props) => {
           <Martini /> <p>{title}</p> <ChevronDown className={styles.chevron} />
         </Accordion.Trigger>
         <Accordion.Content className={styles.content}>
-          {[
-            "Todas",
-            "Whisky",
-            "Cerveza",
-            "Vino tinto",
-            "Vino blanco",
-            "Vino rosado",
-            "Aperitivos",
-            "Gins",
-          ].map((category) => (
+          {categories?.map((category) => (
             <button
-              key={category}
+              key={category.id}
               className={styles.item}
-              onClick={handleClick}
+              onClick={() => handleClick(category.slug)}
             >
-              <p>{category}</p>
+              <p>{category.name}</p>
             </button>
           ))}
         </Accordion.Content>

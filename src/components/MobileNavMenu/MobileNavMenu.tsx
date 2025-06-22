@@ -32,6 +32,9 @@ export const MobileNavMenu = () => {
           ref={overlayRef}
           onClick={handleClose}
         />
+        <Dialog.Description hidden>
+          Navega por las distintas secciones de la tienda desde este menú.
+        </Dialog.Description>
         <Dialog.Content className={styles.content} ref={contentRef}>
           <Dialog.Close
             className={styles.closeButton}
@@ -42,7 +45,7 @@ export const MobileNavMenu = () => {
           </Dialog.Close>
           <Dialog.Title className={styles.title}>
             <img className={styles.logo} src={logo} alt="Zorro Viejo" />
-            <h2>Explorar</h2>
+            Explorar
           </Dialog.Title>
 
           <ul className={styles.linksContainer}>
