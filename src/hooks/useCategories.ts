@@ -7,7 +7,8 @@ export const useCategories = () => {
     queryFn: async () => await fetchCategories(),
     placeholderData: keepPreviousData,
     staleTime: 60_000,
-    retry: 1,
+    retry: 3,
+    retryDelay: (retryAttempt) => 1000 * Math.min(2 ** retryAttempt, 30),
   });
 
   return {
