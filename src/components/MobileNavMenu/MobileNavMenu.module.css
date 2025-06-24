@@ -9,6 +9,7 @@
   position: fixed;
   inset: 0;
   animation: overlayShow 150ms ease-in-out;
+  z-index: 9;
 }
 
 .overlay[data-state="closed"] {
@@ -24,6 +25,9 @@
   height: 100dvh;
   padding: 1.5rem;
   animation: slideInOut 150ms ease-in-out forwards;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  z-index: 10;
 }
 
 .content[data-state="closed"] {
@@ -36,7 +40,7 @@
 }
 
 .closeButton {
-  position: absolute;
+  position: fixed;
   top: 0.75rem;
   right: 0.75rem;
   cursor: pointer;

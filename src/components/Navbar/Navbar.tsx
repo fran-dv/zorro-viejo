@@ -5,7 +5,7 @@ import { Paths } from "@/routing";
 import { CategoriesDropdown, MobileNavMenu } from "@/components";
 import { useMediaQuery } from "usehooks-ts";
 export const Navbar = () => {
-  const isSmallDevice = useMediaQuery("(max-width: 750px)");
+  const isSmallDevice = useMediaQuery("(max-width: 850px)");
 
   return (
     <nav className={styles.container}>

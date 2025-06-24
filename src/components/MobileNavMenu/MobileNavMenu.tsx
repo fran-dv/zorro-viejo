@@ -6,10 +6,17 @@ import { CategoriesAccordion } from "@/components";
 import { Link } from "react-router-dom";
 import { Paths } from "@/routing";
 import { ShoppingBag } from "lucide-react";
+import { useState } from "react";
 
 export const MobileNavMenu = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <MenuIcon className={styles.menuIcon} />
       </Dialog.Trigger>
@@ -35,7 +42,10 @@ export const MobileNavMenu = () => {
               </Link>
             </li>
             <li>
-              <CategoriesAccordion title="BEBIDAS" />
+              <CategoriesAccordion
+                title="BEBIDAS"
+                closeCallback={handleClose}
+              />
             </li>
           </ul>
         </Dialog.Content>
