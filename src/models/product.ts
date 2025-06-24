@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { Category } from "@/models";
 
 export const ProductSchema = z.object({
   id: z.number(),
@@ -16,3 +17,8 @@ export const ProductSchema = z.object({
 });
 
 export type Product = z.infer<typeof ProductSchema>;
+
+export type ProductsByCategory = {
+  category: Category;
+  products: Product[];
+};
