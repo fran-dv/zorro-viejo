@@ -1,0 +1,143 @@
+.container {
+  --image-size: 3rem;
+  --border-radius: 1rem;
+  --shadow:
+    0 0.25rem 0.5rem rgba(0, 0, 0, 0.2), 0 0.5rem 1rem rgba(0, 0, 0, 0.07);
+  background-color: var(--surface);
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 200px;
+}
+
+.container h2 {
+  font-size: 1.1rem;
+}
+.container h3 {
+  font-size: 1rem;
+}
+.container p {
+  font-size: 0.8rem;
+}
+.offerTag {
+  font-size: 0.7rem;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background-color: var(--dropdown-bg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: var(--border-radius);
+}
+
+.bottomSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+.packageInfo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.packageInfo p {
+  font-size: 1rem;
+}
+
+.packageInfo .packageIcon {
+  width: 1.25rem;
+  height: auto;
+}
+
+.priceSection {
+  display: flex;
+  gap: 0.5rem;
+  position: relative;
+  width: 100%;
+}
+
+.oldPrice {
+  position: relative;
+}
+
+.cross {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-primary);
+  position: absolute;
+  top: 49%;
+  left: 0;
+}
+
+.oldPrice h3 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.offerTag {
+  display: inline-flex;
+  align-self: center;
+
+  margin-right: auto;
+  line-height: 1;
+  background-color: var(--accent);
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.addToCartBtn {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: var(--border-radius);
+  background-color: var(--color-primary);
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.addToCartBtn:hover {
+  transform: translateY(-2px);
+}
+
+.container .addToCartBtn > p {
+  color: var(--on-primary);
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+@media (width >= 500px) {
+  .container {
+    gap: 1rem;
+  }
+  .container h2 {
+    font-size: 1.2rem;
+  }
+  .container h3 {
+    font-size: 1.1rem;
+  }
+  .container p {
+    font-size: 1rem;
+  }
+  .bottomSection {
+    gap: 0.75rem;
+  }
+  .offerTag {
+    font-size: 0.9rem;
+  }
+  .container .addToCartBtn > p {
+    font-size: 1.1rem;
+  }
+}

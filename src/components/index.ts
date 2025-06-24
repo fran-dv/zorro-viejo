@@ -4,3 +4,4 @@ export * from "./MobileNavMenu";
 export * from "./MobileNavAccordion";
 export * from "./LoadingSpinner";
 export * from "./LoadingView";
+export * from "./ProductCard";
