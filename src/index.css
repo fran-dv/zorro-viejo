@@ -10,6 +10,7 @@
 
   --color-primary: #e25822;
   --color-primary-hover: #c04818;
+  --on-primary: #ffffff;
 
   --general-bg: #f8f3e3;
   --surface: #ffffff;
@@ -32,7 +33,14 @@ h3,
 h4,
 p,
 li,
-a {
+a,
+span {
   font-family: var(--general-font-family);
   color: var(--text-primary);
+}
+
+body {
+  max-width: 100dvw;
+  overflow-x: hidden;
+  background-color: var(--general-bg);
 }
