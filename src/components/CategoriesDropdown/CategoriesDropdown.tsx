@@ -3,11 +3,12 @@ import { DropdownMenu } from "radix-ui";
 import styles from "./CategoriesDropdown.module.css";
 import { useNavigate } from "react-router-dom";
 import { Paths } from "@/routing";
-import { useCategories } from "@/hooks";
+import { useGlobalContext } from "@/context";
+import { AllCategory } from "@/models";
 
 export const CategoriesDropdown = () => {
   const navigate = useNavigate();
-  const { data: categories } = useCategories();
+  const { categories } = useGlobalContext();
 
   return (
     <div>
@@ -19,7 +20,7 @@ export const CategoriesDropdown = () => {
           </button>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content className={styles.content}>
-          {categories?.map((category) => (
+          {[AllCategory, ...categories].map((category) => (
             <DropdownMenu.Item
               key={category.id}
               className={styles.item}

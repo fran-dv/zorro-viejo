@@ -3,18 +3,21 @@ import styles from "./CategoriesAccordion.module.css";
 import { useNavigate } from "react-router-dom";
 import { Paths } from "@/routing";
 import { ChevronDown, Martini } from "lucide-react";
-import { useCategories } from "@/hooks";
+import { useGlobalContext } from "@/context";
+import { AllCategory } from "@/models";
 
 interface Props {
   title: string;
+  closeCallback: () => void;
 }
 
-export const CategoriesAccordion = ({ title }: Props) => {
+export const CategoriesAccordion = ({ title, closeCallback }: Props) => {
   const navigate = useNavigate();
-  const { data: categories } = useCategories();
+  const { categories } = useGlobalContext();
 
   const handleClick = (catSlug: string) => {
     navigate(`${Paths.Products}?category=${catSlug}`);
+    closeCallback();
   };
 
   return (
@@ -24,7 +27,7 @@ export const CategoriesAccordion = ({ title }: Props) => {
           <Martini /> <p>{title}</p> <ChevronDown className={styles.chevron} />
         </Accordion.Trigger>
         <Accordion.Content className={styles.content}>
-          {categories?.map((category) => (
+          {[AllCategory, ...categories].map((category) => (
             <button
               key={category.id}
               className={styles.item}

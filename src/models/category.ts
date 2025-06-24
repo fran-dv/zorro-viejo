@@ -7,3 +7,9 @@ export const CategorySchema = z.object({
 });
 
 export type Category = z.infer<typeof CategorySchema>;
+
+export const AllCategory: Category = {
+  id: 0,
+  name: "Todas",
+  slug: "todas",
+};
