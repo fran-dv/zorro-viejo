@@ -5,3 +5,4 @@ export * from "./MobileNavAccordion";
 export * from "./LoadingSpinner";
 export * from "./LoadingView";
 export * from "./ProductCard";
+export * from "./ProductsList";
