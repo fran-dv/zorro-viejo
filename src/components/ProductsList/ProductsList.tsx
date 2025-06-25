@@ -16,8 +16,8 @@ export const ProductsList = ({ productsByCategory }: Props) => {
       {productsByCategory.length > 1 ? (
         productsByCategory.map((it) => {
           return (
-            <div className={styles.AllCategoriesContainer}>
-              <div key={it.category.id}>
+            <div className={styles.AllCategoriesContainer} key={it.category.id}>
+              <div>
                 <h2>{it.category.name}</h2>
                 <p>(Carousel de {it.products.length} productos)</p>
                 {/* <ProductsCarousel products={it.products} /> */}

@@ -1,25 +1,32 @@
-import { LoadingView } from "@/components";
+import { CategoryFilter, LoadingView } from "@/components";
 import { useProducts } from "@/hooks/useProducts";
 import type { Category } from "@/models";
 import { useSearchParams } from "react-router-dom";
 import { useGlobalContext } from "@/context";
 import { useMemo } from "react";
 import { ProductsList } from "@/components";
+import { useNavigate } from "react-router-dom";
+import { Paths } from "@/routing";
+import { AllCategory } from "@/models";
+import styles from "./Products.module.css";
 
 const PRODUCTS_LIMIT = 10;
 
 export const Products = () => {
   const { categories } = useGlobalContext();
   const [searchParams] = useSearchParams();
-  const currentSlug = searchParams.get("category");
-  const currentCategory: Category | "all" =
-    categories.find((cat) => cat.slug === currentSlug) ?? "all";
+  const currentSlug = searchParams.get("category") ?? AllCategory.slug;
+
+  const navigate = useNavigate();
+
+  const currentCategory: Category | string =
+    categories.find((cat) => cat.slug === currentSlug) ?? AllCategory.slug;
 
   const categoriesIdsToFetch: number[] = useMemo(
     () =>
-      currentCategory === "all"
+      currentCategory === AllCategory.slug
         ? categories.map((cat) => cat.id)
-        : [currentCategory.id],
+        : [(currentCategory as Category).id],
     [currentCategory, categories],
   );
 
@@ -43,8 +50,17 @@ export const Products = () => {
     };
   });
 
+  const handleCategoryChange = (catSlug: string) => {
+    navigate(`${Paths.Products}?category=${catSlug}`);
+  };
+
   return (
-    <div>
+    <div className={styles.container}>
+      <CategoryFilter
+        categories={categories}
+        onChange={handleCategoryChange}
+        currentCategorySlug={currentSlug}
+      />
       <ProductsList productsByCategory={prodsByCategory ?? []} />
     </div>
   );

@@ -36,7 +36,11 @@ export const MobileNavMenu = () => {
 
           <ul className={styles.linksContainer}>
             <li>
-              <Link className={styles.link} to={Paths.Cart}>
+              <Link
+                className={styles.link}
+                to={Paths.Cart}
+                onClick={handleClose}
+              >
                 <ShoppingBag />
                 <p>CARRITO</p>
               </Link>
