@@ -19,6 +19,9 @@
   --text-primary: #212121;
   --text-secondary: #757575;
 
+  --neutral: #333333;
+  --neutral-hover: #454545;
+
   --navbar-bg: #333333;
   --navbar-text: #ffffff;
   --navbar-link-hover: #d4af37;
@@ -34,7 +37,8 @@ h4,
 p,
 li,
 a,
-span {
+span,
+label {
   font-family: var(--general-font-family);
   color: var(--text-primary);
 }
