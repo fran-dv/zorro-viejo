@@ -6,3 +6,4 @@ export * from "./LoadingSpinner";
 export * from "./LoadingView";
 export * from "./ProductCard";
 export * from "./ProductsList";
+export * from "./CategoryFilter";

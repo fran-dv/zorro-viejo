@@ -1,0 +1,112 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.container p {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.rootContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.rootContainer::before,
+.rootContainer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0.5rem;
+  height: 100%;
+  pointer-events: none;
+}
+
+.rootContainer::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    var(--general-bg),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.rootContainer::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    var(--general-bg),
+    rgba(255, 255, 255, 0)
+  );
+}
+
+.root {
+  display: flex;
+  align-items: center;
+  max-width: 100dvw;
+  overflow-x: scroll;
+  gap: 0.5rem;
+  scroll-behavior: smooth;
+  padding: 0 0.75rem;
+
+  ::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+  ::-ms-overflow-style {
+    display: none;
+  }
+  scrollbar-width: none;
+}
+
+.optionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: var(--neutral);
+  border-radius: 1rem;
+}
+
+.optionContainer:hover {
+  background-color: var(--neutral-hover);
+}
+
+.optionContainer.selected {
+  background-color: var(--color-primary);
+}
+
+.label {
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+  text-wrap: nowrap;
+  text-align: center;
+  font-weight: 500;
+  color: var(--on-primary);
+}
+
+.item {
+  display: none;
+}
+
+@media (width >= 500px) {
+  .container p {
+    font-size: 1.2rem;
+  }
+  .optionContainer {
+    padding: 0.5rem 0.75rem;
+  }
+  .label {
+    font-size: 1rem;
+  }
+}
