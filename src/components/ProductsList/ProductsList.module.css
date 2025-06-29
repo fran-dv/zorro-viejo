@@ -12,5 +12,13 @@
   padding: 1rem;
   gap: 1.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+}
+
+.noProducts {
+  align-self: center;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1rem;
 }

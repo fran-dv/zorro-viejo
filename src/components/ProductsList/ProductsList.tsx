@@ -5,16 +5,23 @@ import { LoadingView } from "@/components";
 
 interface Props {
   productsByCategory: ProductsByCategory[];
+  areProductsLoading: boolean;
 }
 
-export const ProductsList = ({ productsByCategory }: Props) => {
+export const ProductsList = ({
+  productsByCategory,
+  areProductsLoading,
+}: Props) => {
   if (!productsByCategory.length) {
     return <LoadingView message="Cargando productos..." />;
   }
+
   return (
     <div className={styles.container}>
       {productsByCategory.length > 1 ? (
         productsByCategory.map((it) => {
+          if (it.products.length === 0) return null;
+
           return (
             <div className={styles.AllCategoriesContainer} key={it.category.id}>
               <div>
@@ -27,10 +34,19 @@ export const ProductsList = ({ productsByCategory }: Props) => {
         })
       ) : (
         <>
-          <h2>{productsByCategory[0].category.name}</h2>
           <div className={styles.productsContainer}>
+            {productsByCategory[0].products.length === 0 && (
+              <p className={styles.noProducts}>
+                No tenemos productos disponibles en esta categoría. Puedes
+                explorar otras!
+              </p>
+            )}
             {productsByCategory[0].products.map((prod) => (
-              <ProductCard product={prod} key={prod.id} />
+              <ProductCard
+                product={prod}
+                key={prod.id}
+                isLoading={areProductsLoading}
+              />
             ))}
           </div>
         </>
