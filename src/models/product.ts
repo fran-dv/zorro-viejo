@@ -21,4 +21,5 @@ export type Product = z.infer<typeof ProductSchema>;
 export type ProductsByCategory = {
   category: Category;
   products: Product[];
+  count: number;
 };

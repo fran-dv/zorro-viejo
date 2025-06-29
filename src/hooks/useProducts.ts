@@ -4,13 +4,18 @@ import { fetchProducts } from "@/api";
 interface Props {
   limitPerCategory: number;
   categoriesIds: number[];
+  page: number;
 }
 
-export const useProducts = ({ limitPerCategory, categoriesIds }: Props) => {
+export const useProducts = ({
+  limitPerCategory,
+  categoriesIds,
+  page,
+}: Props) => {
   const { isPending, error, data, isFetching, isLoading } = useQuery({
-    queryKey: ["products", categoriesIds, limitPerCategory],
+    queryKey: ["products", categoriesIds, limitPerCategory, page],
     queryFn: async () =>
-      await fetchProducts({ categoriesIds, limitPerCategory }),
+      await fetchProducts({ categoriesIds, limitPerCategory, page }),
     placeholderData: keepPreviousData,
     staleTime: 60_000,
     retry: 3,

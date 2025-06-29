@@ -1,47 +1,33 @@
-import {
-  ProductResponseSchema,
-  productResponseToProduct,
-  type Product,
-  type ProductResponse,
-} from "@/models";
+import { type Product } from "@/models";
 import { supabase, Tables } from "@/api";
+import { parseProduct } from "@/utils";
 
 interface FetchOpts {
   limitPerCategory: number;
   categoriesIds: number[];
+  page?: number;
 }
 
 interface CategoryProducts {
   categoryId: number;
   products: Product[];
+  count: number;
 }
 
 type ProductsByCategory = CategoryProducts[];
 
-const parseProduct = (prod: ProductResponse, index: number) => {
-  try {
-    const result = ProductResponseSchema.safeParse(prod);
-    if (!result.success) {
-      console.error(`Error parsing product at index ${index}: ${result.error}`);
-      return null;
-    }
-    return productResponseToProduct(result.data);
-  } catch (err) {
-    console.error(`Error parsing product at index ${index}: ${err}`);
-    return null;
-  }
-};
-
 export const fetchProducts = async ({
   limitPerCategory,
   categoriesIds,
+  page = 1,
 }: FetchOpts): Promise<ProductsByCategory> => {
   const promises = categoriesIds.map(async (id) => {
-    const { data, error } = await supabase
+    const { data, error, count } = await supabase
       .from(Tables.Products)
-      .select()
+      .select("*", { count: "exact", head: false })
       .eq("category_id", id)
-      .limit(limitPerCategory);
+      .range((page - 1) * limitPerCategory, page * limitPerCategory - 1)
+      .order("name", { ascending: true });
 
     if (error) {
       throw new Error(`Network error: ${error.message}`);
@@ -52,7 +38,7 @@ export const fetchProducts = async ({
       .map((prod, i) => parseProduct(prod, i))
       .filter(Boolean) as Product[];
 
-    return { categoryId: id, products: localProducts };
+    return { categoryId: id, products: localProducts, count: count ?? 0 };
   });
 
   return await Promise.all(promises);
