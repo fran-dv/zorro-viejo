@@ -1,0 +1,56 @@
+.root {
+  display: flex;
+  border-radius: var(--border-radius);
+  --border-radius: 0.5rem;
+  box-shadow:
+    0 0.25rem 0.5rem rgba(0, 0, 0, 0.1),
+    0 0.5rem 1rem rgba(0, 0, 0, 0.07);
+}
+
+.item {
+  padding: 0.5rem 0.75rem;
+  background-color: var(--surface);
+  border: none;
+  min-width: min-content;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item p {
+  font-weight: 600;
+}
+
+.item .chevron {
+  width: 1rem;
+  height: auto;
+}
+
+.item.selected {
+  background-color: var(--text-secondary);
+}
+
+.item.selected p,
+.item:hover p {
+  color: var(--on-primary);
+}
+
+.item.first {
+  border-top-left-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+}
+
+.item.last {
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+@media (width >= 700px) {
+  .item:hover {
+    background-color: var(--text-secondary);
+  }
+  .item:hover .chevron {
+    color: var(--on-primary);
+  }
+}
