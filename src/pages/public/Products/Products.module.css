@@ -5,3 +5,7 @@
   padding: var(--padding);
   gap: 1rem;
 }
+
+.pagination {
+  align-self: center;
+}

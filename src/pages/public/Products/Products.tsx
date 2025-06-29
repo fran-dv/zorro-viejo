@@ -1,23 +1,29 @@
 import { CategoryFilter, LoadingView } from "@/components";
 import { useProducts } from "@/hooks/useProducts";
-import type { Category } from "@/models";
+import type { Category, ProductsByCategory } from "@/models";
 import { useSearchParams } from "react-router-dom";
 import { useGlobalContext } from "@/context";
-import { useMemo } from "react";
-import { ProductsList } from "@/components";
+import { useEffect, useMemo, useState } from "react";
+import { ProductsList, Pagination } from "@/components";
 import { useNavigate } from "react-router-dom";
 import { Paths } from "@/routing";
 import { AllCategory } from "@/models";
 import styles from "./Products.module.css";
-
-const PRODUCTS_LIMIT = 10;
+import { useMediaQuery } from "usehooks-ts";
 
 export const Products = () => {
+  const isDesktop = useMediaQuery("(min-width: 850px)");
+  const PRODUCTS_LIMIT = isDesktop ? 12 : 8;
   const { categories } = useGlobalContext();
   const [searchParams] = useSearchParams();
   const currentSlug = searchParams.get("category") ?? AllCategory.slug;
+  const [page, setPage] = useState(1);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setPage(1);
+  }, [currentSlug]);
 
   const currentCategory: Category | string =
     categories.find((cat) => cat.slug === currentSlug) ?? AllCategory.slug;
@@ -33,6 +39,7 @@ export const Products = () => {
   const { data, error, isFetching } = useProducts({
     limitPerCategory: PRODUCTS_LIMIT,
     categoriesIds: categoriesIdsToFetch,
+    page: page,
   });
 
   if (error) {
@@ -43,15 +50,32 @@ export const Products = () => {
     return <LoadingView message="Cargando productos..." />;
   }
 
-  const prodsByCategory = data?.map((item) => {
-    return {
-      category: categories.find((cat) => cat.id === item.categoryId)!,
-      products: item.products,
-    };
-  });
+  const prodsByCategory: ProductsByCategory[] | undefined = data?.map(
+    (item) => {
+      return {
+        category: categories.find((cat) => cat.id === item.categoryId)!,
+        products: item.products,
+        count: item.count,
+      };
+    },
+  );
+
+  let pagesAmount = 0;
+  if (
+    currentCategory !== "all" &&
+    prodsByCategory &&
+    prodsByCategory.length > 0
+  ) {
+    const count = prodsByCategory[0].count;
+    pagesAmount = Math.ceil(count / PRODUCTS_LIMIT);
+  }
 
   const handleCategoryChange = (catSlug: string) => {
     navigate(`${Paths.Products}?category=${catSlug}`);
+  };
+
+  const handlePageChange = (page: number) => {
+    setPage(page);
   };
 
   return (
@@ -61,7 +85,31 @@ export const Products = () => {
         onChange={handleCategoryChange}
         currentCategorySlug={currentSlug}
       />
-      <ProductsList productsByCategory={prodsByCategory ?? []} />
+      <h2>
+        {currentCategory === AllCategory.slug
+          ? "Todos los productos"
+          : (currentCategory as Category).name}
+      </h2>
+      {currentCategory !== AllCategory.slug && (
+        <Pagination
+          className={styles.pagination}
+          selectedPage={page}
+          onPageChange={handlePageChange}
+          pagesAmount={pagesAmount}
+        />
+      )}
+      <ProductsList
+        productsByCategory={prodsByCategory ?? []}
+        areProductsLoading={isFetching}
+      />
+      {currentCategory !== AllCategory.slug && (
+        <Pagination
+          className={styles.pagination}
+          selectedPage={page}
+          onPageChange={handlePageChange}
+          pagesAmount={pagesAmount}
+        />
+      )}
     </div>
   );
 };
