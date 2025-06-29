@@ -1,14 +1,61 @@
 import { Package } from "lucide-react";
 import styles from "./ProductCard.module.css";
 import type { Product } from "@/models";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 interface Props {
   product: Product;
+  isLoading?: boolean;
 }
 
-export const ProductCard = ({ product }: Props) => {
+export const ProductCard = ({ product, isLoading }: Props) => {
   const shortDescription =
     product.shortDescription ?? product.description.slice(0, 50) + "...";
+
+  if (isLoading) {
+    return (
+      <div className={styles.container}>
+        <div
+          className={styles.image}
+          style={{ backgroundColor: "transparent" }}
+        >
+          <Skeleton
+            borderRadius={"1rem"}
+            containerClassName={styles.skeleton}
+            height={"100%"}
+          />
+        </div>
+        <div>
+          <h2>
+            <Skeleton
+              borderRadius={"0.5rem"}
+              height={25}
+              containerClassName={styles.skeleton}
+            />
+          </h2>
+        </div>
+        <div className={styles.description}>
+          <p>
+            <Skeleton
+              borderRadius={"0.25rem"}
+              count={3}
+              containerClassName={styles.skeleton}
+            />
+          </p>
+        </div>
+
+        <div className={styles.bottomSection}>
+          <Skeleton
+            height={35}
+            style={{ marginTop: "1.5rem" }}
+            containerClassName={styles.skeleton}
+            borderRadius={"1rem"}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
