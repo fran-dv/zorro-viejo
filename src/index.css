@@ -38,7 +38,8 @@ p,
 li,
 a,
 span,
-label {
+label,
+input {
   font-family: var(--general-font-family);
   color: var(--text-primary);
 }
