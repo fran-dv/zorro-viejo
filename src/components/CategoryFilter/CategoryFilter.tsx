@@ -3,20 +3,24 @@ import styles from "./CategoryFilter.module.css";
 import type { Category } from "@/models";
 import { AllCategory } from "@/models";
 import { useState, useEffect, useRef } from "react";
+import { useMediaQuery } from "usehooks-ts";
 
 interface Props {
   categories: Category[];
   onChange: (catSlug: string) => void;
   currentCategorySlug: string;
+  className?: string;
 }
 
 export const CategoryFilter = ({
   categories,
   onChange,
   currentCategorySlug,
+  className,
 }: Props) => {
   const [value, setValue] = useState(currentCategorySlug);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isDesktop = useMediaQuery("(min-width: 850px)");
 
   useEffect(() => {
     setValue(currentCategorySlug);
@@ -42,12 +46,12 @@ export const CategoryFilter = ({
     onChange(catSlug);
   };
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${className ?? ""}`}>
       <p>Filtrar por: </p>
       <div className={styles.rootContainer}>
         <RadioGroup.Root
           onValueChange={handleChange}
-          className={styles.root}
+          className={`${styles.root} ${!isDesktop ? styles.hideScrollbar : ""}`}
           value={value}
           ref={containerRef}
         >

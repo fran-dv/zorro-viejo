@@ -56,8 +56,11 @@
   overflow-x: scroll;
   gap: 0.5rem;
   scroll-behavior: smooth;
-  padding: 0 0.75rem;
+  padding: 0 0.75rem 0.75rem 0.75rem;
+  scrollbar-width: thin;
+}
 
+.hideScrollbar {
   ::-webkit-scrollbar {
     width: 0;
     background: transparent;
@@ -66,6 +69,10 @@
     display: none;
   }
   scrollbar-width: none;
+}
+
+.root.hideScrollbar {
+  padding: 0 0.75rem;
 }
 
 .optionContainer {
