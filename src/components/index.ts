@@ -9,3 +9,5 @@ export * from "./ProductsList";
 export * from "./CategoryFilter";
 export * from "./Pagination";
 export * from "./SearchSuggestions";
+export * from "./SearchBar";
+export * from "./MobileSearchDialog";

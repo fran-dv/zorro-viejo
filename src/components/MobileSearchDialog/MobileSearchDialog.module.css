@@ -1,0 +1,79 @@
+.searchCircle {
+  --max-width: 5rem;
+  display: flex;
+  justify-content: center;
+  max-width: var(--max-width);
+  align-items: center;
+  aspect-ratio: 1 / 1 !important;
+  padding: 1rem;
+  border-radius: var(--max-width);
+  position: fixed;
+  bottom: 2rem;
+  right: 1rem;
+  background-color: var(--navbar-bg);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  border: none;
+}
+
+.searchCircle .icon {
+  color: var(--on-primary);
+  width: 1.5rem;
+  height: auto;
+}
+
+.overlay {
+  z-index: 1;
+}
+
+.overlay[data-state="open"] {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  width: 100dvw;
+  height: 100dvh;
+  top: 0;
+  left: 0;
+  animation: overlayShow 150ms ease-in-out;
+}
+
+.overlay[data-state="closed"] {
+  animation: overlayClose 150ms ease-in-out;
+}
+
+.content {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.searchContainer {
+  flex: 1;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 6dvh;
+  z-index: 10;
+}
+
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overlayClose {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
