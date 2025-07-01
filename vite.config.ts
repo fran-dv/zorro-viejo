@@ -12,4 +12,21 @@ export default defineConfig({
     },
   },
   plugins: [react()],
+  esbuild: {
+    treeShaking: true,
+  },
+  build: {
+    cssCodeSplit: true,
+    rollupOptions: {
+      treeshake: true,
+      output: {
+        manualChunks: undefined,
+      },
+    },
+  },
+  css: {
+    modules: {
+      localsConvention: "camelCase",
+    },
+  },
 });

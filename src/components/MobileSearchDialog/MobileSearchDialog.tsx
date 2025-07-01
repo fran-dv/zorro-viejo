@@ -2,7 +2,7 @@ import { Dialog } from "radix-ui";
 import styles from "./MobileSearchDialog.module.css";
 import { Search, X } from "lucide-react";
 import { useState } from "react";
-import { SearchBar } from "../SearchBar";
+import { SearchBar } from "@/components";
 
 export const MobileSearchDialog = () => {
   const [open, setOpen] = useState(false);
