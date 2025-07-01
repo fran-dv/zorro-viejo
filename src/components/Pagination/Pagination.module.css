@@ -31,8 +31,7 @@
   background-color: var(--text-secondary);
 }
 
-.item.selected p,
-.item:hover p {
+.item.selected p {
   color: var(--on-primary);
 }
 
@@ -46,9 +45,12 @@
   border-bottom-right-radius: var(--border-radius);
 }
 
-@media (width >= 700px) {
+@media (width >= 850px) {
   .item:hover {
     background-color: var(--text-secondary);
+  }
+  .item:hover p {
+    color: var(--on-primary);
   }
   .item:hover .chevron {
     color: var(--on-primary);
