@@ -8,3 +8,4 @@ export * from "./ProductCard";
 export * from "./ProductsList";
 export * from "./CategoryFilter";
 export * from "./Pagination";
+export * from "./SearchSuggestions";
