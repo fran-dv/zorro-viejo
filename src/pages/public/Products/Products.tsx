@@ -1,4 +1,9 @@
-import { CategoryFilter, LoadingView } from "@/components";
+import {
+  CategoryFilter,
+  LoadingView,
+  SearchBar,
+  MobileSearchDialog,
+} from "@/components";
 import { useProducts } from "@/hooks/useProducts";
 import type { Category, ProductsByCategory } from "@/models";
 import { useSearchParams } from "react-router-dom";
@@ -24,6 +29,11 @@ export const Products = () => {
   useEffect(() => {
     setPage(1);
   }, [currentSlug]);
+
+  useEffect(() => {
+    const top = document.getElementById("products-top");
+    top?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [page]);
 
   const currentCategory: Category | string =
     categories.find((cat) => cat.slug === currentSlug) ?? AllCategory.slug;
@@ -80,16 +90,26 @@ export const Products = () => {
 
   return (
     <div className={styles.container}>
-      <CategoryFilter
-        categories={categories}
-        onChange={handleCategoryChange}
-        currentCategorySlug={currentSlug}
-      />
-      <h2>
+      {!isDesktop && <MobileSearchDialog />}
+      <div className={styles.header}>
+        {isDesktop && (
+          <div className={styles.searchContainer}>
+            <SearchBar placeholder="Buscar un producto. Por ej. 'Chateau Subsónico' ..." />
+          </div>
+        )}
+        <CategoryFilter
+          categories={categories}
+          onChange={handleCategoryChange}
+          currentCategorySlug={currentSlug}
+          className={styles.categoryFilter}
+        />
+      </div>
+
+      <h1 id="products-top" className={styles.title}>
         {currentCategory === AllCategory.slug
           ? "Todos los productos"
           : (currentCategory as Category).name}
-      </h2>
+      </h1>
       {currentCategory !== AllCategory.slug && (
         <Pagination
           className={styles.pagination}
