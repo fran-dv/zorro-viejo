@@ -2,6 +2,8 @@ import type { ProductsByCategory } from "@/models";
 import styles from "./ProductsList.module.css";
 import { ProductCard } from "@/components";
 import { LoadingView } from "@/components";
+import { Paths } from "@/routing";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   productsByCategory: ProductsByCategory[];
@@ -12,9 +14,15 @@ export const ProductsList = ({
   productsByCategory,
   areProductsLoading,
 }: Props) => {
+  const navigate = useNavigate();
+
   if (!productsByCategory.length) {
     return <LoadingView message="Cargando productos..." />;
   }
+
+  const handleProductClick = (slug: string) => {
+    navigate(Paths.getProductDetailPath(slug));
+  };
 
   return (
     <div className={styles.container}>
@@ -46,6 +54,7 @@ export const ProductsList = ({
                 product={prod}
                 key={prod.id}
                 isLoading={areProductsLoading}
+                onClick={() => handleProductClick(prod.slug)}
               />
             ))}
           </div>

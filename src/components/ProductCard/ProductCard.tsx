@@ -7,9 +7,10 @@ import "react-loading-skeleton/dist/skeleton.css";
 interface Props {
   product: Product;
   isLoading?: boolean;
+  onClick?: () => void;
 }
 
-export const ProductCard = ({ product, isLoading }: Props) => {
+export const ProductCard = ({ product, isLoading, onClick }: Props) => {
   const shortDescription =
     product.shortDescription ?? product.description.slice(0, 50) + "...";
 
@@ -57,8 +58,12 @@ export const ProductCard = ({ product, isLoading }: Props) => {
     );
   }
 
+  const handleAddToCartClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={onClick}>
       <div
         className={styles.image}
         style={{ backgroundImage: `url(${product.imageUrls[0]})` }}
@@ -95,7 +100,7 @@ export const ProductCard = ({ product, isLoading }: Props) => {
             </div>
           )}
         </div>
-        <button className={styles.addToCartBtn}>
+        <button className={styles.addToCartBtn} onClick={handleAddToCartClick}>
           <p>Añadir al carrito</p>
         </button>
       </div>
