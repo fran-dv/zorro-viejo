@@ -3,7 +3,6 @@ import styles from "./CategoryFilter.module.css";
 import type { Category } from "@/models";
 import { AllCategory } from "@/models";
 import { useState, useEffect, useRef } from "react";
-import { useMediaQuery } from "usehooks-ts";
 
 interface Props {
   categories: Category[];
@@ -20,7 +19,6 @@ export const CategoryFilter = ({
 }: Props) => {
   const [value, setValue] = useState(currentCategorySlug);
   const containerRef = useRef<HTMLDivElement>(null);
-  const isDesktop = useMediaQuery("(min-width: 850px)");
 
   useEffect(() => {
     setValue(currentCategorySlug);
@@ -51,7 +49,7 @@ export const CategoryFilter = ({
       <div className={styles.rootContainer}>
         <RadioGroup.Root
           onValueChange={handleChange}
-          className={`${styles.root} ${!isDesktop ? styles.hideScrollbar : ""}`}
+          className={styles.root}
           value={value}
           ref={containerRef}
         >

@@ -56,11 +56,9 @@
   overflow-x: scroll;
   gap: 0.5rem;
   scroll-behavior: smooth;
-  padding: 0 0.75rem 0.75rem 0.75rem;
-  scrollbar-width: thin;
-}
+  padding: 0 0.75rem;
 
-.hideScrollbar {
+  /* hidden scrollbar on touch devices */
   ::-webkit-scrollbar {
     width: 0;
     background: transparent;
@@ -69,10 +67,6 @@
     display: none;
   }
   scrollbar-width: none;
-}
-
-.root.hideScrollbar {
-  padding: 0 0.75rem;
 }
 
 .optionContainer {
@@ -115,5 +109,19 @@
   }
   .label {
     font-size: 1rem;
+  }
+}
+
+/* show scrollbar on devices with mouse */
+@media (pointer: fine) {
+  .root {
+    padding: 0 0.75rem 0.75rem 0.75rem;
+    ::-webkit-scrollbar {
+      width: thin;
+    }
+    ::-ms-overflow-style {
+      display: block;
+    }
+    scrollbar-width: thin;
   }
 }
