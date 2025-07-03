@@ -1,5 +1,6 @@
-import "./App.css";
+import styles from "./App.module.css";
 import { Navbar } from "@/components/Navbar/Navbar";
+import { Footer } from "@/components/Footer/Footer";
 
 interface Props {
   children: React.ReactNode;
@@ -7,10 +8,11 @@ interface Props {
 
 function App({ children }: Props) {
   return (
-    <>
+    <div className={styles.container}>
       <Navbar />
-      {children}
-    </>
+      <main className={styles.main}>{children}</main>
+      <Footer />
+    </div>
   );
 }
 

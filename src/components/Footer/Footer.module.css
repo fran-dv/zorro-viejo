@@ -1,0 +1,9 @@
+.container {
+  margin-top: auto;
+  padding: 3rem 1rem;
+  background-color: var(--navbar-bg);
+}
+
+.container h2 {
+  color: var(--navbar-text);
+}
