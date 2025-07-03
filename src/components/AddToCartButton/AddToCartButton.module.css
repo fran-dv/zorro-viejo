@@ -1,0 +1,20 @@
+.button {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 1rem;
+  background-color: var(--color-primary);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button > p {
+  color: var(--on-primary);
+  font-weight: bold;
+  font-size: 0.9rem;
+}

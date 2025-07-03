@@ -68,59 +68,6 @@
   width: 100%;
 }
 
-.oldPrice {
-  position: relative;
-}
-
-.cross {
-  width: 100%;
-  height: 1px;
-  background-color: var(--color-primary);
-  position: absolute;
-  top: 49%;
-  left: 0;
-}
-
-.oldPrice h3 {
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--text-secondary);
-}
-
-.offerTag {
-  display: inline-flex;
-  align-self: center;
-
-  margin-right: auto;
-  line-height: 1;
-  background-color: var(--accent);
-  padding: 0.25rem 0.5rem;
-  border-radius: 5px;
-  font-weight: 500;
-}
-
-.addToCartBtn {
-  width: 100%;
-  padding: 0.75rem;
-  border-radius: var(--border-radius);
-  background-color: var(--color-primary);
-  border: none;
-  cursor: pointer;
-
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
-}
-
-.addToCartBtn:hover {
-  transform: translateY(-2px);
-}
-
-.container .addToCartBtn > p {
-  color: var(--on-primary);
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-
 .skeleton {
   flex: 1;
   line-height: 1;
@@ -145,8 +92,5 @@
   }
   .offerTag {
     font-size: 0.9rem;
-  }
-  .container .addToCartBtn > p {
-    font-size: 1.1rem;
   }
 }
