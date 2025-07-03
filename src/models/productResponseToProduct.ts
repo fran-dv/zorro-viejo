@@ -5,7 +5,7 @@ export const productResponseToProduct = (
 ): Product => {
   return {
     id: productResponse.id,
-    categoryId: 0,
+    categoryId: productResponse.category_id,
     name: productResponse.name,
     slug: productResponse.slug,
     price: productResponse.price,
