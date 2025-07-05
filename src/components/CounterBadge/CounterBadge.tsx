@@ -2,7 +2,7 @@ import styles from "./CounterBadge.module.css";
 
 interface Props {
   children: React.ReactNode;
-  count: number;
+  count?: number;
 }
 
 export const CounterBadge = ({ children, count }: Props) => {
@@ -13,7 +13,9 @@ export const CounterBadge = ({ children, count }: Props) => {
       role="status"
     >
       {children}
-      <span className={styles.badge}>{count}</span>
+      <span className={`${styles.badge} ${!count && styles.hidden}`}>
+        {count}
+      </span>
     </div>
   );
 };

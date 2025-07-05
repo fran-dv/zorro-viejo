@@ -22,6 +22,10 @@
   background-color: var(--color-primary);
 }
 
+.hidden {
+  display: none;
+}
+
 @media (width >= 850px) {
   .badge {
     width: 1.4rem;
