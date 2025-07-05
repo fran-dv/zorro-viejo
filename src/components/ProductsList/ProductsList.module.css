@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .productsContainer {
@@ -21,4 +22,15 @@
   text-align: center;
   font-weight: 500;
   font-size: 1rem;
+}
+
+.categorySectionTitle {
+  margin-left: 1rem;
+  text-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.2);
+}
+
+@media (width >= 850px) {
+  .categorySectionTitle {
+    font-size: 1.7rem;
+  }
 }

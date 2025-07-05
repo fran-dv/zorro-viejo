@@ -1,6 +1,6 @@
 import type { Product, ProductsByCategory } from "@/models";
 import styles from "./ProductsList.module.css";
-import { ProductCard } from "@/components";
+import { ProductCard, ProductsCarousel } from "@/components";
 import { LoadingView } from "@/components";
 import { Paths } from "@/routing";
 import { useNavigate } from "react-router-dom";
@@ -39,9 +39,20 @@ export const ProductsList = ({
           return (
             <div className={styles.AllCategoriesContainer} key={it.category.id}>
               <div>
-                <h2>{it.category.name}</h2>
-                <p>(Carousel de {it.products.length} productos)</p>
-                {/* <ProductsCarousel products={it.products} /> */}
+                <h2 className={styles.categorySectionTitle}>
+                  {it.category.name}
+                </h2>
+                <ProductsCarousel
+                  cards={it.products.map((p) => (
+                    <ProductCard
+                      product={p}
+                      key={p.id}
+                      isLoading={areProductsLoading}
+                      onClick={() => handleProductClick(p.slug)}
+                      onAddToCartClick={() => handleAddToCart(p)}
+                    />
+                  ))}
+                />
               </div>
             </div>
           );
