@@ -8,9 +8,11 @@ import { Paths } from "@/routing";
 import { ShoppingBag } from "lucide-react";
 import { useState } from "react";
 import { CounterBadge } from "../CounterBadge/CounterBadge";
+import { useCartStore } from "@/stores";
 
 export const MobileNavMenu = () => {
   const [open, setOpen] = useState(false);
+  const { items } = useCartStore();
 
   const handleClose = () => {
     setOpen(false);
@@ -42,7 +44,9 @@ export const MobileNavMenu = () => {
                 to={Paths.Cart}
                 onClick={handleClose}
               >
-                <CounterBadge count={10}>
+                <CounterBadge
+                  count={items.length > 0 ? items.length : undefined}
+                >
                   <ShoppingBag />
                 </CounterBadge>
                 <p>CARRITO</p>

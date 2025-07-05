@@ -5,8 +5,11 @@ import { Paths } from "@/routing";
 import { CategoriesDropdown, MobileNavMenu } from "@/components";
 import { useMediaQuery } from "usehooks-ts";
 import { CounterBadge } from "../CounterBadge/CounterBadge";
+import { useCartStore } from "@/stores/useCartStore";
+
 export const Navbar = () => {
   const isDesktop = useMediaQuery("(min-width: 850px)");
+  const { items } = useCartStore();
 
   const title: React.ReactNode = (
     <li
@@ -21,7 +24,7 @@ export const Navbar = () => {
   const cartButton: React.ReactNode = (
     <li>
       <Link className={styles.link} to={Paths.Cart}>
-        <CounterBadge count={10}>
+        <CounterBadge count={items.length > 0 ? items.length : undefined}>
           <ShoppingBag className={styles.shoppingBag} />
         </CounterBadge>
       </Link>
