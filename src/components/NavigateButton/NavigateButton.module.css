@@ -1,0 +1,30 @@
+.button {
+  cursor: pointer;
+  background-color: var(--surface);
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+  font-weight: 500;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+}
+
+.button:hover,
+.button:hover .buttonText {
+  background-color: var(--color-primary);
+  color: var(--on-primary);
+}
+
+.button .buttonText {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.button .arrow {
+  min-width: 2rem;
+  align-self: center;
+}

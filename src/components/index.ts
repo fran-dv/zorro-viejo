@@ -13,6 +13,7 @@ export * from "./Pagination/Pagination";
 export * from "./SearchSuggestions/SearchSuggestions";
 export * from "./SearchBar/SearchBar";
 export * from "./MobileSearchDialog/MobileSearchDialog";
+export * from "./NavigateButton/NavigateButton";
 export * from "./EmblaCarousel/EmblaCarousel";
 export * from "./ImagesCarousel/ImagesCarousel";
 export * from "./ProductsCarousel/ProductsCarousel";
