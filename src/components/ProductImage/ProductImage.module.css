@@ -1,0 +1,11 @@
+.container {
+  overflow: hidden;
+  background-color: var(--dropdown-bg);
+  filter: drop-shadow(0 0.25rem 0.5rem rgba(0, 0, 0, 0.2));
+}
+
+.image {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
