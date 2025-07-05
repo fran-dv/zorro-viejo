@@ -3,3 +3,4 @@ export * from "./useProducts";
 export * from "./useProductBySlug";
 export * from "./useSearchSuggestions";
 export * from "./useHideOnFooter";
+export * from "./useRelatedProducts";
