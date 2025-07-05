@@ -19,3 +19,4 @@ export * from "./EmblaCarousel/EmblaCarousel";
 export * from "./ImagesCarousel/ImagesCarousel";
 export * from "./ProductsCarousel/ProductsCarousel";
 export * from "./SearchInterface/SearchInterface";
+export * from "./StickyFooterButton/StickyFooterBar";
