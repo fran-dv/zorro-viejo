@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  color: var(--on-primary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  display: inline-flex;
+  line-height: 1;
+  align-items: center;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+  transform: translateY(-1px);
+}
+
+.inStock {
+  background-color: var(--success);
+}
+
+.outOfStock {
+  background-color: var(--error);
+}
