@@ -4,14 +4,18 @@ import { Search, X } from "lucide-react";
 import { useState } from "react";
 import { SearchBar } from "@/components";
 
-export const MobileSearchDialog = () => {
+interface Props {
+  floatingButtonClassName?: string;
+}
+
+export const MobileSearchDialog = ({ floatingButtonClassName = "" }: Props) => {
   const [open, setOpen] = useState(false);
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       {!open && (
         <Dialog.Trigger
-          className={styles.searchCircle}
+          className={`${styles.searchCircle} ${floatingButtonClassName}`}
           title="Buscar producto"
           onClick={() => setOpen(!open)}
         >
@@ -32,7 +36,7 @@ export const MobileSearchDialog = () => {
         <Dialog.Close className={styles.searchCircle}>
           <X className={styles.icon} />
         </Dialog.Close>
-        <Dialog.Title>Buscar un producto</Dialog.Title>
+        <Dialog.Title hidden>Buscar un producto</Dialog.Title>
         <Dialog.Description hidden>
           Buscar un producto. Por ej. 'Chateau Subsónico'
         </Dialog.Description>
