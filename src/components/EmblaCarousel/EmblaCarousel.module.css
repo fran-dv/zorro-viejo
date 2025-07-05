@@ -1,0 +1,176 @@
+.embla {
+  position: relative;
+  overflow: hidden;
+  max-width: 99dvw;
+  padding: 1rem 0;
+}
+.embla__container {
+  display: flex;
+}
+
+.cardsCarousel .embla__container {
+  --gap: 2rem;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(300px, 1fr);
+  gap: var(--gap);
+  padding-left: var(--gap);
+  padding-right: var(--gap);
+  justify-items: center;
+}
+
+.cardsCarousel .embla__slide:last-of-type {
+  margin-inline-end: var(--gap);
+}
+
+.imageCarousel .embla__slide {
+  flex: 0 0 100%;
+}
+
+.embla__buttonPrev,
+.embla__buttonNext {
+  position: absolute;
+  top: 45%;
+  background-color: transparent;
+  transform: translateY(-45%);
+  border: none;
+  color: var(--text-primary);
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.cardsCarousel .embla__buttonPrev,
+.cardsCarousel .embla__buttonNext {
+  z-index: 2;
+}
+
+.embla__buttonPrev.filled,
+.embla__buttonNext.filled {
+  background-color: var(--surface);
+  color: var(--text-primary);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.chevron {
+  width: 1.9rem;
+  height: auto;
+}
+
+.embla__buttonPrev {
+  left: 5px;
+}
+.embla__buttonNext {
+  right: 5px;
+}
+
+.embla__buttonPrev.disabled {
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.3s ease-in-out;
+}
+
+.embla__buttonPrev.disabled {
+  animation: fadeOut 0.3s ease-in-out forwards;
+}
+
+.embla__buttonNext.disabled {
+  animation: fadeOut 0.3s ease-in-out forwards;
+}
+
+.embla__buttonPrev:not(.disabled) {
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.embla__buttonNext:not(.disabled) {
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.embla__buttonNext.disabled {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (hover: hover) {
+  .embla__buttonPrev:hover,
+  .embla__buttonNext:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
+}
+
+@media (max-width: 360px) {
+  .cardsCarousel .embla__container {
+    --gap: 0.5rem;
+  }
+}
+
+@media (min-width: 500px) {
+  .cardsCarousel .embla__container {
+    --gap: 3rem;
+  }
+}
+
+@media (min-width: 850px) {
+  .cardsCarousel .embla__container {
+    grid-auto-columns: 40%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .embla {
+    max-width: 1200px;
+  }
+  .embla.cardsCarousel::before,
+  .embla.cardsCarousel::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 0.75rem;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .embla.cardsCarousel::before {
+    left: 0;
+    background: linear-gradient(
+      to right,
+      var(--general-bg),
+      rgba(255, 255, 255, 0)
+    );
+    z-index: 1;
+  }
+
+  .embla.cardsCarousel::after {
+    right: 0;
+    background: linear-gradient(
+      to left,
+      var(--general-bg),
+      rgba(255, 255, 255, 0)
+    );
+    z-index: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
