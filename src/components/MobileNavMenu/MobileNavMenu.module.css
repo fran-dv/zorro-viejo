@@ -9,7 +9,7 @@
   position: fixed;
   inset: 0;
   animation: overlayShow 150ms ease-in-out;
-  z-index: 9;
+  z-index: 10;
 }
 
 .overlay[data-state="closed"] {
@@ -19,7 +19,7 @@
 .content {
   background-color: var(--surface);
   position: fixed;
-  right: 0;
+  left: 0;
   top: 0;
   width: 75dvw;
   height: 100dvh;
@@ -90,14 +90,6 @@
   line-height: 1;
 }
 
-.overlayClose {
-  animation: overlayClose 150ms ease-in-out forwards;
-}
-
-.closeAnimation {
-  animation: slideOut 150ms ease-in-out forwards;
-}
-
 @keyframes overlayShow {
   from {
     opacity: 0;
@@ -118,7 +110,7 @@
 
 @keyframes slideInOut {
   from {
-    transform: translateX(100%);
+    transform: translateX(-100%);
   }
   to {
     transform: translateX(0);
@@ -130,6 +122,6 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(100%);
+    transform: translateX(-100%);
   }
 }

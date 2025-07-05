@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Paths } from "@/routing";
 import { ShoppingBag } from "lucide-react";
 import { useState } from "react";
+import { CounterBadge } from "../CounterBadge/CounterBadge";
 
 export const MobileNavMenu = () => {
   const [open, setOpen] = useState(false);
@@ -41,7 +42,9 @@ export const MobileNavMenu = () => {
                 to={Paths.Cart}
                 onClick={handleClose}
               >
-                <ShoppingBag />
+                <CounterBadge count={10}>
+                  <ShoppingBag />
+                </CounterBadge>
                 <p>CARRITO</p>
               </Link>
             </li>

@@ -4,31 +4,46 @@ import { ShoppingBag } from "lucide-react";
 import { Paths } from "@/routing";
 import { CategoriesDropdown, MobileNavMenu } from "@/components";
 import { useMediaQuery } from "usehooks-ts";
+import { CounterBadge } from "../CounterBadge/CounterBadge";
 export const Navbar = () => {
-  const isSmallDevice = useMediaQuery("(max-width: 850px)");
+  const isDesktop = useMediaQuery("(min-width: 850px)");
+
+  const title: React.ReactNode = (
+    <li
+      className={`${styles.title} ${styles.link} ${!isDesktop ? styles.mobileTitle : ""}`}
+    >
+      <Link to={Paths.Home}>
+        <h2>Zorro Viejo</h2>
+      </Link>
+    </li>
+  );
+
+  const cartButton: React.ReactNode = (
+    <li>
+      <Link className={styles.link} to={Paths.Cart}>
+        <CounterBadge count={10}>
+          <ShoppingBag className={styles.shoppingBag} />
+        </CounterBadge>
+      </Link>
+    </li>
+  );
 
   return (
     <nav className={styles.container}>
       <ul className={styles.linksContainer}>
-        <li className={`${styles.title} ${styles.link}`}>
-          <Link to={Paths.Home}>
-            <h2>Zorro Viejo</h2>
-          </Link>
-        </li>
-        {!isSmallDevice ? (
+        {isDesktop ? (
           <>
+            {title}
             <li className={styles.link}>
               <CategoriesDropdown />
             </li>
-            <li>
-              <Link className={styles.link} to={Paths.Cart}>
-                <ShoppingBag />
-              </Link>
-            </li>
+            {cartButton}
           </>
         ) : (
           <>
             <MobileNavMenu />
+            {title}
+            {cartButton}
           </>
         )}
       </ul>
