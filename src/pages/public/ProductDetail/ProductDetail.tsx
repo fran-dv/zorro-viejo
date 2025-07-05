@@ -18,12 +18,14 @@ import { useMediaQuery } from "usehooks-ts";
 import { StockTag } from "./components";
 import type { Product } from "@/models";
 import { useNavigate } from "react-router-dom";
+import { useCartStore } from "@/stores";
 
 export const ProductDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const isDesktop = useMediaQuery("(min-width: 850px)");
   const { isFooterVisible } = useHideOnFooter();
   const navigate = useNavigate();
+  const { addItemToCart } = useCartStore();
 
   const { data, error, isFetching } = useProductBySlug({ slug: slug ?? "" });
 
@@ -147,7 +149,7 @@ export const ProductDetail = () => {
           <SearchInterface floatingButtonClassName={styles.searchButton} />
           <AddToCartButton
             className={styles.addToCartButton}
-            onClick={() => {}}
+            onClick={() => addItemToCart(product)}
             content="Añadir al carrito"
           />
         </StickyFooterBar>

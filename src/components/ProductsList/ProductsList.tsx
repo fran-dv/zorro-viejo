@@ -1,9 +1,10 @@
-import type { ProductsByCategory } from "@/models";
+import type { Product, ProductsByCategory } from "@/models";
 import styles from "./ProductsList.module.css";
 import { ProductCard } from "@/components";
 import { LoadingView } from "@/components";
 import { Paths } from "@/routing";
 import { useNavigate } from "react-router-dom";
+import { useCartStore } from "@/stores";
 
 interface Props {
   productsByCategory: ProductsByCategory[];
@@ -15,6 +16,7 @@ export const ProductsList = ({
   areProductsLoading,
 }: Props) => {
   const navigate = useNavigate();
+  const { addItemToCart } = useCartStore();
 
   if (!productsByCategory.length) {
     return <LoadingView message="Cargando productos..." />;
@@ -22,6 +24,10 @@ export const ProductsList = ({
 
   const handleProductClick = (slug: string) => {
     navigate(Paths.getProductDetailPath(slug));
+  };
+
+  const handleAddToCart = (product: Product) => {
+    addItemToCart(product);
   };
 
   return (
@@ -55,6 +61,7 @@ export const ProductsList = ({
                 key={prod.id}
                 isLoading={areProductsLoading}
                 onClick={() => handleProductClick(prod.slug)}
+                onAddToCartClick={() => handleAddToCart(prod)}
               />
             ))}
           </div>

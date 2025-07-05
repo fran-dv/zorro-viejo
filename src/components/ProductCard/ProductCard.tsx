@@ -9,9 +9,15 @@ interface Props {
   product: Product;
   isLoading?: boolean;
   onClick?: () => void;
+  onAddToCartClick?: () => void;
 }
 
-export const ProductCard = ({ product, isLoading, onClick }: Props) => {
+export const ProductCard = ({
+  product,
+  isLoading,
+  onClick,
+  onAddToCartClick,
+}: Props) => {
   const shortDescription =
     product.shortDescription ?? product.description.slice(0, 50) + "...";
 
@@ -61,6 +67,7 @@ export const ProductCard = ({ product, isLoading, onClick }: Props) => {
 
   const handleAddToCartClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+    onAddToCartClick?.();
   };
 
   return (
