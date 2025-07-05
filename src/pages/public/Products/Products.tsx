@@ -1,9 +1,4 @@
-import {
-  CategoryFilter,
-  LoadingView,
-  SearchBar,
-  MobileSearchDialog,
-} from "@/components";
+import { CategoryFilter, LoadingView, SearchInterface } from "@/components";
 import { useProducts } from "@/hooks/useProducts";
 import type { Category, ProductsByCategory } from "@/models";
 import { useSearchParams } from "react-router-dom";
@@ -90,13 +85,8 @@ export const Products = () => {
 
   return (
     <div className={styles.container}>
-      {!isDesktop && <MobileSearchDialog />}
       <div className={styles.header}>
-        {isDesktop && (
-          <div className={styles.searchContainer}>
-            <SearchBar placeholder="Buscar un producto. Por ej. 'Chateau Subsónico' ..." />
-          </div>
-        )}
+        <SearchInterface />
         <CategoryFilter
           categories={categories}
           onChange={handleCategoryChange}

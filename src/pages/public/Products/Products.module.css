@@ -15,29 +15,6 @@
   align-self: center;
 }
 
-.searchCircle {
-  --max-width: 5rem;
-  display: flex;
-  justify-content: center;
-  max-width: var(--max-width);
-  align-items: center;
-  aspect-ratio: 1 / 1 !important;
-  padding: 1rem;
-  border-radius: var(--max-width);
-  position: fixed;
-  bottom: 2rem;
-  right: 1rem;
-  background-color: var(--navbar-bg);
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
-  z-index: 10;
-}
-
-.searchCircle .icon {
-  color: var(--on-primary);
-  width: 1.5rem;
-  height: auto;
-}
-
 @media (width >= 850px) {
   .header {
     display: flex;
