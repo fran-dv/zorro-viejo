@@ -47,7 +47,7 @@
 
 .cardsCarousel .embla__buttonPrev,
 .cardsCarousel .embla__buttonNext {
-  z-index: 2;
+  z-index: 0;
 }
 
 .embla__buttonPrev.filled,
