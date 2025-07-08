@@ -3,13 +3,20 @@ import { Navbar } from "@/components/Navbar/Navbar";
 import { Footer } from "@/components/Footer/Footer";
 import { FooterContextProvider } from "./context/FooterContext";
 import { useRef } from "react";
+import { useLocation } from "react-router-dom";
+import { Paths } from "@/routing";
 
 interface Props {
   children: React.ReactNode;
 }
 
+const hideFooterOn = [Paths.Cart];
+
 function App({ children }: Props) {
   const footerRef = useRef<HTMLElement>(null);
+  const { pathname } = useLocation();
+  const shouldHideFooter = hideFooterOn.includes(pathname);
+
   return (
     <FooterContextProvider
       value={footerRef as React.RefObject<HTMLElement | null>}
@@ -17,7 +24,7 @@ function App({ children }: Props) {
       <div className={styles.container}>
         <Navbar />
         <main className={styles.main}>{children}</main>
-        <Footer ref={footerRef} />
+        {!shouldHideFooter && <Footer ref={footerRef} />}
       </div>
     </FooterContextProvider>
   );
