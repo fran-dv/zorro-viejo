@@ -5,6 +5,7 @@ import { FooterContextProvider } from "./context/FooterContext";
 import { useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { Paths } from "@/routing";
+import { ScrollToTop } from "@/components/ScrollToTop/ScrollToTop";
 
 interface Props {
   children: React.ReactNode;
@@ -21,6 +22,7 @@ function App({ children }: Props) {
     <FooterContextProvider
       value={footerRef as React.RefObject<HTMLElement | null>}
     >
+      <ScrollToTop />
       <div className={styles.container}>
         <Navbar />
         <main className={styles.main}>{children}</main>
