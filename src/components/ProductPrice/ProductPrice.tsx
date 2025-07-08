@@ -3,9 +3,14 @@ import styles from "./ProductPrice.module.css";
 interface Props {
   price: number;
   offerPrice?: number;
+  showOfferTag?: boolean;
 }
 
-export const ProductPrice = ({ price, offerPrice = undefined }: Props) => {
+export const ProductPrice = ({
+  price,
+  offerPrice = undefined,
+  showOfferTag = true,
+}: Props) => {
   return offerPrice ? (
     <>
       <div className={styles.oldPrice}>
@@ -15,7 +20,7 @@ export const ProductPrice = ({ price, offerPrice = undefined }: Props) => {
       <div className={styles.price}>
         <h3>${offerPrice}</h3>
       </div>
-      <span className={styles.offerTag}>¡Aprovechá!</span>
+      {showOfferTag && <span className={styles.offerTag}>¡Aprovechá!</span>}
     </>
   ) : (
     <div className={styles.price}>
