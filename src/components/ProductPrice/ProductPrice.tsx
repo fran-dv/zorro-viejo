@@ -1,3 +1,4 @@
+import { formatPrice } from "@/utils";
 import styles from "./ProductPrice.module.css";
 
 interface Props {
@@ -15,16 +16,16 @@ export const ProductPrice = ({
     <>
       <div className={styles.oldPrice}>
         <div className={styles.cross}></div>
-        <h3>${price}</h3>
+        <h3>{formatPrice(price)}</h3>
       </div>
       <div className={styles.price}>
-        <h3>${offerPrice}</h3>
+        <h3>{formatPrice(offerPrice)}</h3>
       </div>
       {showOfferTag && <span className={styles.offerTag}>¡Aprovechá!</span>}
     </>
   ) : (
     <div className={styles.price}>
-      <h3>${price}</h3>
+      <h3>{formatPrice(price)}</h3>
     </div>
   );
 };
