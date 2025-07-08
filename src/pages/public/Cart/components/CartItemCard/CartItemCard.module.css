@@ -1,0 +1,131 @@
+.container {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  padding-right: 0.75rem;
+  width: 100%;
+  background-color: var(--surface);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow:
+    0 0.25rem 0.5rem rgba(0, 0, 0, 0.2),
+    0 0.5rem 1rem rgba(0, 0, 0, 0.07);
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.imageWrapper {
+  max-width: 5rem;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.productName {
+  font-size: 1.3rem;
+  text-wrap: wrap;
+}
+
+.deleteButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  margin-left: auto;
+}
+
+.deleteButton {
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteIcon {
+  color: var(--error);
+  width: 2rem;
+  height: auto;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.titleAndPackageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
+}
+
+.packageInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (hover: hover) {
+  .deleteButton:hover {
+    cursor: pointer;
+    animation: deleteHover 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@media (width >= 1000px) {
+  .imageWrapper {
+    max-width: 6rem;
+  }
+  .productName {
+    font-size: 1.2rem;
+  }
+  .infoContainer {
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    flex-grow: 1;
+  }
+  .priceContainer {
+    margin-right: 0.5rem;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+    justify-content: center;
+  }
+  .quantitySelector {
+    align-self: flex-start;
+    margin-left: auto;
+    align-self: center;
+  }
+  .deleteButtonContainer {
+    margin-left: 0;
+  }
+}
+
+@keyframes deleteHover {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  20% {
+    transform: scale(1.1) rotate(-8deg);
+  }
+  50% {
+    transform: scale(1.15) rotate(8deg);
+  }
+  80% {
+    transform: scale(1.1) rotate(-6deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
