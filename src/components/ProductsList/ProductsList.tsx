@@ -1,10 +1,11 @@
 import type { Product, ProductsByCategory } from "@/models";
 import styles from "./ProductsList.module.css";
-import { ProductCard, ProductsCarousel } from "@/components";
+import { ProductCard, ProductsCarousel, Snackbar } from "@/components";
 import { LoadingView } from "@/components";
 import { Paths } from "@/routing";
 import { useNavigate } from "react-router-dom";
 import { useCartStore } from "@/stores";
+import { useSnackbar } from "@/hooks";
 
 interface Props {
   productsByCategory: ProductsByCategory[];
@@ -16,7 +17,16 @@ export const ProductsList = ({
   areProductsLoading,
 }: Props) => {
   const navigate = useNavigate();
-  const { addItemToCart } = useCartStore();
+  const { addItemToCart, removeItem } = useCartStore();
+  const {
+    isOpened,
+    content,
+    onUndo,
+    showUndo,
+    openSnackbar,
+    closeSnackbar,
+    setOnUndo,
+  } = useSnackbar();
 
   if (!productsByCategory.length) {
     return <LoadingView message="Cargando productos..." />;
@@ -28,6 +38,8 @@ export const ProductsList = ({
 
   const handleAddToCart = (product: Product) => {
     addItemToCart(product);
+    setOnUndo(() => removeItem(product.id));
+    openSnackbar("Producto añadido!", true);
   };
 
   return (
@@ -77,6 +89,15 @@ export const ProductsList = ({
             ))}
           </div>
         </>
+      )}
+      {isOpened && (
+        <Snackbar
+          content={content}
+          seconds={4}
+          onClose={closeSnackbar}
+          showUndoBtn={showUndo}
+          onUndo={onUndo}
+        />
       )}
     </div>
   );
