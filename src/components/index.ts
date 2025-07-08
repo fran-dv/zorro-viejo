@@ -4,7 +4,7 @@ export * from "./MobileNavMenu/MobileNavMenu";
 export * from "./CategoriesAccordion/CategoriesAccordion";
 export * from "./LoadingSpinner/LoadingSpinner";
 export * from "./LoadingView/LoadingView";
-export * from "./AddToCartButton/AddToCartButton";
+export * from "./ActionButton/ActionButton";
 export * from "./ProductPrice/ProductPrice";
 export * from "./ProductCard/ProductCard";
 export * from "./ProductsList/ProductsList";

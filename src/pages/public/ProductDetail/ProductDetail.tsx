@@ -1,8 +1,13 @@
 import { useParams } from "react-router-dom";
 import styles from "./ProductDetail.module.css";
-import { useProductBySlug, useRelatedProducts, useHideOnFooter } from "@/hooks";
 import {
-  AddToCartButton,
+  useProductBySlug,
+  useRelatedProducts,
+  useHideOnFooter,
+  useSnackbar,
+} from "@/hooks";
+import {
+  ActionButton,
   ImagesCarousel,
   LoadingView,
   ProductCard,
@@ -11,6 +16,7 @@ import {
   SearchInterface,
   StickyFooterBar,
   ProductsCarousel,
+  Snackbar,
 } from "@/components";
 import { Paths } from "@/routing";
 import { NavigateButton } from "@/components";
@@ -25,7 +31,16 @@ export const ProductDetail = () => {
   const isDesktop = useMediaQuery("(min-width: 850px)");
   const { isFooterVisible } = useHideOnFooter();
   const navigate = useNavigate();
-  const { addItemToCart } = useCartStore();
+  const { addItemToCart, removeItem } = useCartStore();
+  const {
+    isOpened,
+    content,
+    showUndo,
+    onUndo,
+    openSnackbar,
+    setOnUndo,
+    closeSnackbar,
+  } = useSnackbar();
 
   const { data, error, isFetching } = useProductBySlug({ slug: slug ?? "" });
 
@@ -86,6 +101,13 @@ export const ProductDetail = () => {
 
   if (!product) return;
 
+  const handleAddToCart = () => {
+    addItemToCart(product);
+    setOnUndo(() => removeItem(product.id));
+    openSnackbar("Producto añadido!", true);
+    console.log("snackbar opened. On undo: ", onUndo);
+  };
+
   return (
     <div className={styles.container}>
       {isDesktop && <SearchInterface />}
@@ -130,8 +152,8 @@ export const ProductDetail = () => {
           </div>
 
           {isDesktop && (
-            <AddToCartButton
-              onClick={() => {}}
+            <ActionButton
+              onClick={handleAddToCart}
               content="Añadir al carrito"
               className={styles.addToCartButton}
             />
@@ -147,9 +169,9 @@ export const ProductDetail = () => {
       {!isDesktop && (
         <StickyFooterBar isHidden={isFooterVisible}>
           <SearchInterface floatingButtonClassName={styles.searchButton} />
-          <AddToCartButton
+          <ActionButton
             className={styles.addToCartButton}
-            onClick={() => addItemToCart(product)}
+            onClick={handleAddToCart}
             content="Añadir al carrito"
           />
         </StickyFooterBar>
@@ -168,10 +190,20 @@ export const ProductDetail = () => {
                 product={p}
                 isLoading={relatedProductsIsFetching}
                 onClick={() => navigate(Paths.getProductDetailPath(p.slug))}
+                onAddToCartClick={handleAddToCart}
               />
             ))}
           />
         </div>
+      )}
+      {isOpened && (
+        <Snackbar
+          content={content}
+          seconds={4}
+          showUndoBtn={showUndo}
+          onUndo={onUndo}
+          onClose={closeSnackbar}
+        />
       )}
     </div>
   );

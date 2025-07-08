@@ -3,7 +3,7 @@ import styles from "./ProductCard.module.css";
 import type { Product } from "@/models";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { AddToCartButton, ProductPrice } from "@/components";
+import { ActionButton, ProductPrice } from "@/components";
 
 interface Props {
   product: Product;
@@ -93,7 +93,7 @@ export const ProductCard = ({
         <div className={styles.priceSection}>
           <ProductPrice price={product.price} offerPrice={product.offerPrice} />
         </div>
-        <AddToCartButton onClick={handleAddToCartClick} />
+        <ActionButton onClick={handleAddToCartClick} />
       </div>
     </div>
   );

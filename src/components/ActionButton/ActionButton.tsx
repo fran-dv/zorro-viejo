@@ -1,4 +1,4 @@
-import styles from "./AddToCartButton.module.css";
+import styles from "./ActionButton.module.css";
 
 interface Props {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -6,7 +6,7 @@ interface Props {
   content?: string;
 }
 
-export const AddToCartButton = ({
+export const ActionButton = ({
   onClick,
   className = "",
   content = "Añadir al carrito",
