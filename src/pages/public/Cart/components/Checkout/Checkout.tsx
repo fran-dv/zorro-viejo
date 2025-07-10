@@ -7,9 +7,10 @@ import { formatPrice } from "@/utils";
 interface Props {
   className?: string;
   total: number;
+  onButtonClick: () => void;
 }
 
-export const Checkout = ({ className = "", total }: Props) => {
+export const Checkout = ({ className = "", total, onButtonClick }: Props) => {
   const isDesktop = useMediaQuery("(min-width: 850px)");
 
   return (
@@ -17,7 +18,10 @@ export const Checkout = ({ className = "", total }: Props) => {
       {isDesktop ? (
         <div className={styles.checkOutContainer}>
           <h4 className={styles.total}>Total: {formatPrice(total)}</h4>
-          <ActionButton onClick={() => {}} content="Proceder con la compra" />
+          <ActionButton
+            onClick={onButtonClick}
+            content="Proceder con la compra"
+          />
         </div>
       ) : (
         <StickyFooterBar
@@ -26,7 +30,10 @@ export const Checkout = ({ className = "", total }: Props) => {
         >
           <h4 className={styles.total}>Total: {formatPrice(total)}</h4>
 
-          <ActionButton onClick={() => {}} content="Proceder con la compra" />
+          <ActionButton
+            onClick={onButtonClick}
+            content="Proceder con la compra"
+          />
         </StickyFooterBar>
       )}
     </div>

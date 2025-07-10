@@ -3,6 +3,7 @@ import styles from "./Cart.module.css";
 import { NavigateButton } from "@/components";
 import { Paths } from "@/routing";
 import { CartItemCard, Checkout } from "./components";
+import { useNavigate } from "react-router-dom";
 
 const title: React.ReactNode = (
   <div className={styles.titleContainer}>
@@ -18,6 +19,8 @@ export const Cart = () => {
     removeItem,
     getTotalPrice,
   } = useCartStore();
+
+  const navigate = useNavigate();
 
   const handleIncrementItem = (itemId: number) => {
     incrementItemAmount(itemId);
@@ -79,6 +82,7 @@ export const Cart = () => {
         <Checkout
           total={getTotalPrice()}
           className={styles.checkoutContainer}
+          onButtonClick={() => navigate(Paths.Checkout)}
         />
       </div>
     </>

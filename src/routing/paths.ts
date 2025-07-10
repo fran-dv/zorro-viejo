@@ -3,9 +3,12 @@ export const Paths = {
   Products: "/products",
   ProductDetail: "/products/:slug",
   Cart: "/cart",
+  Checkout: "/checkout",
+  CheckoutSuccess: "success/:orderId",
   AdminLogin: "/admin/login",
   AnyAdmin: "/admin/*",
   AdminDashboard: "dashboard",
   NotFound: "/404",
   getProductDetailPath: (slug: string) => `/products/${slug}`,
+  getCheckoutSuccessPath: (orderId: string) => `/checkout/success/${orderId}`,
 };
