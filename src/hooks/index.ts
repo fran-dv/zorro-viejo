@@ -5,3 +5,5 @@ export * from "./useSearchSuggestions";
 export * from "./useHideOnFooter";
 export * from "./useRelatedProducts";
 export * from "./useSnackbar";
+export * from "./useSubmitOrder";
+export * from "./useOrderById";
