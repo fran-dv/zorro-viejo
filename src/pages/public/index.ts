@@ -4,3 +4,6 @@ export * from "./Home/Home";
 export * from "./NotFound/NotFound";
 export * from "./Products/Products";
 export * from "./ProductDetail/ProductDetail";
+export * from "./Checkout/Checkout";
+export * from "./CheckoutSuccess/CheckoutSuccess";
+export * from "./CheckoutForm/CheckoutForm";
