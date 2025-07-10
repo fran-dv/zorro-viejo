@@ -8,4 +8,6 @@ export const supabase = createClient(supabaseUrl!, supabaseAnonKey!);
 export const Tables = {
   Categories: "categories",
   Products: "products",
+  Orders: "orders",
+  OrderItems: "order_items",
 } as const;

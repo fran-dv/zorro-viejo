@@ -4,3 +4,5 @@ export * from "./fetchProducts";
 export * from "./fetchProductBySlug";
 export * from "./fetchSearchSuggestions";
 export * from "./fetchRelatedProducts";
+export * from "./createOrder";
+export * from "./fetchOrderById";
