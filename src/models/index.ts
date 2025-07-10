@@ -5,3 +5,5 @@ export * from "./category";
 export * from "./categoryResponse";
 export * from "./categoryResponseToCategory";
 export * from "./cartItem";
+export * from "./checkoutForm";
+export * from "./orders";
