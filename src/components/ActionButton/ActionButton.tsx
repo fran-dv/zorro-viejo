@@ -10,9 +10,14 @@ export const ActionButton = ({
   onClick,
   className = "",
   content = "Añadir al carrito",
-}: Props) => {
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & Props) => {
   return (
-    <button className={`${styles.button} ${className}`} onClick={onClick}>
+    <button
+      className={`${styles.button} ${className}`}
+      onClick={onClick}
+      {...props}
+    >
       <p>{content}</p>
     </button>
   );
