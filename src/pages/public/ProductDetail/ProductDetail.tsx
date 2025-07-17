@@ -138,6 +138,7 @@ export const ProductDetail = () => {
                 className={styles.image}
                 key={product.imageUrls[0]}
                 imageUrl={product.imageUrls[0]}
+                productName={product.name}
               />
             )}
           </div>

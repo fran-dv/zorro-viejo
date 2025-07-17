@@ -75,6 +75,8 @@ export const ProductCard = ({
       <div
         className={styles.image}
         style={{ backgroundImage: `url(${product.imageUrls[0]})` }}
+        role="img"
+        aria-label={`Imagen de ${product.name}`}
       ></div>
       <div>
         <h2>{product.name}</h2>
