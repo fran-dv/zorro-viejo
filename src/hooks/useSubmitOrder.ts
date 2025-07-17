@@ -4,6 +4,7 @@ import {
   type CreateOrderOpts,
   type CreateOrderResponse,
 } from "@/api";
+import { saveOrderToLocalStorage } from "@/utils";
 
 export const useSubmitOrder = () => {
   return useMutation({
@@ -14,7 +15,7 @@ export const useSubmitOrder = () => {
       if (!createOrderResponse.success) {
         throw new Error("Failed to create order");
       }
-      localStorage.setItem("existingOrderId", createOrderResponse.orderId);
+      saveOrderToLocalStorage(createOrderResponse);
     },
     onError: (error) => {
       console.error("Error al crear la orden:", error.message);
