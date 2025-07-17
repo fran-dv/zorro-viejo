@@ -1,4 +1,9 @@
-import { CategoryFilter, LoadingView, SearchInterface } from "@/components";
+import {
+  CategoryFilter,
+  LoadingView,
+  SearchInterface,
+  StickyFooterBar,
+} from "@/components";
 import { useProducts } from "@/hooks/useProducts";
 import type { Category, ProductsByCategory } from "@/models";
 import { useSearchParams } from "react-router-dom";
@@ -10,6 +15,7 @@ import { Paths } from "@/routing";
 import { AllCategory } from "@/models";
 import styles from "./Products.module.css";
 import { useMediaQuery } from "usehooks-ts";
+import { useHideOnFooter } from "@/hooks";
 
 export const Products = () => {
   const isDesktop = useMediaQuery("(min-width: 850px)");
@@ -20,6 +26,8 @@ export const Products = () => {
   const [page, setPage] = useState(1);
 
   const navigate = useNavigate();
+
+  const { isFooterVisible } = useHideOnFooter();
 
   useEffect(() => {
     setPage(1);
@@ -86,7 +94,7 @@ export const Products = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <SearchInterface />
+        {isDesktop && <SearchInterface />}
         <CategoryFilter
           categories={categories}
           onChange={handleCategoryChange}
@@ -119,6 +127,12 @@ export const Products = () => {
           onPageChange={handlePageChange}
           pagesAmount={pagesAmount}
         />
+      )}
+
+      {!isDesktop && (
+        <StickyFooterBar isHidden={isFooterVisible}>
+          <SearchInterface />
+        </StickyFooterBar>
       )}
     </div>
   );
