@@ -17,7 +17,7 @@ export const ProductsList = ({
   areProductsLoading,
 }: Props) => {
   const navigate = useNavigate();
-  const { addItemToCart, removeItem } = useCartStore();
+  const { items, addItemToCart, removeItem } = useCartStore();
   const {
     isOpened,
     content,
@@ -39,7 +39,17 @@ export const ProductsList = ({
   const handleAddToCart = (product: Product) => {
     addItemToCart(product);
     setOnUndo(() => removeItem(product.id));
-    openSnackbar("Producto añadido!", true);
+
+    const isProductInCart =
+      items.findIndex((item) => item.product.id === product.id) === -1
+        ? false
+        : true;
+
+    if (!isProductInCart) {
+      openSnackbar("Producto añadido!", true);
+    } else {
+      openSnackbar("Ya está en el carrito!", false);
+    }
   };
 
   return (
