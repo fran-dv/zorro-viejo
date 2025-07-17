@@ -1,5 +1,5 @@
 import type { Order, OrderItem } from "@/models";
-import { formatPrice } from "@/utils";
+import { formatPrice, shortenLink } from "@/utils";
 
 export const whatsappRedirectNumber = import.meta.env
   .VITE_WHATSAPP_REDIRECT_NUMBER;
@@ -7,7 +7,7 @@ export const whatsappRedirectNumber = import.meta.env
 const buildOrderMessage = (order: Order): string => {
   const orderUrl = `https://example.com/orders?id=${order.id}`; // ajusta a tu dominio
 
-  const divider = `*=====${"=".repeat(order.id.length * 2)}*`;
+  const divider = `*-----${"-".repeat(order.id.length * 2)}*`;
 
   const header = [
     `*Orden #${order.id}*`,
@@ -38,9 +38,10 @@ const buildOrderMessage = (order: Order): string => {
   return [...header, ...items, ...footer].join("\n");
 };
 
-export const getWhatsappLink = (
+export const getWhatsappLink = async (
   order: Order,
   userAgent: "auto" | "desktop" | "mobile" = "auto",
+  shorten = true,
 ) => {
   const text = buildOrderMessage(order);
   const encodedText = encodeURIComponent(text);
@@ -62,5 +63,17 @@ export const getWhatsappLink = (
     prefix = baseWeb;
   }
 
-  return `${prefix}?phone=${whatsappRedirectNumber}&text=${encodedText}`;
+  const longLink = `${prefix}?phone=${whatsappRedirectNumber}&text=${encodedText}`;
+
+  if (!shorten || order.items.length < 4) {
+    return longLink;
+  }
+
+  const shortLink = await shortenLink(longLink);
+
+  if (!shortLink) {
+    return longLink;
+  }
+
+  return shortLink;
 };
