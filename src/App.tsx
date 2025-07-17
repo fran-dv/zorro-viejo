@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { Paths } from "@/routing";
 import { ScrollToTop } from "@/components/ScrollToTop/ScrollToTop";
+import { useExpireOrderStorage } from "@/hooks";
 
 interface Props {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ function App({ children }: Props) {
   const footerRef = useRef<HTMLElement>(null);
   const { pathname } = useLocation();
   const shouldHideFooter = hideFooterOn.includes(pathname);
+  useExpireOrderStorage();
 
   return (
     <FooterContextProvider
