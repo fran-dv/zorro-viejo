@@ -26,17 +26,6 @@
   padding-top: 0.5rem;
 }
 
-.qr {
-  width: 100%;
-  filter: drop-shadow(0 0 0.25rem rgba(0, 0, 0, 0.13));
-}
-
-.qrWhatsappLogo {
-  width: 3rem;
-  position: absolute;
-  margin: auto;
-}
-
 .snackbarContainer {
   display: flex;
   justify-content: center;

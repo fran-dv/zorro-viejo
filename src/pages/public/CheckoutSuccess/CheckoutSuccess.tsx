@@ -6,14 +6,13 @@ import {
   NavigateButton,
   Snackbar,
 } from "@/components";
-import { existingOrderIdKey, getWhatsappLink } from "@/utils";
+import { getWhatsappLink, removeOrderFromLocalStorage } from "@/utils";
 import { useEffect, useState } from "react";
 import { Paths } from "@/routing";
-import { QRCodeSVG } from "qrcode.react";
-import WhatsappLogo from "@/assets/whatsapp-logo.svg";
 import { useCartStore } from "@/stores";
 import { useNavigate } from "react-router-dom";
 import { useOrderById, useSnackbar } from "@/hooks";
+import { QRCode } from "./components";
 
 export const CheckoutSuccess = () => {
   const { orderId } = useParams();
@@ -24,19 +23,30 @@ export const CheckoutSuccess = () => {
   const { data: order, isFetching } = useOrderById({ id: orderId ?? "" });
   const [wppLink, setWppLink] = useState("");
   const [qrWppLink, setQrWppLink] = useState("");
+  const [isLinkLoading, setIsLinkLoading] = useState(true);
   const { isOpened, closeSnackbar, openSnackbar } = useSnackbar();
 
   useEffect(() => {
+    const setLinks = async () => {
+      setWppLink(await getWhatsappLink(order!, "auto", false));
+      setQrWppLink(await getWhatsappLink(order!, "mobile"));
+    };
+
     if (order) {
-      setWppLink(getWhatsappLink(order));
-      setQrWppLink(getWhatsappLink(order, "mobile"));
+      setLinks();
     }
   }, [order]);
 
   useEffect(() => {
+    if (qrWppLink !== "") {
+      setIsLinkLoading(false);
+    }
+  }, [qrWppLink]);
+
+  useEffect(() => {
     const setTime = setTimeout(() => {
       setDelayPassed(true);
-    }, 5000);
+    }, 7000);
 
     return () => clearTimeout(setTime);
   }, []);
@@ -52,7 +62,7 @@ export const CheckoutSuccess = () => {
 
   const handleFinish = () => {
     clearCart();
-    localStorage.removeItem(existingOrderIdKey);
+    removeOrderFromLocalStorage();
     navigate(Paths.Home, { replace: true });
   };
 
@@ -92,26 +102,13 @@ export const CheckoutSuccess = () => {
       <div className={styles.qrWrapper}>
         {qrWppLink !== "" && (
           <>
-            <QRCodeSVG
-              value={qrWppLink}
-              className={styles.qr}
-              size={300}
-              title="QR para WhatsApp"
-              level="M"
+            <QRCode
+              link={qrWppLink}
               onClick={qrClick}
-            />
-            <img
-              className={styles.qrWhatsappLogo}
-              src={WhatsappLogo}
-              alt="Logo de WhatsApp"
+              isLoading={isLinkLoading}
             />
           </>
         )}
-        <img
-          className={styles.qrWhatsappLogo}
-          src={WhatsappLogo}
-          alt="Logo de WhatsApp"
-        />
       </div>
       {!wasRedirected && delayPassed && (
         <>
