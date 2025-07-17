@@ -31,7 +31,7 @@ export const ProductDetail = () => {
   const isDesktop = useMediaQuery("(min-width: 850px)");
   const { isFooterVisible } = useHideOnFooter();
   const navigate = useNavigate();
-  const { addItemToCart, removeItem } = useCartStore();
+  const { items, addItemToCart, removeItem } = useCartStore();
   const {
     isOpened,
     content,
@@ -101,11 +101,20 @@ export const ProductDetail = () => {
 
   if (!product) return;
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (product: Product) => {
     addItemToCart(product);
     setOnUndo(() => removeItem(product.id));
-    openSnackbar("Producto añadido!", true);
-    console.log("snackbar opened. On undo: ", onUndo);
+
+    const isProductInCart =
+      items.findIndex((item) => item.product.id === product.id) === -1
+        ? false
+        : true;
+
+    if (!isProductInCart) {
+      openSnackbar("Producto añadido!", true);
+    } else {
+      openSnackbar("Ya está en el carrito!", false);
+    }
   };
 
   return (
@@ -153,7 +162,7 @@ export const ProductDetail = () => {
 
           {isDesktop && (
             <ActionButton
-              onClick={handleAddToCart}
+              onClick={() => handleAddToCart(product)}
               content="Añadir al carrito"
               className={styles.addToCartButton}
             />
@@ -171,7 +180,7 @@ export const ProductDetail = () => {
           <SearchInterface floatingButtonClassName={styles.searchButton} />
           <ActionButton
             className={styles.addToCartButton}
-            onClick={handleAddToCart}
+            onClick={() => handleAddToCart(product)}
             content="Añadir al carrito"
           />
         </StickyFooterBar>
@@ -190,7 +199,7 @@ export const ProductDetail = () => {
                 product={p}
                 isLoading={relatedProductsIsFetching}
                 onClick={() => navigate(Paths.getProductDetailPath(p.slug))}
-                onAddToCartClick={handleAddToCart}
+                onAddToCartClick={() => handleAddToCart(p)}
               />
             ))}
           />
