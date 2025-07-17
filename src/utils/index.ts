@@ -4,6 +4,7 @@ export * from "./getSlug";
 export * from "./formatPrice";
 export * from "./localStorageKeys";
 export * from "./generateRawOrder";
+export * from "./shortenLink";
 export * from "./whatsappRedirection";
 export * from "./saveOrderToLocalStorage";
 export * from "./removeOrderFromLocalStorage";
