@@ -15,8 +15,17 @@
   align-self: center;
 }
 
+.errorFetchingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+  height: 100%;
+}
+
 @media (width >= 850px) {
   .header {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: stretch;

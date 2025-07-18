@@ -16,11 +16,17 @@ import { AllCategory } from "@/models";
 import styles from "./Products.module.css";
 import { useMediaQuery } from "usehooks-ts";
 import { useHideOnFooter } from "@/hooks";
+import { ErrorFetching } from "@/components/Errors";
 
 export const Products = () => {
   const isDesktop = useMediaQuery("(min-width: 850px)");
   const PRODUCTS_LIMIT = isDesktop ? 12 : 8;
-  const { categories } = useGlobalContext();
+  const {
+    categories,
+    isFetchingCategories,
+    refetchCategories,
+    errorFetchingCategories,
+  } = useGlobalContext();
   const [searchParams] = useSearchParams();
   const currentSlug = searchParams.get("category") ?? AllCategory.slug;
   const [page, setPage] = useState(1);
@@ -49,19 +55,11 @@ export const Products = () => {
     [currentCategory, categories],
   );
 
-  const { data, error, isFetching } = useProducts({
+  const { data, isFetching, isLoading, isError, refetch } = useProducts({
     limitPerCategory: PRODUCTS_LIMIT,
     categoriesIds: categoriesIdsToFetch,
     page: page,
   });
-
-  if (error) {
-    throw new Error(`Error fetching products: ${error.message}`);
-  }
-
-  if (!data && isFetching) {
-    return <LoadingView message="Cargando productos..." />;
-  }
 
   const prodsByCategory: ProductsByCategory[] | undefined = data?.map(
     (item) => {
@@ -95,12 +93,21 @@ export const Products = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         {isDesktop && <SearchInterface />}
-        <CategoryFilter
-          categories={categories}
-          onChange={handleCategoryChange}
-          currentCategorySlug={currentSlug}
-          className={styles.categoryFilter}
-        />
+        {categories.length < 2 && errorFetchingCategories ? (
+          <ErrorFetching
+            isFetching={isFetchingCategories}
+            onRetry={refetchCategories}
+            message="Error al cargar las categorías. Revisa tu conexión y vuelve a intentar"
+          />
+        ) : (
+          <CategoryFilter
+            categories={categories}
+            onChange={handleCategoryChange}
+            currentCategorySlug={currentSlug}
+            className={styles.categoryFilter}
+            isLoading={isFetchingCategories}
+          />
+        )}
       </div>
 
       <h1 id="products-top" className={styles.title}>
@@ -108,7 +115,7 @@ export const Products = () => {
           ? "Todos los productos"
           : (currentCategory as Category).name}
       </h1>
-      {currentCategory !== AllCategory.slug && (
+      {currentCategory !== AllCategory.slug && !isError && (
         <Pagination
           className={styles.pagination}
           selectedPage={page}
@@ -116,11 +123,26 @@ export const Products = () => {
           pagesAmount={pagesAmount}
         />
       )}
-      <ProductsList
-        productsByCategory={prodsByCategory ?? []}
-        areProductsLoading={isFetching}
-      />
-      {currentCategory !== AllCategory.slug && (
+      {prodsByCategory && !isError && (
+        <ProductsList
+          productsByCategory={prodsByCategory ?? []}
+          areProductsLoading={isFetching}
+        />
+      )}
+
+      {isLoading && <LoadingView message="Cargando productos..." />}
+
+      {isError && (
+        <div className={styles.errorFetchingWrapper}>
+          <ErrorFetching
+            onRetry={refetch}
+            message="Error al cargar las bebidas. Revisa tu conexión y vuelve a intentarlo"
+            isFetching={isFetching}
+          />
+        </div>
+      )}
+
+      {currentCategory !== AllCategory.slug && !isError && (
         <Pagination
           className={styles.pagination}
           selectedPage={page}
