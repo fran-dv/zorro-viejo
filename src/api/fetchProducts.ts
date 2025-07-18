@@ -14,23 +14,37 @@ interface CategoryProducts {
   count: number;
 }
 
-type ProductsByCategory = CategoryProducts[];
+export type ProductsByCategoryFetch = CategoryProducts[];
 
 export const fetchProducts = async ({
   limitPerCategory,
   categoriesIds,
   page = 1,
-}: FetchOpts): Promise<ProductsByCategory> => {
-  const promises = categoriesIds.map(async (id) => {
-    const { data, error, count } = await supabase
+}: FetchOpts): Promise<ProductsByCategoryFetch> => {
+  if (!navigator.onLine) {
+    throw new Error("No hay conexión a internet");
+  }
+
+  const results: ProductsByCategoryFetch = [];
+
+  for (const id of categoriesIds) {
+    const { data, error, count, status } = await supabase
       .from(Tables.Products)
       .select("*", { count: "exact", head: false })
       .eq("category_id", id)
       .range((page - 1) * limitPerCategory, page * limitPerCategory - 1)
       .order("name", { ascending: true });
 
+    if (status === 0 || !navigator.onLine) {
+      throw new Error("Error de red. Verifica tu conexión a internet");
+    }
+
     if (error) {
-      throw new Error(`Network error: ${error.message}`);
+      throw error;
+    }
+
+    if (!data) {
+      throw new Error("Error obteniendo productos");
     }
 
     const products = Array.isArray(data) ? data : [data];
@@ -38,8 +52,12 @@ export const fetchProducts = async ({
       .map((prod, i) => parseProduct(prod, i))
       .filter(Boolean) as Product[];
 
-    return { categoryId: id, products: localProducts, count: count ?? 0 };
-  });
+    results.push({
+      categoryId: id,
+      products: localProducts,
+      count: count ?? 0,
+    });
+  }
 
-  return await Promise.all(promises);
+  return results;
 };
