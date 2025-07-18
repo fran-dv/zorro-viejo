@@ -1,4 +1,4 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { fetchRelatedProducts } from "@/api";
 import type { Product } from "@/models";
 
@@ -17,7 +17,6 @@ export const useRelatedProducts = ({
     queryKey: ["related products", product, limit],
     queryFn: async () =>
       await fetchRelatedProducts({ product: product ?? undefined, limit }),
-    placeholderData: keepPreviousData,
     enabled,
     staleTime: 60_000,
     retry: 3,
