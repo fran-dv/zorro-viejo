@@ -1,0 +1,47 @@
+.container {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+  min-height: 100dvh;
+  padding: 4rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  min-height: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.information h1 {
+  align-self: center;
+}
+
+.advise {
+  display: flex;
+  flex-direction: column;
+}
+
+.wppButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  max-width: 4rem;
+  background-color: transparent;
+  transition: transform 0.2s ease-in-out;
+}
+
+.wppButton:hover {
+  transform: scale(1.05);
+}
+
+.wppImage {
+  aspect-ratio: 1;
+  width: 100%;
+  height: auto;
+}
