@@ -6,10 +6,20 @@ import logo from "@/assets/zorro-viejo.png";
 import { useGlobalContext } from "@/context";
 import { CategoryThumbnail } from "./components";
 import { LoadingView } from "@/components";
+import { ErrorFetching } from "@/components/Errors";
+import { useState } from "react";
 
 export const Home = () => {
   const navigate = useNavigate();
-  const { categories } = useGlobalContext();
+  const { categories, errorFetchingCategories, refetchCategories } =
+    useGlobalContext();
+  const [refetchingCategories, setRefetchingCategories] = useState(false);
+
+  const handleRefetch = async () => {
+    setRefetchingCategories(true);
+    await refetchCategories();
+    setRefetchingCategories(false);
+  };
 
   return (
     <div className={styles.container}>
@@ -34,9 +44,12 @@ export const Home = () => {
       </div>
 
       <div className={styles.categoriesSectionContainer}>
-        <h2>Encuentra tus bebidas favoritas</h2>
+        <h2>Encontrá tus bebidas favoritas</h2>
 
-        {categories.length > 0 ? (
+        {(!errorFetchingCategories && categories.length < 1) ||
+        refetchingCategories ? (
+          <LoadingView message="Cargando categorías" />
+        ) : (
           <ul className={styles.categoriesList}>
             {categories.map((c) => {
               if (c.slug === "ofertas") return null;
@@ -50,8 +63,13 @@ export const Home = () => {
               );
             })}
           </ul>
-        ) : (
-          <LoadingView message="Cargando categorías" />
+        )}
+
+        {errorFetchingCategories && (
+          <ErrorFetching
+            message="Error al cargar las categorías. Revisa tu conexión y vuelve a intentar"
+            onRetry={handleRefetch}
+          />
         )}
       </div>
     </div>
