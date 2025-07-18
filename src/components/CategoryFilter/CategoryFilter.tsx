@@ -3,12 +3,15 @@ import styles from "./CategoryFilter.module.css";
 import type { Category } from "@/models";
 import { AllCategory } from "@/models";
 import { useState, useEffect, useRef } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 interface Props {
   categories: Category[];
   onChange: (catSlug: string) => void;
   currentCategorySlug: string;
   className?: string;
+  isLoading?: boolean;
 }
 
 export const CategoryFilter = ({
@@ -16,6 +19,7 @@ export const CategoryFilter = ({
   onChange,
   currentCategorySlug,
   className,
+  isLoading = false,
 }: Props) => {
   const [value, setValue] = useState(currentCategorySlug);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -43,6 +47,44 @@ export const CategoryFilter = ({
     setValue(catSlug);
     onChange(catSlug);
   };
+
+  if (isLoading) {
+    return (
+      <div className={`${styles.container} ${className ?? ""}`}>
+        <p>Filtrar por: </p>
+        <div className={styles.rootContainer}>
+          <div className={styles.root}>
+            <Skeleton
+              width={75}
+              style={{ padding: "0.5rem" }}
+              borderRadius={"1rem"}
+            />
+            <Skeleton
+              width={75}
+              style={{ padding: "0.5rem" }}
+              borderRadius={"1rem"}
+            />
+            <Skeleton
+              width={75}
+              style={{ padding: "0.5rem" }}
+              borderRadius={"1rem"}
+            />
+            <Skeleton
+              width={75}
+              style={{ padding: "0.5rem" }}
+              borderRadius={"1rem"}
+            />
+            <Skeleton
+              width={75}
+              style={{ padding: "0.5rem" }}
+              borderRadius={"1rem"}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`${styles.container} ${className ?? ""}`}>
       <p>Filtrar por: </p>
