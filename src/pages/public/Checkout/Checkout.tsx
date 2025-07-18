@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { useSubmitOrder } from "@/hooks";
 import { useCartStore } from "@/stores";
 import { generateRawOrderItemsToInsert } from "@/utils";
+import { TriangleAlert } from "lucide-react";
 
 export const Checkout = () => {
   const navigate = useNavigate();
@@ -55,11 +56,13 @@ export const Checkout = () => {
       <h1>Tu orden</h1>
 
       {isError && (
-        <p>
-          Error:{" "}
-          {error?.message ||
-            "Hubo problemas al crear la orden. Revisa tu conexión a internet y vuelve a intentarlo."}
-        </p>
+        <div className={styles.errorContainer}>
+          <TriangleAlert className={styles.icon} />
+          <p className={styles.errorText}>
+            😕 Error: Hubo problemas al crear la orden. Revisa tu conexión a
+            internet y vuelve a intentarlo.
+          </p>
+        </div>
       )}
 
       {!existingOrderId ? (

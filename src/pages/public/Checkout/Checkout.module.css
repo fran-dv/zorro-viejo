@@ -10,3 +10,23 @@
 .container h1 {
   text-align: center;
 }
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  max-width: 500px;
+}
+
+.errorContainer .icon {
+  width: 3.5rem;
+  height: auto;
+  color: var(--error);
+}
+
+.errorText {
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center;
+}

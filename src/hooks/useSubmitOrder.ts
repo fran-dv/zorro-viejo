@@ -17,8 +17,6 @@ export const useSubmitOrder = () => {
       }
       saveOrderToLocalStorage(createOrderResponse);
     },
-    onError: (error) => {
-      console.error("Error al crear la orden:", error.message);
-    },
+    networkMode: "always",
   });
 };
