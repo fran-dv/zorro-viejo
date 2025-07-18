@@ -27,6 +27,10 @@
   flex: 0 0 100%;
 }
 
+.cardsCarousel .embla__slide {
+  width: 100%;
+}
+
 .embla__buttonPrev,
 .embla__buttonNext {
   position: absolute;
