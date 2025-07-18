@@ -1,0 +1,65 @@
+.container {
+  align-self: center;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+}
+
+.message {
+  text-align: center;
+}
+
+.retryButton {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 100%;
+  background-color: var(--color-primary);
+  color: var(--on-primary);
+  border: none;
+  cursor: pointer;
+  justify-content: space-between;
+  max-width: 250px;
+  align-self: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.retryButton p {
+  color: var(--on-primary);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.retryButton .icon {
+  width: 2rem;
+  height: auto;
+}
+
+.rotate {
+  animation: rotate 1.5s linear infinite;
+}
+
+.retryP {
+  align-self: center;
+}
+
+@media (hover: hover) {
+  .retryButton:hover {
+    background-color: var(--color-primary-hover);
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
