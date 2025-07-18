@@ -6,7 +6,7 @@ import {
   NavigateButton,
   Snackbar,
 } from "@/components";
-import { getWhatsappLink, removeOrderFromLocalStorage } from "@/utils";
+import { getOrderWhatsappLink, removeOrderFromLocalStorage } from "@/utils";
 import { useEffect, useState } from "react";
 import { Paths } from "@/routing";
 import { useCartStore } from "@/stores";
@@ -28,8 +28,8 @@ export const CheckoutSuccess = () => {
 
   useEffect(() => {
     const setLinks = async () => {
-      setWppLink(await getWhatsappLink(order!, "auto", false));
-      setQrWppLink(await getWhatsappLink(order!, "mobile"));
+      setWppLink(await getOrderWhatsappLink(order!, "auto", false));
+      setQrWppLink(await getOrderWhatsappLink(order!, "mobile"));
     };
 
     if (order) {
