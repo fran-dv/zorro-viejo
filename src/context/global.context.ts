@@ -3,13 +3,17 @@ import type { Category } from "@/models";
 
 interface GlobalContextType {
   categories: Category[];
+  errorFetchingCategories: Error | null;
+  refetchCategories: () => void;
   setCategories: React.Dispatch<React.SetStateAction<Category[]>>;
+  isFetchingCategories: boolean;
 }
 
-export const EmptyGlobalState: Category[] = [];
-
 export const GlobalContext = createContext<GlobalContextType>({
-  categories: EmptyGlobalState,
+  categories: [] as Category[],
+  errorFetchingCategories: null,
+  isFetchingCategories: false,
+  refetchCategories: () => {},
   setCategories: () => {},
 });
 

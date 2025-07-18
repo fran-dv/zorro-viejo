@@ -1,4 +1,4 @@
-import { EmptyGlobalState, GlobalContext } from "@/context";
+import { GlobalContext } from "@/context";
 import { useCategories } from "@/hooks";
 import type { Category } from "@/models";
 import { useEffect, useState } from "react";
@@ -8,11 +8,8 @@ interface Props {
 }
 
 export const GlobalProvider = ({ children }: Props) => {
-  const [categories, setCategories] = useState<Category[]>(EmptyGlobalState);
-  const { data, error } = useCategories();
-  if (error) {
-    throw new Error(`Error fetching categories: ${error.message}`);
-  }
+  const [categories, setCategories] = useState<Category[]>([]);
+  const { data, error, isFetching, refetch } = useCategories();
 
   useEffect(() => {
     if (!data) return;
@@ -20,7 +17,15 @@ export const GlobalProvider = ({ children }: Props) => {
   }, [data, setCategories]);
 
   return (
-    <GlobalContext.Provider value={{ categories, setCategories }}>
+    <GlobalContext.Provider
+      value={{
+        categories,
+        errorFetchingCategories: error,
+        isFetchingCategories: isFetching,
+        setCategories,
+        refetchCategories: refetch,
+      }}
+    >
       {children}
     </GlobalContext.Provider>
   );
