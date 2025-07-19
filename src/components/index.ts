@@ -22,3 +22,4 @@ export * from "./SearchInterface/SearchInterface";
 export * from "./StickyFooterBar/StickyFooterBar";
 export * from "./Snackbar/Snackbar";
 export * from "./ScrollToTop/ScrollToTop";
+export * from "./ControlledInput/ControlledInput";

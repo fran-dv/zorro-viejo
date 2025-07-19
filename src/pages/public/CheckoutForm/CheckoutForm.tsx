@@ -1,11 +1,10 @@
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { ControlledInput } from "@/pages/public/CheckoutForm/components";
+import { type SubmitHandler } from "react-hook-form";
+import { ControlledInput } from "@/components";
 import { checkoutFormSchema, type CheckoutFormValues } from "@/models";
-import { zodResolver } from "@hookform/resolvers/zod";
 import styles from "./CheckoutForm.module.css";
 import { ActionButton } from "@/components";
-import { useRef } from "react";
 import { userFullNameKey } from "@/utils";
+import { useControlledForm } from "@/hooks";
 
 interface Props {
   onSubmit: (data: CheckoutFormValues) => void;
@@ -13,14 +12,14 @@ interface Props {
 }
 
 export const CheckoutForm = ({ onSubmit, isSubmitting }: Props) => {
-  const wasBlurred = useRef(false);
   const {
+    wasBlurredRef,
     control,
     handleSubmit,
     formState: { errors },
     trigger,
-  } = useForm<CheckoutFormValues>({
-    resolver: zodResolver(checkoutFormSchema),
+  } = useControlledForm<CheckoutFormValues>({
+    schema: checkoutFormSchema,
     defaultValues: {
       fullName: localStorage.getItem(userFullNameKey) ?? "",
     },
@@ -52,13 +51,13 @@ export const CheckoutForm = ({ onSubmit, isSubmitting }: Props) => {
               type="text"
               error={errors.fullName}
               onChange={() => {
-                if (wasBlurred.current) {
+                if (wasBlurredRef.current) {
                   trigger("fullName");
                 }
               }}
               onBlur={() => {
-                if (!wasBlurred.current) {
-                  wasBlurred.current = true;
+                if (!wasBlurredRef.current) {
+                  wasBlurredRef.current = true;
                   trigger("fullName");
                 }
               }}
