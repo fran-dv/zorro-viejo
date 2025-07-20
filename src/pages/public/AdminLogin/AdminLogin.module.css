@@ -1,0 +1,75 @@
+.container {
+  margin: 0 auto;
+  padding: 1rem;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.backButton {
+  align-self: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.errorContainer {
+  min-height: 125px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 500px;
+}
+
+.errorContainer p {
+  font-weight: 600;
+  text-align: center;
+}
+
+.errorContainer .icon {
+  width: 3.5rem;
+  height: auto;
+  color: var(--error);
+}
+
+.title {
+  align-self: center;
+  text-align: center;
+  font-size: 1.7rem;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  padding: 0.25rem;
+}
+
+.formWrapper label {
+  font-weight: 600;
+}
+
+.input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+}
+
+.input:focus {
+  border: none;
+  outline: 2px solid var(--color-primary);
+}
+
+.input.error:focus {
+  outline: 2px solid var(--error);
+}
+.input.error {
+  border: 1px solid var(--error);
+}
