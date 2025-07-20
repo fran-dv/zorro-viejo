@@ -1,5 +1,4 @@
 import { AdminSidebar } from "@/pages/private/Admin/components";
-import styles from "./AdminLayout.module.css";
 import { useIsAuthenticated } from "@refinedev/core";
 import { Navigate } from "react-router-dom";
 import { Paths } from "@/routing";
@@ -16,7 +15,7 @@ export const AdminLayout = ({ children }: Props) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div>
       <AdminSidebar />
       {children}
     </div>
