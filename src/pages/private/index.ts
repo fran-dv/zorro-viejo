@@ -1,1 +1,1 @@
-export * from "./AdminDashboard/AdminDashboard";
+export * from "./Admin/AdminDashboard/AdminDashboard";
