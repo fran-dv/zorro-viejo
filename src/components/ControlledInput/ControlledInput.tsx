@@ -1,10 +1,15 @@
-import { Controller, type Control, type FieldError } from "react-hook-form";
+import {
+  Controller,
+  type Control,
+  type FieldError,
+  type FieldValues,
+  type Path,
+} from "react-hook-form";
 import styles from "./ControlledInput.module.css";
-import type { CheckoutFormValues } from "@/models";
 
-interface Props {
-  name: keyof CheckoutFormValues;
-  control: Control<CheckoutFormValues>;
+interface Props<T extends FieldValues> {
+  name: Path<T>;
+  control: Control<T>;
   label: string;
   type?: string;
   error?: FieldError;
@@ -13,7 +18,7 @@ interface Props {
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-export const ControlledInput = ({
+export const ControlledInput = <T extends FieldValues>({
   name,
   control,
   label,
@@ -22,7 +27,7 @@ export const ControlledInput = ({
   inputClassName = "",
   onChange,
   onBlur,
-}: Props) => {
+}: Props<T>) => {
   return (
     <div className={styles.container}>
       <label htmlFor={name}>{label}</label>
