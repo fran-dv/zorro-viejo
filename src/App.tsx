@@ -7,6 +7,12 @@ import { useLocation } from "react-router-dom";
 import { Paths } from "@/routing";
 import { ScrollToTop } from "@/components/ScrollToTop/ScrollToTop";
 import { useExpireOrderStorage } from "@/hooks";
+import { Refine } from "@refinedev/core";
+import { dataProvider } from "@refinedev/supabase";
+import { supabase } from "@/api";
+import { authProvider } from "@/auth";
+import { AdminLayout } from "@/pages/private/Admin/components";
+import routerProvider from "@refinedev/react-router";
 
 interface Props {
   children: React.ReactNode;
@@ -19,18 +25,45 @@ function App({ children }: Props) {
   const { pathname } = useLocation();
   const shouldHideFooter = hideFooterOn.includes(pathname);
   useExpireOrderStorage();
+  const isAdminRoute =
+    pathname.startsWith("/admin") && pathname !== Paths.AdminLogin;
 
   return (
-    <FooterContextProvider
-      value={footerRef as React.RefObject<HTMLElement | null>}
+    <Refine
+      routerProvider={routerProvider}
+      dataProvider={dataProvider(supabase)}
+      authProvider={authProvider}
+      resources={[
+        {
+          name: "products",
+          list: `admin/${Paths.AdminProductsList}`,
+          create: `admin/${Paths.AdminCreateProduct}`,
+          edit: `admin/${Paths.AdminEditProduct}`,
+        },
+        {
+          name: "orders",
+          list: `admin/${Paths.AdminOrdersList}`,
+          show: `admin/${Paths.AdminOrderDetail}`,
+        },
+      ]}
     >
-      <ScrollToTop />
-      <div className={styles.container}>
-        <Navbar />
-        <main className={styles.main}>{children}</main>
-        {!shouldHideFooter && <Footer ref={footerRef} />}
-      </div>
-    </FooterContextProvider>
+      {!isAdminRoute ? (
+        <FooterContextProvider
+          value={footerRef as React.RefObject<HTMLElement | null>}
+        >
+          <ScrollToTop />
+          <div className={styles.container}>
+            <Navbar />
+            <main className={styles.main}>{children}</main>
+            {!shouldHideFooter && <Footer ref={footerRef} />}
+          </div>
+        </FooterContextProvider>
+      ) : (
+        <AdminLayout>
+          <main className={styles.main}>{children}</main>
+        </AdminLayout>
+      )}
+    </Refine>
   );
 }
 
