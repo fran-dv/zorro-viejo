@@ -1,3 +1,13 @@
+export const RelativeAdminPaths = {
+  Login: "login",
+  Dashboard: "dashboard",
+  ProductsList: "products",
+  CreateProduct: "products/create",
+  EditProduct: "products/:id",
+  OrdersList: "orders",
+  OrderDetail: "orders/:id",
+};
+
 export const Paths = {
   Home: "/home",
   Products: "/products",
@@ -5,9 +15,15 @@ export const Paths = {
   Cart: "/cart",
   Checkout: "/checkout",
   CheckoutSuccess: "success/:orderId",
-  AdminLogin: "/admin/login",
+  AdminLogin: `/admin/${RelativeAdminPaths.Login}`,
+  Admin: "/admin",
   AnyAdmin: "/admin/*",
-  AdminDashboard: "dashboard",
+  AdminDashboard: `/admin/${RelativeAdminPaths.Dashboard}`,
+  AdminProductsList: `/admin/${RelativeAdminPaths.ProductsList}`,
+  AdminCreateProduct: `/admin/${RelativeAdminPaths.CreateProduct}`,
+  AdminEditProduct: `/admin/${RelativeAdminPaths.EditProduct}`,
+  AdminOrdersList: `/admin/${RelativeAdminPaths.OrdersList}`,
+  AdminOrderDetail: `/admin/${RelativeAdminPaths.OrderDetail}`,
   NotFound: "/404",
   getProductDetailPath: (slug: string) => `/products/${slug}`,
   getCheckoutSuccessPath: (orderId: string) => `/checkout/success/${orderId}`,

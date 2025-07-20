@@ -1,5 +1,6 @@
 import { Navigate, Route } from "react-router-dom";
 import {
+  AdminDashboard,
   AdminLogin,
   Cart,
   Checkout,
@@ -11,7 +12,7 @@ import {
 import {
   AdminGuard,
   Paths,
-  PrivateRouter,
+  RelativeAdminPaths,
   RoutesWithNotFound,
 } from "@/routing";
 
@@ -27,9 +28,36 @@ export const AppRouter = () => {
         <Route path={Paths.CheckoutSuccess} element={<CheckoutSuccess />} />
       </Route>
       <Route path={Paths.AdminLogin} element={<AdminLogin />} />
-      <Route element={<AdminGuard />}>
-        <Route index path={Paths.AnyAdmin} element={<PrivateRouter />} />
-        <Route path={Paths.AdminDashboard} element={<PrivateRouter />} />
+
+      <Route path={Paths.Admin} element={<AdminGuard />}>
+        <Route
+          index
+          element={<Navigate to={RelativeAdminPaths.Dashboard} replace />}
+        />
+        <Route
+          path={RelativeAdminPaths.Dashboard}
+          element={<AdminDashboard />}
+        />
+        <Route
+          path={RelativeAdminPaths.ProductsList}
+          element={<AdminDashboard />}
+        />
+        <Route
+          path={RelativeAdminPaths.CreateProduct}
+          element={<AdminDashboard />}
+        />
+        <Route
+          path={RelativeAdminPaths.EditProduct}
+          element={<AdminDashboard />}
+        />
+        <Route
+          path={RelativeAdminPaths.OrdersList}
+          element={<AdminDashboard />}
+        />
+        <Route
+          path={RelativeAdminPaths.OrderDetail}
+          element={<AdminDashboard />}
+        />
       </Route>
     </RoutesWithNotFound>
   );
