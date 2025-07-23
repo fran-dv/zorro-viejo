@@ -1,54 +1,123 @@
-# React + TypeScript + Vite
+# Zorro Viejo Beverages E‑commerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> 🚧 **Work in progress:** This project is under active development. The available demo is not production ready, and it is for showcase purposes only. You’ll see mock data and placeholders.
 
-Currently, two official plugins are available:
+**A freelance project**: e-commerce platform for buying alcoholic beverages. This project aims to deliver a clean, mobile‑first shopping experience for customers and a user‑friendly interface for the admin, keeping the product catalog always up to date. Per client requirements, the checkout flow replaces a traditional payment gateway with WhatsApp redirection, while maintaining internal order tracking for reliability.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Live demo:** _A work-in-progress demo will be available soon._
 
-## Expanding the ESLint configuration
+<table>
+  <tr>
+    <td><img src="/preview-images/products.png" alt="Products list view (mobile)" width="400"/></td>
+    <td><img src="preview-images/search.png" alt="Search view (mobile)" width="400"/></td>
+  </tr>
+  <tr>
+    <td><img src="preview-images/product-detail.png" alt="Product detail view (mobile)" width="400"/></td>
+    <td><img src="preview-images/cart.png" alt="Cart view (mobile)" width="400"/></td>
+  </tr>
+</table>
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+- Mobile‑first, fully responsive design
+- Product filtering by category
+- Pagination
+- Loading skeletons during data fetch
+- Product search by name
+- Snackbars for “add to cart” feedback
+- Product detail view with image carousel for multiple images
+- Related products carousel in product detail view
+- Persistent shopping cart (global state via Zustand)
+- Cart badge counter
+- Checkout flow with WhatsApp redirection (pre‑filled order message)
+- QR code for WhatsApp redirection in checkout success view
+- Order creation and storage via Supabase + TanStack Query
+- Advanced form validation with React Hook Form + Zod resolver
+- Admin authentication with Supabase + refine.dev
+- Protected routes with admin guard (redirect to login if unauthenticated)
+- Internal order tracking (admin only)
+- Data fetching using TanStack Query hooks + Supabase API
+- Type‑safe models with Zod schemas and TypeScript
+- API response transformation to local models via Zod
+- User-friendly fetch error handling with retry button
+- Global error handling via Error Boundaries (error view with retry button and contact link for unrecoverable errors)
+- AG Grid for admin data tables (orders and products)
+
+## Tech Stack
+
+**Core & Tooling:**
+
+- React
+- TypeScript
+- Zod
+- Vite
+- ESLint
+- Prettier
+- bun (as package manager)
+
+**Data & State:**
+
+- Supabase
+- TanStack Query
+- Zustand
+
+**UI & Styling:**
+
+- CSS Modules
+- Radix UI
+- Embla Carousel
+- React Loading Skeleton
+- Lucide React Icons
+
+**Others:**
+
+- React Hook Form (with zod resolver)
+- React Router
+- refine.dev
+- usehooks-ts
+- qrcode.react
+- AG Grid
+
+## Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/fran-dv/zorro-viejo.git
+
+# cd into the project directory
+cd zorro-viejo
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install dependencies
 
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
+```bash
+bun install
 ```
+
+### 3.Configure environment variables
+
+- Create a Supabase account and project to obtain your credentials.
+- If your databases schemas differ from the ones in this project, update the Zod schemas in src/models.
+- In the project root, create a .env.local file containing:
+
+```bash
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_WHATSAPP_REDIRECT_NUMBER=your_phone_number
+```
+
+### 4. Run the development server
+
+```bash
+bun run dev # or `bun run dev --host 0.0.0.0` for network exposure
+```
+
+### 5. Open the app
+
+Visit http://localhost:5173 (or http://<your-ip>:5173 from another device) in your browser.
+
+---
+
+_Built with 💚 by Francisco Della Vedova_
+📧 franciscodellav@gmail.com • 💼 [Linkedin](https://www.linkedin.com/in/francisco-della-vedova-702154316/) • 🔗 [Github](https://github.com/fran-dv)
