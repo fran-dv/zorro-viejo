@@ -4,7 +4,7 @@
 
 **A freelance project**: e-commerce platform for buying alcoholic beverages. This project aims to deliver a clean, mobile‑first shopping experience for customers and a user‑friendly interface for the admin, keeping the product catalog always up to date. Per client requirements, the checkout flow replaces a traditional payment gateway with WhatsApp redirection, while maintaining internal order tracking for reliability.
 
-**Live demo:** _A work-in-progress demo will be available soon._
+**Live demo:** [_work-in-progress demo available here._](https://zorro-viejo.vercel.app/)
 
 <table>
   <tr>
