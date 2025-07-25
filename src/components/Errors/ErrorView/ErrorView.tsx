@@ -1,6 +1,5 @@
 import { ActionButton } from "@/components/ActionButton/ActionButton";
 import styles from "./ErrorView.module.css";
-import { useNavigate } from "react-router-dom";
 import wppLogo from "@/assets/whatsapp-logo.svg";
 import { getWhatsappLink } from "@/utils";
 
@@ -9,7 +8,6 @@ interface Props {
   message?: string;
 }
 export const ErrorView = ({ message, onReset }: Props) => {
-  const navigate = useNavigate();
   const handleWppClick = async () => {
     const message =
       "Hola! estoy experimentando errores frecuentes en el sitio web de Zorro viejo";
@@ -37,13 +35,6 @@ export const ErrorView = ({ message, onReset }: Props) => {
         </div>
 
         <ActionButton onClick={onReset} content="Reintentar" />
-        <ActionButton
-          onClick={() => {
-            onReset();
-            navigate("/");
-          }}
-          content="Ir al inicio"
-        />
 
         <p className={styles.detail}>
           <strong>Detalles del error:</strong>

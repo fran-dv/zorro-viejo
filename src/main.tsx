@@ -12,6 +12,7 @@ const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+    <ErrorBoundary>
     <BrowserRouter>
       <ErrorBoundary>
         <QueryClientProvider client={queryClient}>
@@ -21,6 +22,7 @@ createRoot(document.getElementById("root")!).render(
             </App>
           </GlobalProvider>
         </QueryClientProvider>
+      </BrowserRouter>
       </ErrorBoundary>
     </BrowserRouter>
   </StrictMode>,
