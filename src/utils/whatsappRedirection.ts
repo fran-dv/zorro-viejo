@@ -1,9 +1,11 @@
 import type { Order, OrderItem } from "@/models";
 import { formatPrice } from "@/utils";
 import { getWhatsappLink, type UserAgent } from "./whatsappLink";
+import { Paths } from "@/routing";
+import { appUrl } from "@/utils";
 
 const buildOrderMessage = (order: Order): string => {
-  const orderUrl = `https://example.com/orders?id=${order.id}`; // ajusta a tu dominio
+  const orderUrl = `${appUrl}${Paths.getAdminOrderDetail(order.id)}`;
 
   const divider = `*-----${"-".repeat(order.id.length * 2)}*`;
 
@@ -39,7 +41,7 @@ const buildOrderMessage = (order: Order): string => {
 export const getOrderWhatsappLink = async (
   order: Order,
   userAgent: UserAgent,
-  shorten = true,
+  shorten = true
 ) => {
   const message = buildOrderMessage(order);
 
