@@ -89,7 +89,6 @@ export const authProvider: AuthProvider = {
       return {
         authenticated: true,
         logout: false,
-        redirectTo: Paths.AdminDashboard,
       };
     }
 
@@ -104,7 +103,6 @@ export const authProvider: AuthProvider = {
     return {
       authenticated: true,
       logout: false,
-      redirectTo: Paths.AdminDashboard,
     };
   },
   getIdentity: async () => {

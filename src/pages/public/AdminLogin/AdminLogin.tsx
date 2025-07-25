@@ -7,7 +7,7 @@ import { useControlledForm } from "@/hooks";
 import { useLogin } from "@refinedev/core";
 import { Paths } from "@/routing";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { TriangleAlert } from "lucide-react";
 import { AuthErrorsNames } from "@/auth";
 import { useIsAuthenticated } from "@refinedev/core";
@@ -33,9 +33,15 @@ export const AdminLogin = () => {
   const [error, setError] = useState<string | null>(null);
   const { data: authData } = useIsAuthenticated();
 
-  if (authData?.authenticated) {
+  const handleLoginSuccess = useCallback(() => {
     navigate(Paths.AdminDashboard, { replace: true });
-  }
+  }, [navigate]);
+
+  useEffect(() => {
+    if (authData?.authenticated) {
+      handleLoginSuccess();
+    }
+  }, [authData?.authenticated, navigate, handleLoginSuccess]);
 
   const handler: SubmitHandler<LoginFormValues> = (data) => {
     if (!navigator.onLine) {
@@ -48,7 +54,7 @@ export const AdminLogin = () => {
       onSuccess: (data) => {
         if (data.success) {
           setError(null);
-          navigate(Paths.AdminDashboard);
+          handleLoginSuccess();
         }
         if (!data.success) {
           console.error(`Error name: ${data.error?.name}`, data.error);
@@ -102,7 +108,7 @@ export const AdminLogin = () => {
         Ingrese sus credenciales de administrador para iniciar sesión.
       </p>
       <div className={styles.formWrapper}>
-        <form onSubmit={handleSubmit(handler)} className={styles.form}>
+        <form onSubmit={() => handleSubmit(handler)} className={styles.form}>
           <div>
             <ControlledInput
               inputClassName={`${styles.input} ${errors.email ? styles.error : ""}`}

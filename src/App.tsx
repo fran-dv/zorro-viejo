@@ -4,14 +4,14 @@ import { Footer } from "@/components/Footer/Footer";
 import { FooterContextProvider } from "./context/FooterContext";
 import { useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { Paths } from "@/routing";
+import { Paths, RelativeAdminPaths } from "@/routing";
 import { ScrollToTop } from "@/components/ScrollToTop/ScrollToTop";
 import { useExpireOrderStorage } from "@/hooks";
 import { Refine } from "@refinedev/core";
 import { dataProvider } from "@refinedev/supabase";
 import { supabase } from "@/api";
 import { authProvider } from "@/auth";
-import { AdminLayout } from "@/pages/private/Admin/components";
+import { AdminLayout } from "@/components/Admin";
 import routerProvider from "@refinedev/react-router";
 
 interface Props {
@@ -36,14 +36,14 @@ function App({ children }: Props) {
       resources={[
         {
           name: "products",
-          list: `admin/${Paths.AdminProductsList}`,
-          create: `admin/${Paths.AdminCreateProduct}`,
-          edit: `admin/${Paths.AdminEditProduct}`,
+          list: RelativeAdminPaths.ProductsList,
+          create: RelativeAdminPaths.CreateProduct,
+          edit: RelativeAdminPaths.EditProduct,
         },
         {
           name: "orders",
-          list: `admin/${Paths.AdminOrdersList}`,
-          show: `admin/${Paths.AdminOrderDetail}`,
+          list: RelativeAdminPaths.OrdersList,
+          show: RelativeAdminPaths.OrderDetail,
         },
       ]}
     >
@@ -59,9 +59,12 @@ function App({ children }: Props) {
           </div>
         </FooterContextProvider>
       ) : (
-        <AdminLayout>
-          <main className={styles.main}>{children}</main>
-        </AdminLayout>
+        <>
+          <ScrollToTop />
+          <AdminLayout>
+            <main className={styles.main}>{children}</main>
+          </AdminLayout>
+        </>
       )}
     </Refine>
   );

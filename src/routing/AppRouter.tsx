@@ -6,6 +6,7 @@ import {
   Checkout,
   CheckoutSuccess,
   Home,
+  OrderDetail,
   ProductDetail,
   Products,
 } from "@/pages";
@@ -29,11 +30,12 @@ export const AppRouter = () => {
       </Route>
       <Route path={Paths.AdminLogin} element={<AdminLogin />} />
 
-      <Route path={Paths.Admin} element={<AdminGuard />}>
+      <Route path={Paths.AnyAdmin} element={<AdminGuard />}>
         <Route
           index
           element={<Navigate to={RelativeAdminPaths.Dashboard} replace />}
         />
+
         <Route
           path={RelativeAdminPaths.Dashboard}
           element={<AdminDashboard />}
@@ -51,11 +53,11 @@ export const AppRouter = () => {
           element={<AdminDashboard />}
         />
         <Route
-          path={RelativeAdminPaths.OrdersList}
-          element={<AdminDashboard />}
+          path={RelativeAdminPaths.OrderDetail}
+          element={<OrderDetail />}
         />
         <Route
-          path={RelativeAdminPaths.OrderDetail}
+          path={RelativeAdminPaths.OrdersList}
           element={<AdminDashboard />}
         />
       </Route>
