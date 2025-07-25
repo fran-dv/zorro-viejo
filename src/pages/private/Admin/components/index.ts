@@ -1,2 +1,1 @@
-export * from "./AdminSidebar/AdminSidebar";
-export * from "./AdminLayout/AdminLayout";
+export * from "./LastOrders/LastOrders";
