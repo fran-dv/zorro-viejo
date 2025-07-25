@@ -9,3 +9,4 @@ export * from "./whatsappLink";
 export * from "./whatsappRedirection";
 export * from "./saveOrderToLocalStorage";
 export * from "./removeOrderFromLocalStorage";
+export * from "./appUrl";

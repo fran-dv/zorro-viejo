@@ -6,7 +6,7 @@ import { ActionButton } from "@/components";
 import { useControlledForm } from "@/hooks";
 import { useLogin } from "@refinedev/core";
 import { Paths } from "@/routing";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { TriangleAlert } from "lucide-react";
 import { AuthErrorsNames } from "@/auth";
@@ -32,10 +32,12 @@ export const AdminLogin = () => {
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const { data: authData } = useIsAuthenticated();
+  const location = useLocation();
+  const from = (location.state as { from?: string })?.from;
 
   const handleLoginSuccess = useCallback(() => {
-    navigate(Paths.AdminDashboard, { replace: true });
-  }, [navigate]);
+    navigate(from ?? Paths.AdminDashboard, { replace: true });
+  }, [navigate, from]);
 
   useEffect(() => {
     if (authData?.authenticated) {
@@ -46,7 +48,7 @@ export const AdminLogin = () => {
   const handler: SubmitHandler<LoginFormValues> = (data) => {
     if (!navigator.onLine) {
       setError(
-        "No pudimos iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo.",
+        "No pudimos iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo."
       );
       return;
     }
@@ -60,18 +62,18 @@ export const AdminLogin = () => {
           console.error(`Error name: ${data.error?.name}`, data.error);
           if (data.error?.name === AuthErrorsNames.InvalidCredentials) {
             setError(
-              "No pudimos iniciar sesión. Tu correo o contraseña parecen ser incorrectos — Revísalos y vuelve a intentarlo.",
+              "No pudimos iniciar sesión. Tu correo o contraseña parecen ser incorrectos — Revísalos y vuelve a intentarlo."
             );
             return;
           }
           if (data.error?.name === AuthErrorsNames.NetworkError) {
             setError(
-              "No pudimos iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo.",
+              "No pudimos iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo."
             );
             return;
           }
           setError(
-            "Error inesperado al intentar iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo.",
+            "Error inesperado al intentar iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo."
           );
           return;
         }
@@ -79,7 +81,7 @@ export const AdminLogin = () => {
       onError: (error) => {
         console.error(error);
         setError(
-          "Error al iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo.",
+          "Error al iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo."
         );
       },
     });
