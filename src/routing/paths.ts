@@ -28,4 +28,5 @@ export const Paths = {
   getProductDetailPath: (slug: string) => `/products/${slug}`,
   getCheckoutSuccessPath: (orderId: string) => `/checkout/success/${orderId}`,
   getCategoryPath: (slug: string) => `/products?category=${slug}`,
+  getAdminOrderDetail: (orderId: string) => `/admin/orders/${orderId}`,
 };
