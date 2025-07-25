@@ -27,6 +27,7 @@ export const RawOrderResponseSchema = z.object({
   id: z.string(),
   customer_name: z.string().min(3).trim(),
   order_items: z.array(OrderItemResponseSchema),
+  created_at: z.string(),
 });
 export type RawOrderResponse = z.infer<typeof RawOrderResponseSchema>;
 
@@ -56,6 +57,7 @@ export const OrderSchema = RawOrderResponseSchema.transform((raw) => {
     customerName: raw.customer_name,
     items,
     totalPrice,
+    createdAt: raw.created_at,
   };
 });
 export type Order = z.infer<typeof OrderSchema>;
