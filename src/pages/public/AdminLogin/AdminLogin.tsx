@@ -48,7 +48,7 @@ export const AdminLogin = () => {
   const handler: SubmitHandler<LoginFormValues> = (data) => {
     if (!navigator.onLine) {
       setError(
-        "No pudimos iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo."
+        "No pudimos iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo.",
       );
       return;
     }
@@ -62,18 +62,18 @@ export const AdminLogin = () => {
           console.error(`Error name: ${data.error?.name}`, data.error);
           if (data.error?.name === AuthErrorsNames.InvalidCredentials) {
             setError(
-              "No pudimos iniciar sesión. Tu correo o contraseña parecen ser incorrectos — Revísalos y vuelve a intentarlo."
+              "No pudimos iniciar sesión. Tu correo o contraseña parecen ser incorrectos — Revísalos y vuelve a intentarlo.",
             );
             return;
           }
           if (data.error?.name === AuthErrorsNames.NetworkError) {
             setError(
-              "No pudimos iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo."
+              "No pudimos iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo.",
             );
             return;
           }
           setError(
-            "Error inesperado al intentar iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo."
+            "Error inesperado al intentar iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo.",
           );
           return;
         }
@@ -81,7 +81,7 @@ export const AdminLogin = () => {
       onError: (error) => {
         console.error(error);
         setError(
-          "Error al iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo."
+          "Error al iniciar sesión. Revisa tu conexión a internet y vuelve a intentarlo.",
         );
       },
     });

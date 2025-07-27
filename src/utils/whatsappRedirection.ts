@@ -41,7 +41,7 @@ const buildOrderMessage = (order: Order): string => {
 export const getOrderWhatsappLink = async (
   order: Order,
   userAgent: UserAgent,
-  shorten = true
+  shorten = true,
 ) => {
   const message = buildOrderMessage(order);
 
