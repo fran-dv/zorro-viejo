@@ -1,7 +1,7 @@
 import { Dialog } from "radix-ui";
 import styles from "./MobileNavMenu.module.css";
 import { MenuIcon, X } from "lucide-react";
-import logo from "@/assets/zorro-viejo.png";
+import logo from "@/assets/zorro-viejo.webp";
 import { CategoriesAccordion } from "@/components";
 import { Link } from "react-router-dom";
 import { Paths } from "@/routing";

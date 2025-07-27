@@ -1,8 +1,8 @@
 import styles from "./Home.module.css";
-import heroBackground from "@/assets/hero-bg.png";
+import heroBackground from "@/assets/hero-bg.webp";
 import { Paths } from "@/routing";
 import { useNavigate } from "react-router-dom";
-import logo from "@/assets/zorro-viejo.png";
+import logo from "@/assets/zorro-viejo.webp";
 import { useGlobalContext } from "@/context";
 import { CategoryThumbnail } from "./components";
 import { LoadingView } from "@/components";

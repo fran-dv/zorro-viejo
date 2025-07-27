@@ -2,7 +2,7 @@ import { Dialog } from "radix-ui";
 import styles from "./AdminSidebar.module.css";
 import { useState } from "react";
 import { MenuIcon, X } from "lucide-react";
-import logo from "@/assets/zorro-viejo.png";
+import logo from "@/assets/zorro-viejo.webp";
 import { Link } from "react-router-dom";
 import { Paths } from "@/routing";
 import { useLogout } from "@refinedev/core";
