@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,7 +12,7 @@ export default defineConfig({
       "@components": path.resolve(__dirname, "./src/components"),
     },
   },
-  plugins: [react()],
+  plugins: [react(), visualizer({ open: true, gzipSize: true })],
   esbuild: {
     treeShaking: true,
   },
@@ -20,7 +21,26 @@ export default defineConfig({
     rollupOptions: {
       treeshake: true,
       output: {
-        manualChunks: undefined,
+        entryFileNames: "assets/js/[name]-[hash].js",
+        chunkFileNames: "assets/js/[name]-[hash].js",
+        assetFileNames: (assetInfo) => {
+          const names = assetInfo.names;
+          const primary = names && names[0] ? names[0] : "";
+          if (primary.endsWith(".css")) {
+            return "assets/css/[name]-[hash][extname]";
+          }
+          return "assets/[name]-[hash][extname]";
+        },
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (id.includes("ag-grid")) return "vendor-ag-grid";
+            if (id.includes("tanstack")) return "vendor-tanstack";
+            if (id.includes("refine")) return "vendor-refine";
+            if (id.includes("hookform")) return "vendor-hookform";
+            if (id.includes("react")) return "vendor-react";
+            return "vendor";
+          }
+        },
       },
     },
   },
