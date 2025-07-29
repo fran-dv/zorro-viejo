@@ -5,6 +5,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -37,7 +38,6 @@ export default defineConfig({
             if (id.includes("tanstack")) return "vendor-tanstack";
             if (id.includes("refine")) return "vendor-refine";
             if (id.includes("hookform")) return "vendor-hookform";
-            if (id.includes("react")) return "vendor-react";
             return "vendor";
           }
         },
