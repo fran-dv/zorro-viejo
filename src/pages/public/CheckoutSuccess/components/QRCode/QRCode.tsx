@@ -31,6 +31,7 @@ export const QRCode = ({ link, onClick, isLoading }: Props) => {
         className={styles.qrWhatsappLogo}
         src={WhatsappLogo}
         alt="Logo de WhatsApp"
+        onClick={onClick}
       />
     </>
   );
