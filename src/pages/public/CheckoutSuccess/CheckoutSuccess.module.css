@@ -7,6 +7,29 @@
   align-self: center;
 }
 
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.cancelButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  max-width: 300px;
+  background-color: transparent;
+  border: none;
+  padding: 0.25rem;
+}
+
+.cancelButton .icon {
+  width: 1.5rem;
+  height: auto;
+  color: var(--error);
+}
+
 .indications {
   font-weight: 400;
   font-size: 1rem;

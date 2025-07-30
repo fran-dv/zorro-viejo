@@ -2,29 +2,32 @@ import { useParams } from "react-router-dom";
 import styles from "./CheckoutSuccess.module.css";
 import {
   ActionButton,
+  GenericAlertDialog,
   LoadingView,
   NavigateButton,
   Snackbar,
 } from "@/components";
-import { getOrderWhatsappLink, removeOrderFromLocalStorage } from "@/utils";
+import { getOrderWhatsappLink } from "@/utils";
 import { useEffect, useState } from "react";
 import { Paths } from "@/routing";
-import { useCartStore } from "@/stores";
 import { useNavigate } from "react-router-dom";
-import { useOrderById, useSnackbar } from "@/hooks";
+import { useExistingOrder, useOrderById, useSnackbar } from "@/hooks";
 import { QRCode } from "./components";
+import { Trash2 } from "lucide-react";
 
 export const CheckoutSuccess = () => {
   const { orderId } = useParams();
   const [wasRedirected, setWasRedirected] = useState(false);
   const [delayPassed, setDelayPassed] = useState(false);
-  const { clearCart } = useCartStore();
   const navigate = useNavigate();
   const { data: order, isFetching } = useOrderById({ id: orderId ?? "" });
   const [wppLink, setWppLink] = useState("");
   const [qrWppLink, setQrWppLink] = useState("");
   const [isLinkLoading, setIsLinkLoading] = useState(true);
   const { isOpened, closeSnackbar, openSnackbar } = useSnackbar();
+  const [openCancelDialog, setOpenCancelDialog] = useState(false);
+
+  const { deleteOrder, checkExistingOrderValidity } = useExistingOrder();
 
   useEffect(() => {
     const setLinks = async () => {
@@ -61,14 +64,18 @@ export const CheckoutSuccess = () => {
   };
 
   const handleFinish = () => {
-    clearCart();
-    removeOrderFromLocalStorage();
+    deleteOrder();
+    checkExistingOrderValidity();
     navigate(Paths.Home, { replace: true });
   };
 
   const qrClick = () => {
     navigator.clipboard.writeText(qrWppLink);
     openSnackbar("Enlace copiado!", false);
+  };
+
+  const handleDeleteOrder = () => {
+    setOpenCancelDialog(true);
   };
 
   return (
@@ -80,7 +87,12 @@ export const CheckoutSuccess = () => {
       )}
       {!wasRedirected ? (
         <>
-          <h2>Orden creada</h2>
+          <div className={styles.titleContainer}>
+            <h2>Orden creada </h2>
+            <button onClick={handleDeleteOrder} className={styles.cancelButton}>
+              <Trash2 className={styles.icon} />
+            </button>
+          </div>
           <p>
             ✅ Pedido registrado. Ahora pulsa “Finalizar pedido en WhatsApp” y
             envía el mensaje.
@@ -128,6 +140,16 @@ export const CheckoutSuccess = () => {
           />
         </div>
       )}
+      <GenericAlertDialog
+        hasTriggerButton={false}
+        cancelButtonContent="Cancelar orden"
+        continueButtonContent="Continuar con mi orden"
+        titleContent="Estás por cancelar tu orden"
+        descriptionContent="Si cancelás, se eliminarán todos los productos seleccionados. Si no querés perder tu pedido, simplemente seguí con la compra."
+        open={openCancelDialog}
+        onContinue={() => setOpenCancelDialog(false)}
+        onCancel={handleFinish}
+      />
     </div>
   );
 };
