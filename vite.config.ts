@@ -38,6 +38,8 @@ export default defineConfig({
             if (id.includes("tanstack")) return "vendor-tanstack";
             if (id.includes("refine")) return "vendor-refine";
             if (id.includes("hookform")) return "vendor-hookform";
+            if (id.includes("supabase")) return "vendor-supabase";
+            if (id.includes("radix-ui")) return "vendor-radix-ui";
             return "vendor";
           }
         },
