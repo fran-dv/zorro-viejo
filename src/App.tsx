@@ -1,18 +1,19 @@
 import styles from "./App.module.css";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { Footer } from "@/components/Footer/Footer";
-import { FooterContextProvider } from "./context/FooterContext";
+import { FooterContextProvider } from "@/context/FooterContext";
 import { useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { Paths, RelativeAdminPaths } from "@/routing";
 import { ScrollToTop } from "@/components/ScrollToTop/ScrollToTop";
-import { useExpireOrderStorage } from "@/hooks";
+import { useExistingOrderDialog } from "@/hooks";
 import { Refine } from "@refinedev/core";
 import { dataProvider } from "@refinedev/supabase";
 import { supabase } from "@/api";
 import { authProvider } from "@/auth";
 import { AdminLayout } from "@/components/Admin";
 import routerProvider from "@refinedev/react-router";
+import { GenericAlertDialog } from "@/components/GenericAlertDialog/GenericAlertDialog";
 
 interface Props {
   children: React.ReactNode;
@@ -24,9 +25,11 @@ function App({ children }: Props) {
   const footerRef = useRef<HTMLElement>(null);
   const { pathname } = useLocation();
   const shouldHideFooter = hideFooterOn.includes(pathname);
-  useExpireOrderStorage();
   const isAdminRoute =
     pathname.startsWith("/admin") && pathname !== Paths.AdminLogin;
+
+  const { openOrderDialog, onCancelOrder, onContinueOrder, orderDialogRoutes } =
+    useExistingOrderDialog();
 
   return (
     <Refine
@@ -57,6 +60,18 @@ function App({ children }: Props) {
             <main className={styles.main}>{children}</main>
             {!shouldHideFooter && <Footer ref={footerRef} />}
           </div>
+          {orderDialogRoutes && (
+            <GenericAlertDialog
+              hasTriggerButton={false}
+              open={openOrderDialog}
+              titleContent="Orden en curso detectada"
+              descriptionContent="Ya tenés una orden empezada. Podés continuar con ella o cancelarla."
+              cancelButtonContent="Cancelar orden"
+              continueButtonContent="Continuar con la orden"
+              onContinue={onContinueOrder}
+              onCancel={onCancelOrder}
+            />
+          )}
         </FooterContextProvider>
       ) : (
         <>
