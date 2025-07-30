@@ -10,3 +10,4 @@ export * from "./useOrderById";
 export * from "./useExistingOrder";
 export * from "./useNetworkStatus";
 export * from "./useControlledForm";
+export * from "./useExistingOrderDialog";
