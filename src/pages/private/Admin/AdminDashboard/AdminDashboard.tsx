@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { Paths } from "@/routing";
 import { LastOrders } from "./components";
 import { LoadingView } from "@/components";
+import { ErrorFetching } from "@/components/Errors";
 
 export const AdminDashboard = () => {
-  const { data, error, isLoading } = useList({
+  const { data, error, isLoading, refetch } = useList({
     resource: "orders",
     pagination: { current: 1, pageSize: 10 },
     sorters: [
@@ -31,7 +32,20 @@ export const AdminDashboard = () => {
   const navigate = useNavigate();
 
   if (error) {
-    return <div>Error al cargar órdenes</div>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ErrorFetching
+          message="Error al cargar. Revisa tu conexión y vuelve a intentarlo"
+          onRetry={() => refetch()}
+        />
+      </div>
+    );
   }
 
   if (isLoading) {
