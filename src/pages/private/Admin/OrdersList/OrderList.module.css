@@ -1,0 +1,73 @@
+.container {
+  margin: 0 auto;
+  width: 100%;
+  max-height: 100dvh;
+  padding: 1rem;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: stretch;
+  gap: 0.25rem;
+}
+
+.gridWrapper {
+  height: 80dvh;
+  width: 100%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  align-self: stretch;
+}
+
+.bulkActionsMenu {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  min-height: 1rem;
+}
+
+.actionsWrapper {
+  display: flex;
+  gap: 0.5rem;
+  visibility: visible;
+  opacity: 1;
+  transition:
+    visibility 0.2s ease-in-out,
+    opacity 0.2s ease-in-out;
+}
+
+.actionsWrapper.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.bulkDeleteButton {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  gap: 0.5rem;
+  background-color: var(--surface);
+  color: var(--on-surface);
+  border-radius: 1rem;
+}
+
+.bulkDeleteButton:hover {
+  transform: scale(1.05);
+}
+
+.bulkDeleteButton p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.icon {
+  color: var(--error);
+  width: 1.75rem;
+  height: auto;
+}
