@@ -12,6 +12,7 @@
     "host": "vite --host 0.0.0.0"
   },
   "dependencies": {
+    "@ag-grid-community/locale": "^34.1.0",
     "@hookform/resolvers": "^5.1.1",
     "@refinedev/core": "^4.57.10",
     "@refinedev/react-router": "^1.0.1",

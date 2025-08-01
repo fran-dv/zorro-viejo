@@ -4,6 +4,7 @@
     "": {
       "name": "zorro-viejo",
       "dependencies": {
+        "@ag-grid-community/locale": "^34.1.0",
         "@hookform/resolvers": "^5.1.1",
         "@refinedev/core": "^4.57.10",
         "@refinedev/react-router": "^1.0.1",
@@ -44,6 +45,8 @@
     },
   },
   "packages": {
+    "@ag-grid-community/locale": ["@ag-grid-community/locale@34.1.0", "", {}, "sha512-Hv0Jej5h3Z9gi5hr3waCGLUITRFSfCOfVJOeUcWaVtAd5ln2ok5YuwWb1bXk5xUTtgAxSvZWVPv/ITeeUOJ0rw=="],
+
     "@esbuild/aix-ppc64": ["@esbuild/aix-ppc64@0.25.5", "", { "os": "aix", "cpu": "ppc64" }, "sha512-9o3TMmpmftaCMepOdA5k/yDw8SfInyzWWTjYTFCX3kPSDJMROQTb8jg+h9Cnwnmm1vOzvxN7gIfB5V2ewpjtGA=="],
 
     "@esbuild/android-arm": ["@esbuild/android-arm@0.25.5", "", { "os": "android", "cpu": "arm" }, "sha512-AdJKSPeEHgi7/ZhuIPtcQKr5RQdo6OO2IL87JkianiMYMPbCtot9fxPbrMiBADOWWm3T2si9stAiVsGbTQFkbA=="],
