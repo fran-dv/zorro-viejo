@@ -2,7 +2,7 @@ import styles from "./LastOrders.module.css";
 import type { Order } from "@/models";
 import { AgGridReact } from "ag-grid-react";
 import { themeQuartz } from "ag-grid-community";
-import { formatPrice } from "@/utils";
+import { formatOrders } from "@/utils";
 import { useMediaQuery } from "usehooks-ts";
 
 interface Props {
@@ -27,13 +27,7 @@ const theme = themeQuartz.withParams({
 export const LastOrders = ({ onOrderRowClick, orders }: Props) => {
   const isSmallDevice = useMediaQuery("(max-width: 500px)");
   const isMediumDevice = useMediaQuery("(max-width: 850px)");
-  const formattedOrders = orders.map((order) => {
-    return {
-      ...order,
-      totalPrice: formatPrice(order.totalPrice),
-      createdAt: new Date(order.createdAt).toLocaleString(),
-    };
-  });
+  const formattedOrders = formatOrders(orders);
 
   return (
     <section className={styles.recentOrdersSection}>
@@ -50,12 +44,12 @@ export const LastOrders = ({ onOrderRowClick, orders }: Props) => {
             { field: "id", headerName: "ID", flex: 1, hide: isSmallDevice },
             { field: "customerName", headerName: "Cliente", flex: 1 },
             {
-              field: "createdAt",
+              field: "formattedCreatedAt",
               headerName: "Fecha",
               flex: 1,
               hide: isSmallDevice,
             },
-            { field: "totalPrice", headerName: "Total", flex: 1 },
+            { field: "formattedTotalPrice", headerName: "Total", flex: 1 },
             {
               field: "items",
               headerName: "Items",
