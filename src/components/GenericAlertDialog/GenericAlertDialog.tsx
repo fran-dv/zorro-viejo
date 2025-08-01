@@ -5,11 +5,12 @@ import styles from "./GenericAlertDialog.module.css";
 interface Props {
   hasTriggerButton: boolean;
   triggerButtonContent?: React.ReactNode;
+  triggerButtonClassName?: string;
   cancelButtonContent: React.ReactNode;
   continueButtonContent: React.ReactNode;
   titleContent: React.ReactNode;
   descriptionContent: React.ReactNode;
-  open: boolean;
+  open?: boolean;
   onContinue: () => void;
   onCancel: () => void;
 }
@@ -17,6 +18,7 @@ interface Props {
 export const GenericAlertDialog = ({
   hasTriggerButton,
   triggerButtonContent,
+  triggerButtonClassName,
   cancelButtonContent,
   continueButtonContent,
   titleContent,
@@ -37,7 +39,9 @@ export const GenericAlertDialog = ({
     <AlertDialog.Root open={open}>
       {hasTriggerButton && (
         <AlertDialog.Trigger asChild>
-          <button onClick={handleContinue}>{triggerButtonContent}</button>
+          <button className={triggerButtonClassName}>
+            {triggerButtonContent}
+          </button>
         </AlertDialog.Trigger>
       )}
       <AlertDialog.Portal>
