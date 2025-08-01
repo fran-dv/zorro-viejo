@@ -10,3 +10,5 @@ export * from "./whatsappRedirection";
 export * from "./saveOrderToLocalStorage";
 export * from "./removeOrderFromLocalStorage";
 export * from "./appUrl";
+export * from "./formatOrders";
+export * from "./generalAgGridThemeParams";
