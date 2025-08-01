@@ -8,28 +8,28 @@
   --general-font-family: "Poppins", sans-serif;
   --title-font: "Tangerine", cursive;
 
-  --color-primary: #e25822;
-  --color-primary-hover: #c04818;
-  --on-primary: #ffffff;
+  --color-primary: rgb(226, 88, 34);
+  --color-primary-hover: rgb(192, 72, 24);
+  --on-primary: rgb(255, 255, 255);
 
-  --general-bg: #f8f3e3;
-  --surface: #ffffff;
-  --border: #ddd6ce;
+  --general-bg: rgb(248, 243, 227);
+  --surface: rgb(255, 255, 255);
+  --border: rgb(221, 214, 206);
 
-  --text-primary: #212121;
-  --text-secondary: #757575;
+  --text-primary: rgb(33, 33, 33);
+  --text-secondary: rgb(117, 117, 117);
 
-  --neutral: #333333;
-  --neutral-hover: #454545;
+  --neutral: rgb(51, 51, 51);
+  --neutral-hover: rgb(69, 69, 69);
 
-  --navbar-bg: #333333;
-  --navbar-text: #ffffff;
-  --navbar-link-hover: #d4af37;
-  --dropdown-bg: #faf6ed;
+  --navbar-bg: rgb(51, 51, 51);
+  --navbar-text: rgb(255, 255, 255);
+  --navbar-link-hover: rgb(212, 175, 55);
+  --dropdown-bg: rgb(250, 246, 237);
 
-  --accent: #d4af37;
-  --success: #4b8f4b;
-  --error: #b93d3d;
+  --accent: rgb(212, 175, 55);
+  --success: rgb(75, 143, 75);
+  --error: rgb(185, 61, 61);
 }
 
 h1,
