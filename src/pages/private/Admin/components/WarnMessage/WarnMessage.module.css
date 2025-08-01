@@ -1,0 +1,49 @@
+.warn {
+  width: 100%;
+  max-width: 500px;
+  background-color: rgba(255, 0, 0, 0.6);
+  color: var(--on-primary);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(var(--error), 0.2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+  gap: 0.5rem;
+  z-index: 1;
+}
+
+.warnIcon {
+  width: 5rem;
+  height: auto;
+  @media (width < 430px) {
+    width: 8rem;
+  }
+}
+
+.warn p {
+  font-size: 0.8rem;
+}
+
+.closeIcon,
+.warn p {
+  color: var(--on-primary);
+}
+
+.closeButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeIcon {
+  width: 1.2rem;
+  height: auto;
+}
