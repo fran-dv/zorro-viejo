@@ -5,6 +5,7 @@ import { AdminDashboard } from "@/pages/private/Admin/AdminDashboard/AdminDashbo
 import { OrderDetail } from "@/pages/private/Admin/OrderDetail/OrderDetail";
 import { AdminLogin } from "@/pages/public/AdminLogin/AdminLogin";
 import { Navigate } from "react-router-dom";
+import { OrdersList } from "@/pages";
 
 export const PrivateRoutes = () => {
   return (
@@ -36,10 +37,7 @@ export const PrivateRoutes = () => {
           path={RelativeAdminPaths.OrderDetail}
           element={<OrderDetail />}
         />
-        <Route
-          path={RelativeAdminPaths.OrdersList}
-          element={<AdminDashboard />}
-        />
+        <Route path={RelativeAdminPaths.OrdersList} element={<OrdersList />} />
       </Route>
     </Routes>
   );
