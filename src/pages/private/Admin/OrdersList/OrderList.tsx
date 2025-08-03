@@ -8,12 +8,7 @@ import {
   type SelectionChangedEvent,
 } from "ag-grid-community";
 import { formatOrders, generalThemeParams, type FormattedOrder } from "@/utils";
-import {
-  useDelete,
-  useDeleteMany,
-  useList,
-  type HttpError,
-} from "@refinedev/core";
+import { useDelete, useDeleteMany, useList } from "@refinedev/core";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { GenericAlertDialog, LoadingView } from "@/components";
 import { OrderSchema, type Order } from "@/models";
@@ -77,34 +72,20 @@ export const OrdersList = () => {
       if (!id && !ids) return;
       if (id) {
         currentDeletingIds.current = [id];
-        mutate(
-          {
-            resource: "orders",
-            id: id,
-          },
-          {
-            onError: (error: HttpError) => {
-              throw error;
-            },
-          },
-        );
+        mutate({
+          resource: "orders",
+          id: id,
+        });
       }
       if (ids) {
         currentDeletingIds.current = ids;
-        mutateMany(
-          {
-            resource: "orders",
-            ids: ids,
-          },
-          {
-            onError: (error: HttpError) => {
-              throw error;
-            },
-          },
-        );
+        mutateMany({
+          resource: "orders",
+          ids: ids,
+        });
       }
     },
-    [mutate, mutateMany],
+    [mutate, mutateMany]
   );
 
   const columnDefs: ColDef[] = useMemo(
@@ -147,11 +128,11 @@ export const OrdersList = () => {
         },
       },
     ],
-    [isSmallDevice, deleteError, deleteIsPending, handleOrderDelete],
+    [isSmallDevice, deleteError, deleteIsPending, handleOrderDelete]
   );
   const orders: Order[] = useMemo(
     () => data?.data.map((order) => OrderSchema.parse(order)) ?? [],
-    [data],
+    [data]
   );
 
   const rowData = useMemo(() => formatOrders(orders), [orders]);
@@ -164,10 +145,12 @@ export const OrdersList = () => {
 
   if (error) {
     return (
-      <ErrorFetching
-        message="Error al cargar órdenes. Revisa tu conexión y vuelve a intentarlo"
-        onRetry={() => refetch()}
-      />
+      <div className={styles.errorContainer}>
+        <ErrorFetching
+          message="Error al cargar órdenes. Revisa tu conexión y vuelve a intentarlo"
+          onRetry={() => refetch()}
+        />
+      </div>
     );
   }
 
@@ -241,7 +224,7 @@ export const OrdersList = () => {
               clickedCell?.column.getColDef().field === "actions";
 
             const isCheckbox = clickedCell?.column.isCellCheckboxSelection(
-              e.node,
+              e.node
             );
 
             if (!isActionsCell && !isCheckbox) {
