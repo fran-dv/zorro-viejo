@@ -60,7 +60,11 @@ export const OrdersList = () => {
   } = useDelete<{ id: string }>();
 
   const currentDeletingIds = useRef<string[]>([]);
-  const { mutate: mutateMany } = useDeleteMany<{ id: string }>();
+  const {
+    mutate: mutateMany,
+    isPending: deleteManyIsPending,
+    error: deleteManyError,
+  } = useDeleteMany<{ id: string }>();
 
   const gridApi = useRef<GridApi>(null);
   const onGridReady = (params: GridReadyEvent) => {
@@ -85,54 +89,67 @@ export const OrdersList = () => {
         });
       }
     },
-    [mutate, mutateMany]
+    [mutate, mutateMany],
   );
 
   const columnDefs: ColDef[] = useMemo(
-    () => [
-      { field: "id", headerName: "ID", flex: 1, hide: isSmallDevice },
-      { field: "customerName", headerName: "Cliente", flex: 1 },
-      {
-        field: "createdAt",
-        headerName: "Fecha",
-        flex: 1,
-        valueFormatter: (params) =>
-          (params.data as FormattedOrder).formattedCreatedAt,
-      },
-      {
-        field: "totalPrice",
-        headerName: "Total",
-        flex: 1,
-        valueFormatter: (params) =>
-          (params.data as FormattedOrder).formattedTotalPrice,
-      },
-      {
-        field: "items",
-        headerName: "Cantidad de items",
-        flex: 1,
-        hide: isSmallDevice,
-        valueGetter: (params) => (params.data as FormattedOrder).items.length,
-      },
-      {
-        headerName: "Acciones",
-        field: "actions",
-        flex: 1,
-        sortable: false,
-        filter: false,
-        cellRenderer: DeleteCellRenderer,
-        cellRendererParams: {
-          onDelete: handleOrderDelete,
-          isLoading: deleteIsPending,
-          isLoadingIds: currentDeletingIds.current,
-          error: !!deleteError,
+    () =>
+      [
+        { field: "id", headerName: "ID", flex: 1, hide: isSmallDevice },
+        { field: "customerName", headerName: "Cliente", flex: 1 },
+        {
+          field: "createdAt",
+          headerName: "Fecha",
+          flex: 1,
+          valueFormatter: (params) =>
+            (params.data as FormattedOrder).formattedCreatedAt,
         },
-      },
+        {
+          field: "totalPrice",
+          headerName: "Total",
+          flex: 1,
+          valueFormatter: (params) =>
+            (params.data as FormattedOrder).formattedTotalPrice,
+        },
+        {
+          field: "items",
+          headerName: "Cantidad de items",
+          flex: 1,
+          hide: isSmallDevice,
+          valueGetter: (params) => (params.data as FormattedOrder).items.length,
+        },
+        {
+          headerName: "Acciones",
+          field: "actions",
+          flex: 1,
+          sortable: false,
+          filter: false,
+          cellRenderer: DeleteCellRenderer,
+          cellRendererParams: {
+            onDelete: handleOrderDelete,
+            isLoading: deleteIsPending || deleteManyIsPending,
+            isLoadingIds: currentDeletingIds.current,
+            error: !!deleteError || !!deleteManyError,
+            dialogTitle: "Estás por eliminar una orden",
+            dialogDescription:
+              "Si eliminas esta orden, no podrás revertir la acción. ¿Qué quieres hacer?",
+            cancelButtonContent: "Eliminar orden",
+            continueButtonContent: "Mantener orden",
+          },
+        },
+      ] as ColDef[],
+    [
+      isSmallDevice,
+      deleteError,
+      deleteIsPending,
+      deleteManyError,
+      deleteManyIsPending,
+      handleOrderDelete,
     ],
-    [isSmallDevice, deleteError, deleteIsPending, handleOrderDelete]
   );
   const orders: Order[] = useMemo(
     () => data?.data.map((order) => OrderSchema.parse(order)) ?? [],
-    [data]
+    [data],
   );
 
   const rowData = useMemo(() => formatOrders(orders), [orders]);
@@ -224,7 +241,7 @@ export const OrdersList = () => {
               clickedCell?.column.getColDef().field === "actions";
 
             const isCheckbox = clickedCell?.column.isCellCheckboxSelection(
-              e.node
+              e.node,
             );
 
             if (!isActionsCell && !isCheckbox) {
