@@ -150,7 +150,7 @@ export const ProductDetail = () => {
           <div className={styles.priceSection}>
             <ProductPrice
               price={product.price}
-              offerPrice={product.offerPrice ?? undefined}
+              offerPrice={product.offerPrice}
             />
           </div>
           <div className={styles.packageSection}>
