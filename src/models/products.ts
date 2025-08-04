@@ -39,6 +39,23 @@ export const ProductSchema = RawProductResponseSchema.transform((raw) => {
 
 export type Product = z.infer<typeof ProductSchema>;
 
+export const productToRawProductResponse = (
+  product: Product,
+): RawProductResponse => ({
+  id: product.id,
+  category_id: product.categoryId,
+  name: product.name,
+  slug: product.slug,
+  price: product.price,
+  offer_price: product.offerPrice,
+  image_urls: product.imageUrls,
+  short_description: product.shortDescription,
+  description: product.description,
+  in_stock: product.inStock,
+  units_in_package: product.unitsInPackage,
+  unit_volume_ml: product.unitVolumeMl,
+});
+
 export type ProductsByCategory = {
   category: Category;
   products: Product[];
