@@ -1,7 +1,5 @@
 import { z } from "zod";
-import { ProductSchema } from "./product";
-import { ProductResponseSchema } from "./productResponseSchema";
-import { productResponseToProduct } from "./productResponseToProduct";
+import { ProductSchema, RawProductResponseSchema } from "@/models";
 
 // API
 export const OrderCreateSchema = z.object({
@@ -19,7 +17,7 @@ export type OrderItemCreate = z.infer<typeof OrderItemCreateSchema>;
 
 export const OrderItemResponseSchema = z.object({
   amount: z.number().int().min(1),
-  product: ProductResponseSchema,
+  product: RawProductResponseSchema,
 });
 export type OrderItemResponse = z.infer<typeof OrderItemResponseSchema>;
 
@@ -42,7 +40,7 @@ export const OrderSchema = RawOrderResponseSchema.transform((raw) => {
   // API response to local
   const items: OrderItem[] = raw.order_items.map((item) => {
     return {
-      product: productResponseToProduct(item.product),
+      product: ProductSchema.parse(item.product),
       amount: item.amount,
     };
   });

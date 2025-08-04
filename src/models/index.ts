@@ -1,6 +1,4 @@
-export * from "./product";
-export * from "./productResponseSchema";
-export * from "./productResponseToProduct";
+export * from "./products";
 export * from "./categories";
 export * from "./cartItem";
 export * from "./checkoutForm";

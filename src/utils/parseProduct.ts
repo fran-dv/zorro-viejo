@@ -1,14 +1,14 @@
-import type { ProductResponse } from "@/models";
-import { ProductResponseSchema, productResponseToProduct } from "@/models";
+import type { RawProductResponse } from "@/models";
+import { ProductSchema, RawProductResponseSchema } from "@/models";
 
-export const parseProduct = (prod: ProductResponse, index: number) => {
+export const parseProduct = (prod: RawProductResponse, index: number) => {
   try {
-    const result = ProductResponseSchema.safeParse(prod);
+    const result = RawProductResponseSchema.safeParse(prod);
     if (!result.success) {
       console.error(`Error parsing product at index ${index}: ${result.error}`);
       return null;
     }
-    return productResponseToProduct(result.data);
+    return ProductSchema.parse(result.data);
   } catch (err) {
     console.error(`Error parsing product at index ${index}: ${err}`);
     return null;
