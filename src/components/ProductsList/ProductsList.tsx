@@ -65,15 +65,18 @@ export const ProductsList = ({
                   {it.category.name}
                 </h2>
                 <ProductsCarousel
-                  cards={it.products.map((p) => (
-                    <ProductCard
-                      product={p}
-                      key={p.id}
-                      isLoading={areProductsLoading}
-                      onClick={() => handleProductClick(p.slug)}
-                      onAddToCartClick={() => handleAddToCart(p)}
-                    />
-                  ))}
+                  cards={it.products.map((p) => {
+                    if (!p.inStock) return null;
+                    return (
+                      <ProductCard
+                        product={p}
+                        key={p.id}
+                        isLoading={areProductsLoading}
+                        onClick={() => handleProductClick(p.slug)}
+                        onAddToCartClick={() => handleAddToCart(p)}
+                      />
+                    );
+                  })}
                 />
               </div>
             </div>
@@ -88,15 +91,18 @@ export const ProductsList = ({
                 explorar otras!
               </p>
             )}
-            {productsByCategory[0].products.map((prod) => (
-              <ProductCard
-                product={prod}
-                key={prod.id}
-                isLoading={areProductsLoading}
-                onClick={() => handleProductClick(prod.slug)}
-                onAddToCartClick={() => handleAddToCart(prod)}
-              />
-            ))}
+            {productsByCategory[0].products.map((prod) => {
+              if (!prod.inStock) return null;
+              return (
+                <ProductCard
+                  product={prod}
+                  key={prod.id}
+                  isLoading={areProductsLoading}
+                  onClick={() => handleProductClick(prod.slug)}
+                  onAddToCartClick={() => handleAddToCart(prod)}
+                />
+              );
+            })}
           </div>
         </>
       )}
