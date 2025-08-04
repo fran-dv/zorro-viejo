@@ -10,6 +10,10 @@ interface Props extends ICellRendererParams {
   isLoading: boolean;
   isLoadingIds: string[];
   error: boolean;
+  dialogTitle: string;
+  dialogDescription: string;
+  cancelButtonContent: string;
+  continueButtonContent: string;
 }
 
 export const DeleteCellRenderer: React.FC<Props> = ({
@@ -18,6 +22,10 @@ export const DeleteCellRenderer: React.FC<Props> = ({
   isLoading,
   isLoadingIds,
   error,
+  dialogTitle,
+  dialogDescription,
+  cancelButtonContent,
+  continueButtonContent,
 }) => {
   const handleDelete = useCallback(() => {
     onDelete({ id: data.id });
@@ -48,12 +56,12 @@ export const DeleteCellRenderer: React.FC<Props> = ({
   return (
     <GenericAlertDialog
       hasTriggerButton={true}
-      titleContent="Estás por eliminar una orden"
-      descriptionContent="Si eliminas esta orden, no podrás revertir la acción. ¿Qué quieres hacer?"
+      titleContent={dialogTitle}
+      descriptionContent={dialogDescription}
       onContinue={() => {}}
       onCancel={handleDelete}
-      cancelButtonContent="Eliminar orden"
-      continueButtonContent="Mantener orden"
+      cancelButtonContent={cancelButtonContent}
+      continueButtonContent={continueButtonContent}
       triggerButtonContent={<Trash2 className={styles.icon} />}
       triggerButtonClassName={styles.button}
     />
