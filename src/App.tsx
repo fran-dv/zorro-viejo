@@ -19,7 +19,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const hideFooterOn = [Paths.Cart];
+const hideFooterOn: string[] = [Paths.Cart];
 
 function App({ children }: Props) {
   const footerRef = useRef<HTMLElement>(null);
