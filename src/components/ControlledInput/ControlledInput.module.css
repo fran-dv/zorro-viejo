@@ -8,11 +8,21 @@
 .errorWrapper {
   display: flex;
   padding: 0.25rem;
-  min-height: 3.75rem;
+  min-height: 2.5rem;
   height: max-content;
 }
 
 .errorWrapper p {
   color: var(--error);
-  line-height: 1.5;
+  line-height: 1.2;
+  font-size: 0.8rem;
+}
+
+@media (width >= 850px) {
+  .errorWrapper {
+    min-height: 3.25rem;
+  }
+  .errorWrapper p {
+    font-size: 1rem;
+  }
 }

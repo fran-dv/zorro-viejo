@@ -106,9 +106,6 @@ export const AdminLogin = () => {
         )}
       </div>
       <h1 className={styles.title}>Iniciar sesión como administrador</h1>
-      <p className={styles.indications}>
-        Ingrese sus credenciales de administrador para iniciar sesión.
-      </p>
       <div className={styles.formWrapper}>
         <form onSubmit={() => handleSubmit(handler)} className={styles.form}>
           <div>
