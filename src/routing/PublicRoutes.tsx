@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
 import { Paths } from "@/routing/paths";
 import { Home } from "@/pages/public/Home/Home";
 import { Products } from "@/pages/public/Products/Products";
@@ -7,10 +7,11 @@ import { Cart } from "@/pages/public/Cart/Cart";
 import { Checkout } from "@/pages/public/Checkout/Checkout";
 import { CheckoutSuccess } from "@/pages/public/CheckoutSuccess/CheckoutSuccess";
 import { Navigate } from "react-router-dom";
+import { RoutesWithNotFound } from "./RoutesWithNotFound";
 
 export const PublicRoutes = () => {
   return (
-    <Routes>
+    <RoutesWithNotFound>
       <Route path="/" element={<Navigate to={Paths.Home} />} />
       <Route path={Paths.Home} element={<Home />} />
       <Route path={Paths.Products} element={<Products />} />
@@ -19,7 +20,7 @@ export const PublicRoutes = () => {
       <Route path={Paths.Checkout} element={<Checkout />}>
         <Route path={Paths.CheckoutSuccess} element={<CheckoutSuccess />} />
       </Route>
-    </Routes>
+    </RoutesWithNotFound>
   );
 };
 

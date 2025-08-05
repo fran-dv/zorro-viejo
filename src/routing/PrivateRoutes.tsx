@@ -1,15 +1,15 @@
 import { RelativeAdminPaths } from "@/routing/paths";
-import { Route, Routes } from "react-router-dom";
+import { Route, Navigate } from "react-router-dom";
 import { AdminGuard } from "@/routing/AdminGuard";
 import { AdminDashboard } from "@/pages/private/Admin/AdminDashboard/AdminDashboard";
 import { OrderDetail } from "@/pages/private/Admin/OrderDetail/OrderDetail";
 import { AdminLogin } from "@/pages/public/AdminLogin/AdminLogin";
-import { Navigate } from "react-router-dom";
-import { OrdersList } from "@/pages";
+import { OrdersList } from "@/pages/private/Admin/OrdersList/OrderList";
+import { RoutesWithNotFound } from "./RoutesWithNotFound";
 
 export const PrivateRoutes = () => {
   return (
-    <Routes>
+    <RoutesWithNotFound>
       <Route path={RelativeAdminPaths.Login} element={<AdminLogin />} />
 
       <Route element={<AdminGuard />}>
@@ -39,7 +39,7 @@ export const PrivateRoutes = () => {
         />
         <Route path={RelativeAdminPaths.OrdersList} element={<OrdersList />} />
       </Route>
-    </Routes>
+    </RoutesWithNotFound>
   );
 };
 
