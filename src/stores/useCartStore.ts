@@ -69,7 +69,9 @@ export const useCartStore = create<CartState>()(
       getTotalPrice: () => {
         const { items } = get();
         return items.reduce((total, item) => {
-          const price = item.product.offerPrice ?? item.product.price;
+          const offerPrice = item.product.offerPrice;
+          const price =
+            offerPrice && offerPrice > 0 ? offerPrice : item.product.price;
           return total + price * item.amount;
         }, 0);
       },
