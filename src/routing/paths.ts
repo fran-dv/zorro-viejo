@@ -6,7 +6,7 @@ export const RelativeAdminPaths = {
   EditProduct: "products/:id",
   OrdersList: "orders",
   OrderDetail: "orders/:id",
-};
+} as const;
 
 export const Paths = {
   Home: "/home",
@@ -29,4 +29,5 @@ export const Paths = {
   getCheckoutSuccessPath: (orderId: string) => `/checkout/success/${orderId}`,
   getCategoryPath: (slug: string) => `/products?category=${slug}`,
   getAdminOrderDetail: (orderId: string) => `/admin/orders/${orderId}`,
-};
+  getAdminEditProduct: (productId: number) => `/admin/products/${productId}`,
+} as const;
