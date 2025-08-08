@@ -12,3 +12,4 @@ export * from "./removeOrderFromLocalStorage";
 export * from "./appUrl";
 export * from "./formatOrders";
 export * from "./generalAgGridThemeParams";
+export * from "./formatProducts";
