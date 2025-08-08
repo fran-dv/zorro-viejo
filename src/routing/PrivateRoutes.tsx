@@ -5,7 +5,10 @@ import { AdminDashboard } from "@/pages/private/Admin/AdminDashboard/AdminDashbo
 import { OrderDetail } from "@/pages/private/Admin/OrderDetail/OrderDetail";
 import { AdminLogin } from "@/pages/public/AdminLogin/AdminLogin";
 import { OrdersList } from "@/pages/private/Admin/OrdersList/OrderList";
+import { ProductsList } from "@/pages/private/Admin/ProductsList/ProductList";
 import { RoutesWithNotFound } from "./RoutesWithNotFound";
+import { CreateProduct } from "@/pages/private/Admin/CreateProduct/CreateProduct";
+import { EditProduct } from "@/pages/private/Admin/EditProduct/EditProduct";
 
 export const PrivateRoutes = () => {
   return (
@@ -23,15 +26,15 @@ export const PrivateRoutes = () => {
         />
         <Route
           path={RelativeAdminPaths.ProductsList}
-          element={<AdminDashboard />}
+          element={<ProductsList />}
         />
         <Route
           path={RelativeAdminPaths.CreateProduct}
-          element={<AdminDashboard />}
+          element={<CreateProduct />}
         />
         <Route
           path={RelativeAdminPaths.EditProduct}
-          element={<AdminDashboard />}
+          element={<EditProduct />}
         />
         <Route
           path={RelativeAdminPaths.OrderDetail}
