@@ -2,8 +2,10 @@ import { generateFilter, handleError } from "../utils";
 import type { DataProvider } from "@refinedev/core";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export const dataProvider = (
-  supabaseClient: SupabaseClient<any, any, any>,
+  supabaseClient: SupabaseClient<any, any, any>
 ): Required<DataProvider> => {
   return {
     getList: async ({ resource, pagination, filters, sorters, meta }) => {
@@ -62,6 +64,7 @@ export const dataProvider = (
       const query = client.from(resource).select(meta?.select ?? "*");
 
       if (meta?.idColumnName) {
+        // @ts-expect-error TS2589: excessive depth in type instantiation
         query.in(meta.idColumnName, ids);
       } else {
         query.in("id", ids);
@@ -168,7 +171,7 @@ export const dataProvider = (
           }
 
           return (data || [])[0] as any;
-        }),
+        })
       );
 
       return {
@@ -243,7 +246,7 @@ export const dataProvider = (
           }
 
           return (data || [])[0] as any;
-        }),
+        })
       );
 
       return {
