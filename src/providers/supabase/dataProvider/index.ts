@@ -5,7 +5,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export const dataProvider = (
-  supabaseClient: SupabaseClient<any, any, any>
+  supabaseClient: SupabaseClient<any, any, any>,
 ): Required<DataProvider> => {
   return {
     getList: async ({ resource, pagination, filters, sorters, meta }) => {
@@ -171,7 +171,7 @@ export const dataProvider = (
           }
 
           return (data || [])[0] as any;
-        })
+        }),
       );
 
       return {
@@ -246,7 +246,7 @@ export const dataProvider = (
           }
 
           return (data || [])[0] as any;
-        })
+        }),
       );
 
       return {

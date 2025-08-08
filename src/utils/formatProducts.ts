@@ -12,7 +12,7 @@ export const FormattedStock = {
 
 export const formatProducts = (
   products: Product[],
-  categories: Category[]
+  categories: Category[],
 ): FormattedProduct[] => {
   return products.map((product) => ({
     ...product,
@@ -27,7 +27,7 @@ export const formatProducts = (
 
 export const formattedProductToProduct = (
   product: FormattedProduct,
-  categories: Category[]
+  categories: Category[],
 ): Product => {
   const inStock = product.formattedStock === FormattedStock.inStock;
 
@@ -41,7 +41,7 @@ export const formattedProductToProduct = (
 };
 
 export const formattedProductFieldToRawProductField = (
-  field: keyof FormattedProduct
+  field: keyof FormattedProduct,
 ): keyof RawProductResponse => {
   switch (field) {
     case "formattedStock":
