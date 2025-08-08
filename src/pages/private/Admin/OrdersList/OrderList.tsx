@@ -10,13 +10,14 @@ import {
 import { formatOrders, generalThemeParams, type FormattedOrder } from "@/utils";
 import { useDelete, useDeleteMany, useList } from "@refinedev/core";
 import { useCallback, useMemo, useRef, useState } from "react";
-import { GenericAlertDialog, LoadingView } from "@/components";
+import { LoadingView } from "@/components";
 import { OrderSchema, type Order } from "@/models";
 import { ErrorFetching } from "@/components/Errors";
 import { useMediaQuery } from "usehooks-ts";
 import {
   WarnMessage,
   DeleteCellRenderer,
+  ToolbarButton,
 } from "@/pages/private/Admin/components";
 import { useNavigate } from "react-router-dom";
 import { Paths } from "@/routing";
@@ -198,25 +199,19 @@ export const OrdersList = () => {
         <div
           className={`${styles.actionsWrapper} ${selectedIds.length === 0 && styles.hidden}`}
         >
-          <GenericAlertDialog
-            hasTriggerButton={true}
+          <ToolbarButton
+            icon={<Trash2 className={styles.icon} />}
+            confirmationDialog
+            cancelButtonContent="Eliminar órdenes"
+            continueButtonContent="Mantener órdenes"
             titleContent="Estás por eliminar órdenes"
             descriptionContent="Si eliminas las órdenes, no podrás revertir la acción. ¿Qué quieres hacer?"
             onContinue={() => {}}
             onCancel={() => handleBulkAction("delete")}
-            cancelButtonContent="Eliminar órdenes"
-            continueButtonContent="Mantener órdenes"
-            triggerButtonContent={
-              <>
-                <p>
-                  Eliminar {selectedIds.length} orden
-                  {selectedIds.length > 1 && "es"}
-                </p>
-                <Trash2 className={styles.icon} />
-              </>
-            }
-            triggerButtonClassName={styles.bulkDeleteButton}
-          />
+          >
+            Eliminar {selectedIds.length} orden
+            {selectedIds.length > 1 && "es"}
+          </ToolbarButton>
         </div>
       </div>
 
