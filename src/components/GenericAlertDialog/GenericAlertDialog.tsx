@@ -2,10 +2,11 @@ import React, { useCallback } from "react";
 import { AlertDialog } from "radix-ui";
 import styles from "./GenericAlertDialog.module.css";
 
-interface Props {
+export interface GenericAlertDialogProps {
   hasTriggerButton: boolean;
   triggerButtonContent?: React.ReactNode;
   triggerButtonClassName?: string;
+  triggerButtonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
   cancelButtonContent: React.ReactNode;
   continueButtonContent: React.ReactNode;
   titleContent: React.ReactNode;
@@ -19,6 +20,7 @@ export const GenericAlertDialog = ({
   hasTriggerButton,
   triggerButtonContent,
   triggerButtonClassName,
+  triggerButtonProps,
   cancelButtonContent,
   continueButtonContent,
   titleContent,
@@ -26,7 +28,7 @@ export const GenericAlertDialog = ({
   open,
   onContinue,
   onCancel,
-}: Props) => {
+}: GenericAlertDialogProps) => {
   const handleContinue = useCallback(() => {
     onContinue();
   }, [onContinue]);
@@ -39,7 +41,7 @@ export const GenericAlertDialog = ({
     <AlertDialog.Root open={open}>
       {hasTriggerButton && (
         <AlertDialog.Trigger asChild>
-          <button className={triggerButtonClassName}>
+          <button className={triggerButtonClassName} {...triggerButtonProps}>
             {triggerButtonContent}
           </button>
         </AlertDialog.Trigger>
