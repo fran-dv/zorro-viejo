@@ -8,7 +8,7 @@ import { Paths, RelativeAdminPaths } from "@/routing";
 import { ScrollToTop } from "@/components/ScrollToTop/ScrollToTop";
 import { useExistingOrderDialog } from "@/hooks";
 import { Refine } from "@refinedev/core";
-import { dataProvider } from "@refinedev/supabase";
+import { dataProvider } from "@/providers/supabase/dataProvider";
 import { supabase } from "@/api";
 import { authProvider } from "@/auth";
 import { AdminLayout } from "@/components/Admin";
