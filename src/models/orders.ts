@@ -46,7 +46,8 @@ export const OrderSchema = RawOrderResponseSchema.transform((raw) => {
   });
 
   const totalPrice = items.reduce((total, item) => {
-    const price = item.product.offerPrice ?? item.product.price;
+    const offerPrice = item.product.offerPrice ?? 0;
+    const price = offerPrice > 0 ? offerPrice : item.product.price;
     return total + price * item.amount;
   }, 0);
 

@@ -27,7 +27,8 @@ export const ProductSchema = RawProductResponseSchema.transform((raw) => {
     name: raw.name,
     slug: raw.slug,
     price: raw.price,
-    offerPrice: raw.offer_price ?? undefined,
+    offerPrice:
+      raw.offer_price && raw.offer_price > 0 ? raw.offer_price : undefined,
     imageUrls: raw.image_urls,
     shortDescription: raw.short_description,
     description: raw.description,
