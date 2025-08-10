@@ -5,31 +5,34 @@
 }
 
 :root {
-  --general-font-family: "Poppins", sans-serif;
+  --general-font-family:
+    "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
   --title-font: "Tangerine", cursive;
 
-  --color-primary: rgb(226, 88, 34);
-  --color-primary-hover: rgb(192, 72, 24);
+  --color-primary: rgb(184, 90, 42);
+  --color-primary-hover: rgb(154, 70, 31);
   --on-primary: rgb(255, 255, 255);
 
-  --general-bg: rgb(248, 243, 227);
+  --general-bg: rgb(245, 246, 247);
   --surface: rgb(255, 255, 255);
-  --border: rgb(221, 214, 206);
+  --dropdown-bg: rgb(241, 243, 244);
 
-  --text-primary: rgb(33, 33, 33);
-  --text-secondary: rgb(117, 117, 117);
+  --border: rgb(231, 233, 235);
 
-  --neutral: rgb(51, 51, 51);
-  --neutral-hover: rgb(69, 69, 69);
+  --text-primary: rgb(31, 38, 41);
+  --text-secondary: rgb(107, 113, 117);
 
-  --navbar-bg: rgb(51, 51, 51);
+  --neutral: rgb(31, 38, 41);
+  --neutral-hover: rgb(69, 75, 77);
+
+  --navbar-bg: rgb(17, 19, 22);
   --navbar-text: rgb(255, 255, 255);
-  --navbar-link-hover: rgb(212, 175, 55);
-  --dropdown-bg: rgb(250, 246, 237);
+  --navbar-link-hover: rgb(203, 176, 106);
 
-  --accent: rgb(212, 175, 55);
-  --success: rgb(75, 143, 75);
-  --error: rgb(185, 61, 61);
+  --accent: rgb(203, 176, 106);
+  --success: rgb(47, 157, 105);
+  --error: rgb(209, 67, 67);
 }
 
 h1,
