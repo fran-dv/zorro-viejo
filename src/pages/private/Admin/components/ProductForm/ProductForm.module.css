@@ -1,0 +1,34 @@
+.container {
+  margin: 0 auto;
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.textarea,
+.input {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.75rem;
+  font-size: 1rem;
+}
+
+.textarea:focus,
+.input:focus {
+  border: none;
+  outline: 2px solid var(--color-primary);
+}
+
+.textarea {
+  resize: vertical;
+  overflow-y: auto;
+}
