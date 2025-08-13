@@ -1,0 +1,36 @@
+.container {
+  padding: 2rem 0;
+}
+
+.toolbarButton {
+  max-width: 200px;
+  align-self: center;
+}
+
+.errorWrapper {
+  min-height: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.errorWrapper p {
+  font-size: 0.75rem;
+  line-height: 1.2;
+  color: var(--error);
+}
+
+.imagesPreviewWrapper {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.75rem;
+}
+
+.deleteImagesButton {
+  align-self: flex-start;
+}
+
+@media (width >= 850px) {
+  .errorWrapper p {
+    font-size: 0.9rem;
+  }
+}
