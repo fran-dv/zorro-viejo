@@ -1,0 +1,28 @@
+.container {
+  --gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.errorWrapper {
+  display: flex;
+  padding: 0.25rem;
+  min-height: 2rem;
+  height: max-content;
+}
+
+.errorWrapper p {
+  color: var(--error);
+  line-height: 1.2;
+  font-size: 0.75rem;
+}
+
+@media (width >= 850px) {
+  .errorWrapper {
+    min-height: 2rem;
+  }
+  .errorWrapper p {
+    font-size: 0.9rem;
+  }
+}
