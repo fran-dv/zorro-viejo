@@ -14,14 +14,31 @@ export const RawProductResponseSchema = z.object({
   description: z.string(),
   in_stock: z.boolean(),
   units_in_package: z.number(),
-  unit_volume_ml: z.number(),
+  unit_volume_ml: z.string(),
 });
 
 export type RawProductResponse = z.infer<typeof RawProductResponseSchema>;
 
 // Local
+export const BaseProductSchema = z.object({
+  id: z.number(),
+  categoryId: z.number(),
+  name: z.string(),
+  slug: z.string(),
+  price: z.number(),
+  offerPrice: z.number().optional().nullable(),
+  imageUrls: z.array(z.string().url()).nonempty(),
+  shortDescription: z.string().or(z.null()),
+  description: z.string(),
+  inStock: z.boolean(),
+  unitsInPackage: z.number(),
+  unitVolumeMl: z.string(),
+});
+
+export type BaseProduct = z.infer<typeof BaseProductSchema>;
+
 export const ProductSchema = RawProductResponseSchema.transform((raw) => {
-  return {
+  const product: BaseProduct = {
     id: raw.id,
     categoryId: raw.category_id,
     name: raw.name,
@@ -36,6 +53,8 @@ export const ProductSchema = RawProductResponseSchema.transform((raw) => {
     unitsInPackage: raw.units_in_package,
     unitVolumeMl: raw.unit_volume_ml,
   };
+
+  return product;
 });
 
 export type Product = z.infer<typeof ProductSchema>;
