@@ -6,8 +6,10 @@ import {
   type Path,
 } from "react-hook-form";
 import styles from "./ControlledInput.module.css";
+import type { InputHTMLAttributes } from "react";
 
-interface Props<T extends FieldValues> {
+export interface ControlledInputProps<T extends FieldValues>
+  extends InputHTMLAttributes<HTMLInputElement> {
   name: Path<T>;
   control: Control<T>;
   label: string;
@@ -27,7 +29,9 @@ export const ControlledInput = <T extends FieldValues>({
   inputClassName = "",
   onChange,
   onBlur,
-}: Props<T>) => {
+  ...otherProps
+}: ControlledInputProps<T>) => {
+  const inputProps = otherProps as InputHTMLAttributes<HTMLInputElement>;
   return (
     <div className={styles.container}>
       <label htmlFor={name}>{label}</label>
@@ -40,16 +44,21 @@ export const ControlledInput = <T extends FieldValues>({
             type={type}
             {...field}
             onChange={(event) => {
-              field.onChange(event);
+              if (type === "number") {
+                field.onChange(Number(event.target.value));
+              } else {
+                field.onChange(event.target.value);
+              }
               onChange?.(event);
             }}
             onBlur={onBlur}
             className={`form-control ${error ? "invalid" : ""} ${inputClassName}`}
+            {...inputProps}
           />
         )}
       />
       <div className={styles.errorWrapper}>
-        {error && <p className="error">{error.message}</p>}
+        {error && <p className={styles.error}>{error.message}</p>}
       </div>
     </div>
   );
