@@ -24,6 +24,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const ToolbarButton = ({
   icon,
   children,
+  iconClassName,
   className = "",
   confirmationDialog = false,
   fileImport = false,
@@ -37,23 +38,21 @@ export const ToolbarButton = ({
   cancelButtonContent,
   onContinue,
   onCancel,
-  ...props
+  ...buttonProps
 }: Props) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const buttonProps = props as ButtonHTMLAttributes<HTMLButtonElement>;
   const disabled = buttonProps.disabled;
 
   const iconWithClassName = React.cloneElement(icon, {
-    className: `${icon.props.className || ""} ${styles.icon}`.trim(),
+    className:
+      `${icon.props.className || iconClassName || ""} ${styles.icon}`.trim(),
   });
 
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (fileImport && handleFileChange && fileInputRef.current) {
-      console.log("about click import");
       fileInputRef.current.click();
-    } else if (props.onClick) {
-      props.onClick(e);
+    } else if (buttonProps.onClick) {
+      buttonProps.onClick(e);
     }
   };
 
@@ -106,9 +105,8 @@ export const ToolbarButton = ({
   return (
     <button
       className={`${styles.button} ${className} ${disabled ? styles.disabled : ""}`.trim()}
-      {...buttonProps}
       onClick={handleButtonClick}
-      type={fileImport ? "button" : props.type}
+      type={fileImport ? "button" : buttonProps.type}
     >
       {buttonContent}
     </button>
