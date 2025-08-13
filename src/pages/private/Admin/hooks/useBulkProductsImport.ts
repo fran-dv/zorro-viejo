@@ -77,7 +77,7 @@ export const useBulkProductsImport = (): BulkProductsImportData => {
             ? false
             : true,
         units_in_package: parseInt(row.units_in_package) ?? 1,
-        unit_volume_ml: parseInt(row.unit_volume_ml),
+        unit_volume_ml: row.unit_volume_ml,
         offer_price: isNaN(parseInt(row.offer_price))
           ? 0
           : parseInt(row.offer_price),

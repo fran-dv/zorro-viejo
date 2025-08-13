@@ -47,7 +47,7 @@ export const CartItemCard = ({
         <div className={styles.priceContainer}>
           <ProductPrice
             price={item.product.price}
-            offerPrice={item.product.offerPrice}
+            offerPrice={item.product.offerPrice ?? undefined}
             showOfferTag={false}
           />
         </div>

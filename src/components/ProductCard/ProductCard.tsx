@@ -93,7 +93,10 @@ export const ProductCard = ({
           </p>
         </div>
         <div className={styles.priceSection}>
-          <ProductPrice price={product.price} offerPrice={product.offerPrice} />
+          <ProductPrice
+            price={product.price}
+            offerPrice={product.offerPrice ?? undefined}
+          />
         </div>
         <ActionButton onClick={handleAddToCartClick} />
       </div>
