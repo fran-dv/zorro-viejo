@@ -8,7 +8,7 @@ import { useProducts } from "@/hooks/useProducts";
 import type { Category, ProductsByCategory } from "@/models";
 import { useSearchParams } from "react-router-dom";
 import { useGlobalContext } from "@/context";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ProductsList, Pagination } from "@/components";
 import { useNavigate } from "react-router-dom";
 import { Paths } from "@/routing";
@@ -39,9 +39,13 @@ export const Products = () => {
     setPage(1);
   }, [currentSlug]);
 
+  const topOfPageRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const top = document.getElementById("products-top");
-    top?.scrollIntoView({ behavior: "smooth", block: "center" });
+    topOfPageRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   }, [page]);
 
   const currentCategory: Category | string =
@@ -90,7 +94,7 @@ export const Products = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={topOfPageRef}>
       <div className={styles.header}>
         {isDesktop && <SearchInterface />}
         {categories.length < 2 && errorFetchingCategories ? (
@@ -110,11 +114,6 @@ export const Products = () => {
         )}
       </div>
 
-      <h1 id="products-top" className={styles.title}>
-        {currentCategory === AllCategory.slug
-          ? "Todos los productos"
-          : (currentCategory as Category).name}
-      </h1>
       {currentCategory !== AllCategory.slug && !isError && (
         <Pagination
           className={styles.pagination}
