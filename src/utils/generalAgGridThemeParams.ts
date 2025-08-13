@@ -1,8 +1,8 @@
 export const generalThemeParams = {
-  accentColor: "#E25822",
+  accentColor: "#B85A2A",
   browserColorScheme: "light",
   columnBorder: false,
-  foregroundColor: "#212121",
+  foregroundColor: "#1F2629",
   headerFontSize: 14,
   spacing: 8,
   wrapperBorderRadius: 20,
