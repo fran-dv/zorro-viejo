@@ -6,3 +6,4 @@ export * from "./fetchSearchSuggestions";
 export * from "./fetchRelatedProducts";
 export * from "./createOrder";
 export * from "./fetchOrderById";
+export * from "./uploadImage";
