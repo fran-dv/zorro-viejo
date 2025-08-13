@@ -13,3 +13,5 @@ export * from "./appUrl";
 export * from "./formatOrders";
 export * from "./generalAgGridThemeParams";
 export * from "./formatProducts";
+export * from "./generateNumericId";
+export * from "./generateSlug";
