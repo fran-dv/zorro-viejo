@@ -24,13 +24,28 @@
   font-size: 1rem;
 }
 
-.categorySectionTitle {
-  margin-left: 1rem;
-  text-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.2);
+.categorySection {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5rem;
+  gap: 0, 5rem;
 }
 
-@media (width >= 850px) {
-  .categorySectionTitle {
-    font-size: 1.7rem;
-  }
+.categorySectionTitle {
+  font-family: var(--title-font);
+  font-size: 3rem;
+  margin-left: 1rem;
+  text-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.2s ease-in-out,
+    color 0.3s ease-in-out;
+  font-weight: bold;
+}
+
+.categorySectionTitle:hover {
+  cursor: pointer;
+  color: var(--color-primary);
+  transform: translateY(-4px);
 }

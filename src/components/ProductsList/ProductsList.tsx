@@ -59,26 +59,29 @@ export const ProductsList = ({
           if (it.products.length === 0) return null;
 
           return (
-            <div className={styles.AllCategoriesContainer} key={it.category.id}>
-              <div>
-                <h2 className={styles.categorySectionTitle}>
-                  {it.category.name}
-                </h2>
-                <ProductsCarousel
-                  cards={it.products.map((p) => {
-                    if (!p.inStock) return null;
-                    return (
-                      <ProductCard
-                        product={p}
-                        key={p.id}
-                        isLoading={areProductsLoading}
-                        onClick={() => handleProductClick(p.slug)}
-                        onAddToCartClick={() => handleAddToCart(p)}
-                      />
-                    );
-                  })}
-                />
-              </div>
+            <div className={styles.categorySection} key={it.category.id}>
+              <h2
+                className={styles.categorySectionTitle}
+                onClick={() =>
+                  navigate(Paths.getCategoryPath(it.category.slug))
+                }
+              >
+                {it.category.name}
+              </h2>
+              <ProductsCarousel
+                cards={it.products.map((p) => {
+                  if (!p.inStock) return null;
+                  return (
+                    <ProductCard
+                      product={p}
+                      key={p.id}
+                      isLoading={areProductsLoading}
+                      onClick={() => handleProductClick(p.slug)}
+                      onAddToCartClick={() => handleAddToCart(p)}
+                    />
+                  );
+                })}
+              />
             </div>
           );
         })
