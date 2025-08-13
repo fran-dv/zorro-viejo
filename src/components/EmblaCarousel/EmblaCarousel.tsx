@@ -63,12 +63,14 @@ export const Carousel: React.FC<CarouselProps> = ({
       <button
         onClick={scrollPrev}
         className={`${styles.embla__buttonPrev} ${canScrollPrev ? "" : styles.disabled} ${buttonStyle === "filled" ? styles.filled : ""}`}
+        type="button"
       >
         <ChevronLeft className={styles.chevron} />
       </button>
       <button
         onClick={scrollNext}
         className={`${styles.embla__buttonNext} ${canScrollNext ? "" : styles.disabled} ${buttonStyle === "filled" ? styles.filled : ""}`}
+        type="button"
       >
         <ChevronRight className={styles.chevron} />
       </button>
