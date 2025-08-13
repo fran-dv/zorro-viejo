@@ -44,7 +44,9 @@ li,
 a,
 span,
 label,
-input {
+input,
+textarea,
+select {
   font-family: var(--general-font-family);
   color: var(--text-primary);
 }
