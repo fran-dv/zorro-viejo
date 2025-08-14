@@ -12,7 +12,7 @@ import { useCategories, useControlledForm } from "@/hooks";
 import { ActionButton, ControlledInput, ScrollToTop } from "@/components";
 import { generateNumericId, generateSlug } from "@/utils";
 import type { SubmitHandler } from "react-hook-form";
-import { useUploadImages } from "@/pages/private/Admin/hooks";
+import { useUploadImages, useDeleteImages } from "@/pages/private/Admin/hooks";
 import { WarnMessage } from "@/pages/private/Admin/components";
 
 interface Props {
@@ -43,7 +43,6 @@ export const ProductForm = ({
     offerPrice: initialValues?.offerPrice ?? 0,
     shortDescription: initialValues?.shortDescription ?? "",
     description: initialValues?.description ?? "",
-    imageUrls: initialValues?.imageUrls ?? [""],
     unitsInPackage: initialValues?.unitsInPackage ?? 0,
     unitVolumeMl: initialValues?.unitVolumeMl ?? "",
     categoryId: initialValues?.categoryId ?? 0,
@@ -58,17 +57,49 @@ export const ProductForm = ({
   const [previewImages, setPreviewImages] = useState<string[]>([]);
   const [blobImages, setBlobImages] = useState<Blob[]>([]);
 
+  useEffect(() => {
+    const loadImages = async () => {
+      if (
+        initialValues?.imageUrls &&
+        initialValues.imageUrls.length > 0 &&
+        initialValues.imageUrls[0] !== ""
+      ) {
+        setPreviewImages(initialValues.imageUrls);
+
+        const blobs = await Promise.all(
+          initialValues.imageUrls.map(async (url) => {
+            const response = await fetch(url);
+            return await response.blob();
+          }),
+        );
+
+        setBlobImages(blobs);
+      }
+    };
+
+    loadImages();
+  }, [initialValues]);
+
   const {
     upload,
     error: uploadImageError,
     isPending: isUploadPending,
   } = useUploadImages();
 
+  const { delete: deleteImages, error: deleteImagesError } = useDeleteImages();
+
   useEffect(() => {
     setIsLoading(isUploadPending);
   }, [isUploadPending]);
 
   const handler: SubmitHandler<Product> = async (data) => {
+    if (blobImages.length === 0) {
+      onSubmit(data);
+      return;
+    }
+    if (initialValues?.slug !== data.slug) {
+      deleteImages({ slugs: [initialValues?.slug as string] });
+    }
     const urls = await upload({
       images: blobImages.map((blob, index) => ({
         blob,
@@ -93,7 +124,6 @@ export const ProductForm = ({
   } = controlledMethods;
 
   const name = watch("name");
-
   useEffect(() => {
     if (name) {
       setValue("slug", generateSlug(name), {
@@ -110,6 +140,7 @@ export const ProductForm = ({
   const handleSetImages = (files: File[] | null) => {
     if (!files) {
       setPreviewImages([]);
+      setBlobImages([]);
       return;
     }
     files.forEach(async (file) => {
@@ -122,12 +153,12 @@ export const ProductForm = ({
 
   return (
     <div className={styles.container}>
-      {uploadImageError && (
+      {(uploadImageError || deleteImagesError) && (
         <>
           <ScrollToTop />
           <WarnMessage
             closable
-            message="Hubo un error al subir las imágenes. Por favor, inténtalo de nuevo."
+            message="Hubo un error con la/s imágen/es del producto. Por favor, inténtalo de nuevo."
           />
         </>
       )}
