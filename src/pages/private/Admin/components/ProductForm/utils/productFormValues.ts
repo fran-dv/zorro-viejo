@@ -15,7 +15,7 @@ export const getProductFormValuesSchema = (categories: Category[]) => {
         (id) => categories.some((cat) => cat.id === id),
         `Categoría inválida. Categorías existentes: ${categories
           .map((cat) => cat.name)
-          .join(", ")}`
+          .join(", ")}`,
       ),
     name: z
       .string({ required_error: generalRequiredError })
@@ -38,7 +38,7 @@ export const getProductFormValuesSchema = (categories: Category[]) => {
       .trim()
       .min(
         25,
-        "La descripción del producto debe tener al menos 25 caracteres."
+        "La descripción del producto debe tener al menos 25 caracteres.",
       ),
     shortDescription: z
       .string({
@@ -47,7 +47,7 @@ export const getProductFormValuesSchema = (categories: Category[]) => {
       .trim()
       .max(
         50,
-        "La descripción breve del producto debe tener menos de 50 caracteres."
+        "La descripción breve del producto debe tener menos de 50 caracteres.",
       ),
     slug: z
       .string({ required_error: generalRequiredError })
@@ -56,16 +56,16 @@ export const getProductFormValuesSchema = (categories: Category[]) => {
       .max(100, "El slug del producto debe tener menos de 100 caracteres.")
       .regex(
         /^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/,
-        "El slug del producto solo puede contener letras, números y guiones"
+        "El slug del producto solo puede contener letras, números y guiones",
       ),
     imageUrls: z
       .array(
         z
           .string()
           .url(
-            "Asegúrate de que la URL de las imágenes sean válidas. Por ej.: https://ejemplo-imagen.jpg"
+            "Asegúrate de que la URL de las imágenes sean válidas. Por ej.: https://ejemplo-imagen.jpg",
           ),
-        { required_error: "Se requiere al menos una imagen" }
+        { required_error: "Se requiere al menos una imagen" },
       )
       .min(1, "Se requiere al menos una imagen"),
     inStock: z.boolean({
