@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.errorContainer {
+  width: 100%;
+}
+
+.errorContainer,
+.errorWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
