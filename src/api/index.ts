@@ -7,3 +7,4 @@ export * from "./fetchRelatedProducts";
 export * from "./createOrder";
 export * from "./fetchOrderById";
 export * from "./uploadImage";
+export * from "./deleteProductImages";
