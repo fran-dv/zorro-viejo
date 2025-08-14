@@ -14,6 +14,7 @@ interface UseUploadImagesReturn {
 
 export const useUploadImages = (): UseUploadImagesReturn => {
   const { mutateAsync, error, isPending } = useMutation({
+    mutationKey: ["upload-images"],
     mutationFn: async ({ images }: UploadMultipleOpts) => {
       const urls = await Promise.all(
         images.map(async ({ blob, path }) => {
@@ -21,7 +22,7 @@ export const useUploadImages = (): UseUploadImagesReturn => {
           const { data: publicUrlData } = supabase.storage
             .from("products-images")
             .getPublicUrl(uploadData.path);
-          return publicUrlData.publicUrl;
+          return `${publicUrlData.publicUrl}?${Date.now()}`;
         }),
       );
       return urls;
