@@ -38,11 +38,18 @@ import { Paths } from "@/routing";
 import { TriangleAlert } from "lucide-react";
 import { ProductsToolbar } from "./components/ProductsToolbar";
 import type { BulkImportError } from "@/pages/private/Admin/hooks";
+import { useDeleteImages } from "../hooks/useDeleteImages";
 
 const theme = themeQuartz.withParams({ ...generalThemeParams });
 const initialPageSize = 20;
 
-type HandleProductDeleteFn = (ids: number[]) => void;
+type HandleProductDeleteFn = ({
+  id,
+  ids,
+}: {
+  id?: number;
+  ids?: number[];
+}) => void;
 
 export const ProductsList = () => {
   const navigate = useNavigate();
@@ -60,7 +67,7 @@ export const ProductsList = () => {
     mutate,
     isPending: deleteIsPending,
     error: deleteError,
-  } = useDelete({});
+  } = useDelete();
 
   const {
     mutate: mutateMany,
@@ -81,28 +88,7 @@ export const ProductsList = () => {
     gridApi.current = params.api;
   };
 
-  const handleProductDelete: HandleProductDeleteFn = useCallback(
-    (ids) => {
-      if (!ids) return;
-
-      if (ids?.length === 1) {
-        currentDeletingIds.current = ids;
-        mutate({
-          resource: "products",
-          id: ids[0],
-        });
-      }
-
-      if (ids?.length > 1) {
-        currentDeletingIds.current = ids;
-        mutateMany({
-          resource: "products",
-          ids: ids,
-        });
-      }
-    },
-    [mutate, mutateMany],
-  );
+  const { delete: deleteImages } = useDeleteImages();
 
   const handleProductEdit = useCallback(
     ({ id }: { id: number }) => {
@@ -113,6 +99,65 @@ export const ProductsList = () => {
 
   const products: Product[] | undefined = data?.data.map((prod) =>
     ProductSchema.parse(prod),
+  );
+
+  const handleProductDelete: HandleProductDeleteFn = useCallback(
+    ({ id, ids }) => {
+      if (!ids && !id) return;
+
+      const getSlugsByProductId = ({
+        id,
+        ids,
+      }: {
+        id?: number;
+        ids?: number[];
+      }) => {
+        if (id) {
+          const product = products?.find((prod) => prod.id === id);
+          if (!product) return null;
+          return product.slug;
+        }
+
+        if (ids && ids.length > 0) {
+          return ids.map((id) => {
+            const product = products?.find((prod) => prod.id === id);
+            if (!product) return null;
+            return product.slug;
+          });
+        }
+
+        return null;
+      };
+
+      if (id) {
+        const slug = getSlugsByProductId({ id });
+        if (slug) {
+          deleteImages({ slugs: [slug as string] });
+        }
+
+        currentDeletingIds.current = [id];
+        mutate({
+          resource: "products",
+          id,
+        });
+        return;
+      }
+
+      if (ids && ids.length > 0) {
+        const slugs = getSlugsByProductId({ ids });
+        if (slugs) {
+          deleteImages({ slugs: slugs as string[] });
+        }
+
+        currentDeletingIds.current = ids;
+        mutateMany({
+          resource: "products",
+          ids,
+        });
+        return;
+      }
+    },
+    [mutate, mutateMany, deleteImages, products],
   );
 
   const rowData: FormattedProduct[] = useMemo(

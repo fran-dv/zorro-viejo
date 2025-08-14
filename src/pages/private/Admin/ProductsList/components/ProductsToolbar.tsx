@@ -13,7 +13,7 @@ import { useEffect } from "react";
 
 interface Props {
   selectedIds: number[];
-  onDelete: (ids: number[]) => void;
+  onDelete: ({ id, ids }: { id?: number; ids?: number[] }) => void;
   setIsLoading: (isLoading: boolean) => void;
   setErrors: (errors: BulkImportError[]) => void;
 }
@@ -67,7 +67,7 @@ export const ProductsToolbar = ({
   };
 
   const handleProductDelete = () => {
-    onDelete(selectedIds);
+    onDelete({ ids: selectedIds });
   };
 
   return (
