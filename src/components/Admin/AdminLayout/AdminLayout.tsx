@@ -10,10 +10,31 @@ export const AdminLayout = ({ children }: Props) => {
   const [gridReady, setGridReady] = useState(false);
   useEffect(() => {
     const registerModules = async () => {
-      const { AllCommunityModule, ModuleRegistry } = await import(
-        "ag-grid-community"
-      );
-      ModuleRegistry.registerModules([AllCommunityModule]);
+      const {
+        ModuleRegistry,
+        ClientSideRowModelModule,
+        PaginationModule,
+        TextFilterModule,
+        NumberFilterModule,
+        LocaleModule,
+        RowSelectionModule,
+        TextEditorModule,
+        SelectEditorModule,
+        NumberEditorModule,
+      } = await import("ag-grid-community");
+
+      ModuleRegistry.registerModules([
+        ClientSideRowModelModule,
+        PaginationModule,
+        TextFilterModule,
+        NumberFilterModule,
+        LocaleModule,
+        RowSelectionModule,
+        TextEditorModule,
+        SelectEditorModule,
+        NumberEditorModule,
+      ]);
+
       setGridReady(true);
     };
 
