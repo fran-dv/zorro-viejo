@@ -21,6 +21,7 @@ import { ErrorFetching } from "@/components/Errors";
 export const Products = () => {
   const isDesktop = useMediaQuery("(min-width: 850px)");
   const PRODUCTS_LIMIT = isDesktop ? 12 : 8;
+  const ALL_CATEGORIES_LIMIT = isDesktop ? 6 : 4;
   const {
     categories,
     isFetchingCategories,
@@ -60,7 +61,10 @@ export const Products = () => {
   );
 
   const { data, isFetching, isLoading, isError, refetch } = useProducts({
-    limitPerCategory: PRODUCTS_LIMIT,
+    limitPerCategory:
+      currentCategory === AllCategory.slug
+        ? ALL_CATEGORIES_LIMIT
+        : PRODUCTS_LIMIT,
     categoriesIds: categoriesIdsToFetch,
     page: page,
   });
