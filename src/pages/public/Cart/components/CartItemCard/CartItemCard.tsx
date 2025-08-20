@@ -53,7 +53,11 @@ export const CartItemCard = ({
         </div>
       </div>
       <div className={styles.deleteButtonContainer}>
-        <button className={styles.deleteButton} onClick={onDeleteItem}>
+        <button
+          className={styles.deleteButton}
+          onClick={onDeleteItem}
+          aria-label="Eliminar producto"
+        >
           <Trash2 className={styles.deleteIcon} />
         </button>
       </div>

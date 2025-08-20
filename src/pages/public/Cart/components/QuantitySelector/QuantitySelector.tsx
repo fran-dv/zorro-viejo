@@ -19,6 +19,8 @@ export const QuantitySelector = ({
       <button
         className={`${styles.button} ${styles.left}`}
         onClick={onDecrement}
+        role="button"
+        aria-label="Decrementar cantidad"
       >
         <Minus className={styles.icon} />
       </button>
@@ -28,6 +30,8 @@ export const QuantitySelector = ({
       <button
         className={`${styles.button} ${styles.right}`}
         onClick={onIncrement}
+        role="button"
+        aria-label="Incrementar cantidad"
       >
         <Plus className={styles.icon} />
       </button>
