@@ -1,19 +1,17 @@
 # Zorro Viejo Beverages E‑commerce
 
-> 🚧 **Work in progress:** This project is under active development. The available demo is not production ready, and it is for showcase purposes only. You’ll see mock data and placeholders.
-
 **A freelance project**: e-commerce platform for buying alcoholic beverages. This project aims to deliver a clean, mobile‑first shopping experience for customers and a user‑friendly interface for the admin, keeping the product catalog always up to date. Per client requirements, the checkout flow replaces a traditional payment gateway with WhatsApp redirection, while maintaining internal order tracking for reliability.
 
-**Live demo:** [_work-in-progress demo available here._](https://zorro-viejo.vercel.app/)
+**Visit web:** [zorroviejo.shop](https://zorroviejo.shop/)
 
 <table>
   <tr>
-    <td><img src="/preview-images/products.png" alt="Products list view (mobile)" width="400"/></td>
-    <td><img src="preview-images/search.png" alt="Search view (mobile)" width="400"/></td>
+    <td><img src="preview-images/products.png" alt="Products list view (mobile)" width="250"/></td>
+    <td><img src="preview-images/search.png" alt="Search view (mobile)" width="250"/></td>
   </tr>
   <tr>
-    <td><img src="preview-images/product-detail.png" alt="Product detail view (mobile)" width="400"/></td>
-    <td><img src="preview-images/cart.png" alt="Cart view (mobile)" width="400"/></td>
+    <td><img src="preview-images/product-detail.png" alt="Product detail view (mobile)" width="250"/></td>
+    <td><img src="preview-images/cart.png" alt="Cart view (mobile)" width="250"/></td>
   </tr>
 </table>
 
@@ -42,6 +40,8 @@
 - User-friendly fetch error handling with retry button
 - Global error handling via Error Boundaries (error view with retry button and contact link for unrecoverable errors)
 - AG Grid for admin data tables (orders and products)
+- Bulk CSV products import
+- CSV products export
 
 ## Tech Stack
 
@@ -105,6 +105,7 @@ bun install
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 VITE_WHATSAPP_REDIRECT_NUMBER=your_phone_number
+VITE_APP_URL=your_app_domain
 ```
 
 ### 4. Run the development server
