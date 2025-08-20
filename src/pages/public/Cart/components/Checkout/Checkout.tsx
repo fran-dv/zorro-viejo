@@ -21,6 +21,8 @@ export const Checkout = ({ className = "", total, onButtonClick }: Props) => {
           <ActionButton
             onClick={onButtonClick}
             content="Proceder con la compra"
+            role="button"
+            aria-label="Proceder con la compra"
           />
         </div>
       ) : (
@@ -33,6 +35,8 @@ export const Checkout = ({ className = "", total, onButtonClick }: Props) => {
           <ActionButton
             onClick={onButtonClick}
             content="Proceder con la compra"
+            role="button"
+            aria-label="Proceder con la compra"
           />
         </StickyFooterBar>
       )}
